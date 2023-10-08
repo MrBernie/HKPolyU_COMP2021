@@ -52,8 +52,7 @@ public abstract class Task{
     public boolean isPrimitive(){ return isPrimitive; }
 
     public String printInfo(){
-        //Todo
-        return "";
+        return "\nName: " + this.name +"\nDescription: " + this.description;
     }
 
     //Todo

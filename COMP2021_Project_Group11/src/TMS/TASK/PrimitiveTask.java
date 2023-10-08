@@ -47,6 +47,11 @@ public class PrimitiveTask extends Task {
         return (duration + this.duration);
     }
 
+    @Override
+    public String printInfo(){
+        return super.printInfo()+"\nDuration: " + this.getDuration();
+    }
+
     //Todo
 
 }
