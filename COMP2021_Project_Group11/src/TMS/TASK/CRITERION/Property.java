@@ -1,0 +1,3 @@
+package TMS.TASK.CRITERION;
+
+public enum Property {NAME, DESCRIPTION, DURATION, PREREQUISITE}
