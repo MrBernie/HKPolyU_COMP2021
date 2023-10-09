@@ -22,6 +22,7 @@ public class StorageLists {
         return null;
     }
 
+    /*Primitive Task Operation*/
     public void createNewPrimitiveTask(String name, String description,
                                        double duration, String[] prerequisites) throws Exception {
         PrimitiveTask newPrimitiveTask = new PrimitiveTask(name, description,duration);
@@ -42,12 +43,13 @@ public class StorageLists {
         }
     }
 
+
+    /*Composite Task Operation*/
     public void createNewCompositeTask(String name, String description,
                                        String[] subtaskList) throws Exception{
         CompositeTask newCompositeTask = new CompositeTask(name, description);
         setSubTaskList(newCompositeTask, subtaskList);
     }
-
 
     /**
      * Check if the tasks in subTask List exists in the task list

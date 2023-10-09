@@ -63,8 +63,33 @@ public class TaskOperation {
      * @param newValue
      * @throws Exception
      */
-    public static void setProperty(StorageLists storageLists, String property, String[] newValue) throws Exception{
-        //Todo
+    public static void setProperty(StorageLists storageLists, String name,
+                                   String property, String[] newValue) throws Exception{
+        Task task = CheckAvailability.checkTaskExists(storageLists, name);
+        switch (property){
+            case "name":
+                task.setName(newValue[0]);
+                break;
+            case "description":
+                task.setDescription(newValue[0]);
+                break;
+            case "duration":
+                if(task.isPrimitive()==false) throw new Exception("Cannot set duration for composite task.");
+                CheckAvailability.checkDuration(Double.valueOf(newValue[0]));
+                PrimitiveTask primitiveTask = (PrimitiveTask) task;
+                primitiveTask.setDuration(Double.valueOf(newValue[0]));
+                break;
+            case "prerequisites":
+                if(task.isPrimitive()==false) throw new Exception("Cannot set prerequisites for composite task.");
+                storageLists.setPrerequisites( (PrimitiveTask)task, newValue);
+                break;
+            case "subtasks":
+                if(task.isPrimitive()==true) throw new Exception("Cannot set subtasks for primitive task.");
+                storageLists.setSubTaskList( (CompositeTask)task, newValue);
+                break;
+            default:
+                throw new Exception("Invalid pProperty input.");
+        }
     }
 
     /**
@@ -87,5 +112,13 @@ public class TaskOperation {
         }
     }
 
+    /**
+     * Req 7
+     * @param storageLists
+     * @param name
+     */
+    public static void reportDuration(StorageLists storageLists, String name){
+
+    }
 
 }

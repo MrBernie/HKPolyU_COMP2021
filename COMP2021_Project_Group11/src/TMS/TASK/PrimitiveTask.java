@@ -22,6 +22,8 @@ public class PrimitiveTask extends Task {
         return this.duration;
     }
 
+    public void setDuration(double duration) { this.duration = duration; }
+
     public void addPrerequisites(Task task){
         prerequisites.add(task);
     }
