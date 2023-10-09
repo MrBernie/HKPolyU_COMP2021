@@ -49,7 +49,14 @@ public class PrimitiveTask extends Task {
 
     @Override
     public String printInfo(){
-        return super.printInfo()+"\nDuration: " + this.getDuration();
+        StringBuilder strB = new StringBuilder();
+        strB.append(super.printInfo());
+        strB.append("\nDuration: " + this.getDuration());
+        strB.append("\nPrerequisites: ");
+        for(Task t : prerequisites){
+            strB.append(t.getName() + ",");
+        }
+        return strB.toString();
     }
 
     //Todo

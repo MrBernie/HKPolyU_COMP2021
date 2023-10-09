@@ -33,5 +33,15 @@ public class CompositeTask extends Task{
         return duration;
     }
 
+    @Override
+    public String printInfo(){
+        StringBuilder strB = new StringBuilder();
+        strB.append(super.printInfo());
+        for(Task t : subTaskList){
+            strB.append(t.getName() + ",");
+        }
+        return strB.toString();
+    }
+
     //Todo
 }

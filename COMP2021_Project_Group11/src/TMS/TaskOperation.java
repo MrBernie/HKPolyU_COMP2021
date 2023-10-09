@@ -1,5 +1,5 @@
 package TMS;
-import TMS.TASK.Task;
+import TMS.TASK.*;
 
 public class TaskOperation {
 
@@ -15,8 +15,7 @@ public class TaskOperation {
     public static void createSimpleTask (StorageLists storageLists, String name, String description,
                                            double duration, String[] prerequisites) throws Exception {
         CheckAvailability.checkName(name);
-        Task task = storageLists.searchTaskList(name);
-        if(task != null) throw new Exception("This Task already exists.");
+        CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
         CheckAvailability.checkDuration(duration);
 
@@ -35,8 +34,7 @@ public class TaskOperation {
     public static void createCompositeTask(StorageLists storageLists, String name, String description,
                                            String[] subTaskList) throws Exception{
         CheckAvailability.checkName(name);
-        Task task = storageLists.searchTaskList(name);
-        if(task != null) throw new Exception("This Task already exists.");
+        CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
 
         storageLists.createNewCompositeTask(name, description, subTaskList);
@@ -54,7 +52,7 @@ public class TaskOperation {
         Task task = storageLists.searchTaskList(name);
         if(task == null) throw new Exception("This Task does not exist.");
         for(Task t : storageLists.taskList){
-            if(task.isContained(t)) throw new Exception("This Task is required by other tasks");
+            if(task.isContained(t)) throw new Exception("This Task is required by other tasks.");
         }
         storageLists.taskList.remove(task);
     }
@@ -65,7 +63,7 @@ public class TaskOperation {
      * @param newValue
      * @throws Exception
      */
-    public static void setProperty(String property, String[] newValue) throws Exception{
+    public static void setProperty(StorageLists storageLists, String property, String[] newValue) throws Exception{
         //Todo
     }
 
@@ -74,8 +72,19 @@ public class TaskOperation {
      * @param name
      * @throws Exception
      */
-    public static void printTask(String name) throws Exception{
+    public static void printTask(StorageLists storageLists, String name) throws Exception{
+        Task task = CheckAvailability.checkTaskExists(storageLists, name);
+        System.out.println(task.printInfo());
+    }
 
+    /**
+     * Req 6
+     * @param storageLists
+     */
+    public static void printAllTasks(StorageLists storageLists){
+        for(Task t : storageLists.taskList){
+            t.printInfo();
+        }
     }
 
 }
