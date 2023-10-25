@@ -1,4 +1,0 @@
-package TMS;
-
-class CriterionOperation {
-}
