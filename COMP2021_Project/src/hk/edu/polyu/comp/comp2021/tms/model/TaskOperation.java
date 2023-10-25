@@ -13,13 +13,14 @@ class TaskOperation {
      * @param prerequisites
      * @throws Exception
      */
-    public static void createSimpleTask (StorageLists storageLists, String name, String description,
+    public static String createSimpleTask (StorageLists storageLists, String name, String description,
                                            double duration, String[] prerequisites) throws Exception {
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
         CheckAvailability.checkDuration(duration);
         storageLists.createNewPrimitiveTask(name, description, duration, prerequisites);
+        return "Simple task \""+name+"\" has been created successfully.";
     }
 
     /**
@@ -31,12 +32,13 @@ class TaskOperation {
      * @param subTaskList
      * @throws Exception
      */
-    public static void createCompositeTask(StorageLists storageLists, String name, String description,
+    public static String createCompositeTask(StorageLists storageLists, String name, String description,
                                            String[] subTaskList) throws Exception{
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
         storageLists.createNewCompositeTask(name, description, subTaskList);
+        return "Composite task \""+name+"\" has been created successfully.";
     }
 
     /**
@@ -47,13 +49,14 @@ class TaskOperation {
      * @return
      * @throws Exception
      */
-    public static void deleteTask(StorageLists storageLists, String name) throws Exception{
+    public static String deleteTask(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
         if(task == null) throw new Exception("This Task does not exist.");
         for(Task t : storageLists.taskList){
             if(task.isContained(t)) throw new Exception("This Task is required by other tasks.");
         }
         storageLists.taskList.remove(task);
+        return "Task \""+name+"\" has been deleted successfully.";
     }
 
     /**
@@ -63,7 +66,7 @@ class TaskOperation {
      * @param newValue
      * @throws Exception
      */
-    public static void setProperty(StorageLists storageLists, String name,
+    public static String setProperty(StorageLists storageLists, String name,
                                    String property, String[] newValue) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         switch (property.toLowerCase()){
@@ -90,6 +93,7 @@ class TaskOperation {
             default:
                 throw new Exception("Invalid Property input.");
         }
+        return "Task \""+name+"\"'s property \""+ property+"\" has been set successfully.";
     }
 
     /**
@@ -109,7 +113,7 @@ class TaskOperation {
      * @param storageLists
      */
     public static String printAllTasks(StorageLists storageLists){
-        StringBuilder strB = new StringBuilder();
+        StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
         for(Task t : storageLists.taskList){
             strB.append(t.toString()+"\n");
         }

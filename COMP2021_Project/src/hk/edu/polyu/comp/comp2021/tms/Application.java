@@ -3,7 +3,8 @@ import hk.edu.polyu.comp.comp2021.tms.model.TMS;
 
 public class Application {
 
-    public static void main(String[] args){
+    //Here is the main function
+    public static void main(String[] args) {
         TMS tms = new TMS();
         tms.run();
     }

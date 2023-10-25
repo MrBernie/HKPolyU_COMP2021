@@ -50,7 +50,7 @@ class StorageLists {
      * @throws Exception
      */
     public void setPrerequisites(PrimitiveTask Task, String[] prerequisites) throws Exception{
-        if(prerequisites==null) return;
+        if(prerequisites==null||prerequisites.length==0) return;
         for (String str : prerequisites){
             Task temp = this.searchTaskList(str);
             if(temp==null) throw new Exception("Tasks in Prerequisite task does not exist.");
@@ -80,6 +80,7 @@ class StorageLists {
      * @throws Exception
      */
     public void setSubTaskList(CompositeTask Task, String[] subTaskList) throws Exception{
+        if(subTaskList==null||subTaskList.length==0) return;
         for (String str : subTaskList){
             Task temp = this.searchTaskList(str);
             if(temp==null) throw new Exception("Tasks in SubTaskList task does not exist.");
