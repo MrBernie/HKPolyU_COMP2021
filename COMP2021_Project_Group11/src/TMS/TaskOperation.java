@@ -3,7 +3,7 @@ import TMS.TASK.*;
 
 import java.util.Locale;
 
-public class TaskOperation {
+class TaskOperation {
 
     /**
      * Req 1

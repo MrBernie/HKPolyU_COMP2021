@@ -5,7 +5,7 @@ import TMS.TASK.*;
 
 import java.util.ArrayList;
 
-public class StorageLists {
+class StorageLists {
 
     protected ArrayList<Task> taskList;
     protected ArrayList<Criterion> criterionList;
@@ -15,6 +15,12 @@ public class StorageLists {
         criterionList = new ArrayList<>();
     }
 
+    /**
+     * Search a task in the list by task name.
+     * Return null if the task is not found.
+     * @param name
+     * @return
+     */
     public Task searchTaskList(String name){
         for(Task t : taskList){
             if(t.getName().equals(name)) return t;
@@ -22,7 +28,14 @@ public class StorageLists {
         return null;
     }
 
-    /*Primitive Task Operation*/
+    /**
+     * Create new Primitive Task
+     * @param name
+     * @param description
+     * @param duration
+     * @param prerequisites
+     * @throws Exception
+     */
     public void createNewPrimitiveTask(String name, String description,
                                        double duration, String[] prerequisites) throws Exception {
         PrimitiveTask newPrimitiveTask = new PrimitiveTask(name, description,duration);
@@ -46,7 +59,13 @@ public class StorageLists {
     }
 
 
-    /*Composite Task Operation*/
+    /**
+     * Create new Composite Task
+     * @param name
+     * @param description
+     * @param subtaskList
+     * @throws Exception
+     */
     public void createNewCompositeTask(String name, String description,
                                        String[] subtaskList) throws Exception{
         CompositeTask newCompositeTask = new CompositeTask(name, description);

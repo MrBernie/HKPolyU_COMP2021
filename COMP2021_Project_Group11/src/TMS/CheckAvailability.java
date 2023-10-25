@@ -2,7 +2,7 @@ package TMS;
 import TMS.TASK.*;
 import java.util.regex.*;
 
-public class CheckAvailability {
+class CheckAvailability {
 
     private static final Pattern NAMEPATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]{0,7}$");
     private static final Pattern DESCRIPTIONPATTERN = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9-]*$");

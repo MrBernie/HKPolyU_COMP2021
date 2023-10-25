@@ -1,4 +1,4 @@
 package TMS;
 
-public class CriterionOperation {
+class CriterionOperation {
 }
