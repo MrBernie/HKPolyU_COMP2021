@@ -93,16 +93,20 @@ public class TMS {
                         inputStringArray[3].split(","));
 
             case "printtask":
+                if(inputStringArray.length != COMMANDLENGTH[5]) throw INVALIDPARAMETERS;
                 return TaskOperation.printTask(storageLists,inputStringArray[1]);
 
             case "printalltasks":
+                if(inputStringArray.length != COMMANDLENGTH[6]) throw INVALIDPARAMETERS;
                 return TaskOperation.printAllTasks(storageLists);
 
             case "reportduration":
+                if(inputStringArray.length != COMMANDLENGTH[7]) throw INVALIDPARAMETERS;
                 return TaskOperation.reportDuration(storageLists,
                         inputStringArray[1]);
 
             case "reportearliestfinishtime":
+                if(inputStringArray.length != COMMANDLENGTH[8]) throw INVALIDPARAMETERS;
                 return TaskOperation.reportEarliestFinishTime(storageLists,
                         inputStringArray[1]);
 
