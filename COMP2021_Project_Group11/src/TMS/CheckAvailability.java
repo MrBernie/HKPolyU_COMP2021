@@ -1,14 +1,30 @@
 package TMS;
 import TMS.TASK.*;
+import java.util.regex.*;
 
 public class CheckAvailability {
 
-    public static void checkName(String Name) throws Exception{
-        //Todo
+    private static final Pattern NAMEPATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]{0,7}$");
+    private static final Pattern DESCRIPTIONPATTERN = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9-]*$");
+
+    /**
+     * This method will check if the name of a task is legal.
+     * @param name
+     * @throws Exception
+     */
+    public static void checkName(String name) throws Exception{
+        Matcher matcher = NAMEPATTERN.matcher(name);
+        if(!matcher.matches())throw new Exception("The task name is illegal.");
     }
 
-    public static void checkDescription(String Description) throws Exception{
-        //Todo
+    /**
+     * This method will check if the description of a task is legal.
+     * @param description
+     * @throws Exception
+     */
+    public static void checkDescription(String description) throws Exception{
+        Matcher matcher = DESCRIPTIONPATTERN.matcher(description);
+        if(!matcher.matches())throw new Exception("The task description is illegal.");
     }
 
     /**
@@ -21,7 +37,8 @@ public class CheckAvailability {
     }
 
     /**
-     * Check if a task name has corresponding task object in the list
+     * Check if a task name has corresponding task object in the list.
+     * It will return the task if it exists in the list.
      * @param storageLists
      * @param name
      * @return
@@ -34,7 +51,7 @@ public class CheckAvailability {
     }
 
     /**
-     * Check is a task is already existing in the list
+     * Check is a task is already existing in the list.
      * @param storageLists
      * @param name
      * @throws Exception

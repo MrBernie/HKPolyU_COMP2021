@@ -1,10 +1,12 @@
 package TMS.TASK;
-import java.lang.annotation.Inherited;
 import java.util.*;
 
 public class PrimitiveTask extends Task {
 
     private ArrayList<Task> prerequisites;
+    /**
+     * This duration field only denote the duration of this task itself.
+     */
     private double duration;
 
     public PrimitiveTask(String name, String description, double duration){
@@ -38,6 +40,11 @@ public class PrimitiveTask extends Task {
     @Override
     public ArrayList<Task> getList(){return prerequisites;}
 
+    /**
+     * This method return the sum of duration of its prerequisite.
+     * Notice that this is different from the field "Duration".
+     * @return
+     */
     @Override
     public double getDuration() {
         if(prerequisites.isEmpty()) return this.duration;
@@ -50,11 +57,12 @@ public class PrimitiveTask extends Task {
     }
 
     @Override
-    public String printInfo(){
+    public String toString(){
         StringBuilder strB = new StringBuilder();
-        strB.append(super.printInfo());
-        strB.append("\nDuration: " + this.getDuration());
+        strB.append(super.toString());
+        strB.append("\nDuration: " + this.duration + "h");
         strB.append("\nPrerequisites: ");
+        if(prerequisites.isEmpty()) strB.append("No Prerequisites.");
         for(Task t : prerequisites){
             strB.append(t.getName() + ",");
         }

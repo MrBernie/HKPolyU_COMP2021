@@ -51,11 +51,7 @@ public abstract class Task{
 
     public boolean isPrimitive(){ return isPrimitive; }
 
-    public String printInfo(){
-        StringBuilder strB = new StringBuilder();
-        strB.append(isPrimitive == true ? "\nPrimitive Task" : "\nComposite Task");
-        strB.append("\nName: " + this.name);
-        strB.append("\nDescription: " + this.description);
+    public String toString(){
         return "\nName: " + this.name +"\nDescription: " + this.description;
     }
 

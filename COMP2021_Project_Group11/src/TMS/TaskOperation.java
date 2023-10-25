@@ -1,10 +1,13 @@
 package TMS;
 import TMS.TASK.*;
 
+import java.util.Locale;
+
 public class TaskOperation {
 
     /**
      * Req 1
+     * Create new Primitive Task
      * @param storageLists
      * @param name
      * @param description
@@ -18,13 +21,12 @@ public class TaskOperation {
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
         CheckAvailability.checkDuration(duration);
-
         storageLists.createNewPrimitiveTask(name, description, duration, prerequisites);
-        return;
     }
 
     /**
      * Req 2
+     * Create new Composite Task
      * @param storageLists
      * @param name
      * @param description
@@ -36,13 +38,12 @@ public class TaskOperation {
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
-
         storageLists.createNewCompositeTask(name, description, subTaskList);
-        return;
     }
 
     /**
      * Req 3
+     * Delete Task
      * @param storageLists
      * @param name
      * @return
@@ -59,6 +60,7 @@ public class TaskOperation {
 
     /**
      * Req 4
+     * Change Property
      * @param property
      * @param newValue
      * @throws Exception
@@ -66,7 +68,7 @@ public class TaskOperation {
     public static void setProperty(StorageLists storageLists, String name,
                                    String property, String[] newValue) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
-        switch (property){
+        switch (property.toLowerCase()){
             case "name":
                 task.setName(newValue[0]);
                 break;
@@ -74,51 +76,72 @@ public class TaskOperation {
                 task.setDescription(newValue[0]);
                 break;
             case "duration":
-                if(task.isPrimitive()==false) throw new Exception("Cannot set duration for composite task.");
-                CheckAvailability.checkDuration(Double.valueOf(newValue[0]));
+                if(!task.isPrimitive()) throw new Exception("Cannot set duration for composite task.");
+                CheckAvailability.checkDuration(Double.parseDouble(newValue[0]));
                 PrimitiveTask primitiveTask = (PrimitiveTask) task;
-                primitiveTask.setDuration(Double.valueOf(newValue[0]));
+                primitiveTask.setDuration(Double.parseDouble(newValue[0]));
                 break;
             case "prerequisites":
-                if(task.isPrimitive()==false) throw new Exception("Cannot set prerequisites for composite task.");
+                if(!task.isPrimitive()) throw new Exception("Cannot set prerequisites for composite task.");
                 storageLists.setPrerequisites( (PrimitiveTask)task, newValue);
                 break;
             case "subtasks":
-                if(task.isPrimitive()==true) throw new Exception("Cannot set subtasks for primitive task.");
+                if(task.isPrimitive()) throw new Exception("Cannot set subtasks for primitive task.");
                 storageLists.setSubTaskList( (CompositeTask)task, newValue);
                 break;
             default:
-                throw new Exception("Invalid pProperty input.");
+                throw new Exception("Invalid Property input.");
         }
     }
 
     /**
      * Req 5
+     * Print the information of a task.
      * @param name
      * @throws Exception
      */
-    public static void printTask(StorageLists storageLists, String name) throws Exception{
+    public static String printTask(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
-        System.out.println(task.printInfo());
+        return task.toString();
     }
 
     /**
      * Req 6
+     * Print the information of all task.
      * @param storageLists
      */
-    public static void printAllTasks(StorageLists storageLists){
+    public static String printAllTasks(StorageLists storageLists){
+        StringBuilder strB = new StringBuilder();
         for(Task t : storageLists.taskList){
-            t.printInfo();
+            strB.append(t.toString()+"\n");
         }
+        return strB.toString();
     }
 
     /**
      * Req 7
+     * Print the duration of a composite task
      * @param storageLists
      * @param name
      */
-    public static void reportDuration(StorageLists storageLists, String name){
+    public static String reportDuration(StorageLists storageLists, String name) throws Exception{
+        Task task = CheckAvailability.checkTaskExists(storageLists,name);
+        if(task.isPrimitive()) throw new Exception("Reporting Duration can only be applied to Composite Task.");
+        return "\nThe Duration of the Composite Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
+    }
 
+    /**
+     * Req 8
+     * Print the earliest finish time of a simple task
+     * @param storageLists
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public static String reportEarliestFinishTime(StorageLists storageLists, String name) throws Exception{
+        Task task = CheckAvailability.checkTaskExists(storageLists,name);
+        if(!task.isPrimitive()) throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.)");
+        return "\nThe Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
     }
 
 }

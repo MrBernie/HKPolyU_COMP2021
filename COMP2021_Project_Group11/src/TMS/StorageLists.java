@@ -11,8 +11,8 @@ public class StorageLists {
     protected ArrayList<Criterion> criterionList;
 
     public StorageLists(){
-        taskList = new ArrayList<Task>();
-        criterionList = new ArrayList<Criterion>();
+        taskList = new ArrayList<>();
+        criterionList = new ArrayList<>();
     }
 
     public Task searchTaskList(String name){
@@ -27,6 +27,7 @@ public class StorageLists {
                                        double duration, String[] prerequisites) throws Exception {
         PrimitiveTask newPrimitiveTask = new PrimitiveTask(name, description,duration);
         setPrerequisites(newPrimitiveTask,prerequisites);
+        taskList.add(newPrimitiveTask);
     }
 
     /**
@@ -36,6 +37,7 @@ public class StorageLists {
      * @throws Exception
      */
     public void setPrerequisites(PrimitiveTask Task, String[] prerequisites) throws Exception{
+        if(prerequisites==null) return;
         for (String str : prerequisites){
             Task temp = this.searchTaskList(str);
             if(temp==null) throw new Exception("Tasks in Prerequisite task does not exist.");
@@ -49,6 +51,7 @@ public class StorageLists {
                                        String[] subtaskList) throws Exception{
         CompositeTask newCompositeTask = new CompositeTask(name, description);
         setSubTaskList(newCompositeTask, subtaskList);
+        taskList.add(newCompositeTask);
     }
 
     /**
