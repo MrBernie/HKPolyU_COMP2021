@@ -14,11 +14,11 @@ public class TMS {
     //Ex Req 1 requires 5 input string splitted by space
     //Default input size of Req 0 is 1.
     //Req 11 has two sizes
-    private static final int[] COMMANDLENGTH = {1,
+    private static final int[] COMMAND_LENGTH = {1,
             5,4,2,4,2,1,2,2,5,1,3,5,1,2,2,2,1 };
 
-    private static final Exception INVALIDCOMMAND = new Exception("Invalid input command.");
-    private static final Exception INVALIDPARAMETERS = new Exception("Invalid input parameters");
+    private static final Exception INVALID_COMMAND = new Exception("Invalid input command.");
+    private static final Exception INVALID_PARAMETERS = new Exception("Invalid input parameters");
 
     public TMS(){
         storageLists = new StorageLists();
@@ -66,7 +66,7 @@ public class TMS {
         switch(inputStringArray[0].toLowerCase()){
 
             case "createsimpletask":
-                if(inputStringArray.length != COMMANDLENGTH[1]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[1]) throw INVALID_PARAMETERS;
                 return TaskOperation.createSimpleTask(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
@@ -74,39 +74,39 @@ public class TMS {
                         inputStringArray[4].split(","));
 
             case "createcompositetask":
-                if(inputStringArray.length != COMMANDLENGTH[2]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[2]) throw INVALID_PARAMETERS;
                 return TaskOperation.createCompositeTask(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3].split(","));
 
             case "deletetask":
-                if(inputStringArray.length != COMMANDLENGTH[3]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[3]) throw INVALID_PARAMETERS;
                 return TaskOperation.deleteTask(storageLists,
                         inputStringArray[1]);
 
             case "changetask":
-                if(inputStringArray.length != COMMANDLENGTH[4]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[4]) throw INVALID_PARAMETERS;
                 return TaskOperation.setProperty(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3].split(","));
 
             case "printtask":
-                if(inputStringArray.length != COMMANDLENGTH[5]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[5]) throw INVALID_PARAMETERS;
                 return TaskOperation.printTask(storageLists,inputStringArray[1]);
 
             case "printalltasks":
-                if(inputStringArray.length != COMMANDLENGTH[6]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[6]) throw INVALID_PARAMETERS;
                 return TaskOperation.printAllTasks(storageLists);
 
             case "reportduration":
-                if(inputStringArray.length != COMMANDLENGTH[7]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[7]) throw INVALID_PARAMETERS;
                 return TaskOperation.reportDuration(storageLists,
                         inputStringArray[1]);
 
             case "reportearliestfinishtime":
-                if(inputStringArray.length != COMMANDLENGTH[8]) throw INVALIDPARAMETERS;
+                if(inputStringArray.length != COMMAND_LENGTH[8]) throw INVALID_PARAMETERS;
                 return TaskOperation.reportEarliestFinishTime(storageLists,
                         inputStringArray[1]);
 
@@ -135,7 +135,7 @@ public class TMS {
             case "quit":
                 return "quit";
             default:
-                throw INVALIDCOMMAND;
+                throw INVALID_COMMAND;
         }
     }
 

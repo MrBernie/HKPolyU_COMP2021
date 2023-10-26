@@ -6,8 +6,6 @@ public enum Property {
     DURATION ,
     PREREQUISITE ;
 
-    public static final String[] PROPERTYSYMBOL = {"name","description","duration","prerequisite"};
-
     public static Property getProperty(String property){
         switch (property){
             case "name" : return NAME;

@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 class CheckAvailability {
 
-    private static final Pattern NAMEPATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]{0,7}$");
-    private static final Pattern DESCRIPTIONPATTERN = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9-]*$");
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]{0,7}$");
+    private static final Pattern DESCRIPTION_PATTERN = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9-]*$");
 
     /**
      * Check if the name of a task is legal.
@@ -19,7 +19,7 @@ class CheckAvailability {
      * @throws Exception
      */
     protected static void checkName(String name) throws Exception{
-        Matcher matcher = NAMEPATTERN.matcher(name);
+        Matcher matcher = NAME_PATTERN.matcher(name);
         if(!matcher.matches())throw new Exception("The task name is illegal.");
     }
 
@@ -29,7 +29,7 @@ class CheckAvailability {
      * @throws Exception
      */
     protected static void checkDescription(String description) throws Exception{
-        Matcher matcher = DESCRIPTIONPATTERN.matcher(description);
+        Matcher matcher = DESCRIPTION_PATTERN.matcher(description);
         if(!matcher.matches())throw new Exception("The task description is illegal.");
     }
 
@@ -126,7 +126,7 @@ class CheckAvailability {
 
     protected static void checkOperandValueMatch(Operand operand, String[] value) throws Exception{
         switch (operand){
-            case LESS,GREATER,GREATEROREQUAL,LESSOREQUAL,NOTEQUAL:
+            case LESS,GREATER,GREATER_OR_EQUAL,LESS_OR_EQUAL,NOT_EQUAL:
                 if(value.length>1) throw new Exception("Too much input for value.");
                 CheckAvailability.checkDuration(value[0]);
                 return;

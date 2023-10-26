@@ -12,17 +12,17 @@ public enum Operand {
             return Double.parseDouble(value1[0]) < Double.parseDouble(value2[0]);
         }
     },
-    GREATEROREQUAL {
+    GREATER_OR_EQUAL {
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) >= Double.parseDouble(value2[0]);
         }
     },
-    LESSOREQUAL {
+    LESS_OR_EQUAL {
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) <= Double.parseDouble(value2[0]);
         }
     },
-    NOTEQUAL {
+    NOT_EQUAL {
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) != Double.parseDouble(value2[0]);
         }
@@ -48,9 +48,9 @@ public enum Operand {
         switch (operand){
             case ">": return GREATER;
             case "<": return LESS;
-            case ">=": return GREATEROREQUAL;
-            case "<=": return LESSOREQUAL;
-            case "!=": return NOTEQUAL;
+            case ">=": return GREATER_OR_EQUAL;
+            case "<=": return LESS_OR_EQUAL;
+            case "!=": return NOT_EQUAL;
             case "contains": return CONTAINS;
             default: return null;
         }
