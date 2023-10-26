@@ -70,7 +70,7 @@ public class TMS {
                 return TaskOperation.createSimpleTask(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
-                        Double.parseDouble(inputStringArray[3]),
+                        inputStringArray[3],
                         inputStringArray[4].split(","));
 
             case "createcompositetask":

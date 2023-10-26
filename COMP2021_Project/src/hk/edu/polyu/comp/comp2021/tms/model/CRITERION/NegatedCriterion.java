@@ -8,6 +8,7 @@ public class NegatedCriterion extends Criterion{
     public NegatedCriterion(String name, Criterion criterion){
         super(name);
         this.criterion = criterion;
-        this.isPrimitive = false;
     }
+
+    //Todo
 }

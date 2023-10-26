@@ -13,8 +13,8 @@ public class Test {
         StorageLists sList = new StorageLists();
         List<Exception> eList = new ArrayList<Exception>();
         try {
-            TaskOperation.createSimpleTask(sList,"Task1","t1-simple-task",2.3,null);
-            TaskOperation.createSimpleTask(sList,"Task3","t3-simple-task",10,null);
+            TaskOperation.createSimpleTask(sList,"Task1","t1-simple-task","2.3",null);
+            TaskOperation.createSimpleTask(sList,"Task3","t3-simple-task","10",null);
             String[] property = {"3.5"};
             String[] preRofTask1 = {"Task3"};
             TaskOperation.setProperty(sList,"Task1","Prerequisites",preRofTask1);

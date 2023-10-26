@@ -1,4 +1,5 @@
 package hk.edu.polyu.comp.comp2021.tms.model;
+import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.Property;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
 class TaskOperation {
@@ -13,13 +14,13 @@ class TaskOperation {
      * @param prerequisites
      * @throws Exception
      */
-    static String createSimpleTask (StorageLists storageLists, String name, String description,
-                                           double duration, String[] prerequisites) throws Exception {
+    static String createSimpleTask(StorageLists storageLists, String name, String description,
+                                           String duration, String[] prerequisites) throws Exception {
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
-        CheckAvailability.checkDuration(duration);
-        storageLists.createNewPrimitiveTask(name, description, duration, prerequisites);
+        Double dur = CheckAvailability.checkDuration(duration);
+        storageLists.createNewPrimitiveTask(name, description, dur, prerequisites);
         return "Simple task \""+name+"\" has been created successfully.";
     }
 
@@ -78,9 +79,8 @@ class TaskOperation {
                 break;
             case "duration":
                 if(!task.isPrimitive()) throw new Exception("Cannot set duration for composite task.");
-                CheckAvailability.checkDuration(Double.parseDouble(newValue[0]));
                 PrimitiveTask primitiveTask = (PrimitiveTask) task;
-                primitiveTask.setDuration(Double.parseDouble(newValue[0]));
+                primitiveTask.setDuration(CheckAvailability.checkDuration(newValue[0]));
                 break;
             case "prerequisites":
                 if(!task.isPrimitive()) throw new Exception("Cannot set prerequisites for composite task.");

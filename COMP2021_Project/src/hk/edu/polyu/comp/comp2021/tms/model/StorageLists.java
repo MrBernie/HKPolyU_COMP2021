@@ -15,16 +15,15 @@ class StorageLists {
         criterionList = new ArrayList<>();
     }
 
+    /* Task List Operations*/
     /**
      * Search a task in the list by task name.
      * Return null if the task is not found.
      * @param name
      * @return
      */
-    public Task searchTaskList(String name){
-        for(Task t : taskList){
-            if(t.getName().equals(name)) return t;
-        }
+    Task searchTaskList(String name){
+        for(Task t : taskList) if(t.getName().equals(name)) return t;
         return null;
     }
 
@@ -36,7 +35,7 @@ class StorageLists {
      * @param prerequisites
      * @throws Exception
      */
-    public void createNewPrimitiveTask(String name, String description,
+    void createNewPrimitiveTask(String name, String description,
                                        double duration, String[] prerequisites) throws Exception {
         PrimitiveTask newPrimitiveTask = new PrimitiveTask(name, description,duration);
         setPrerequisites(newPrimitiveTask,prerequisites);
@@ -49,7 +48,7 @@ class StorageLists {
      * @param prerequisites
      * @throws Exception
      */
-    public void setPrerequisites(PrimitiveTask Task, String[] prerequisites) throws Exception{
+    void setPrerequisites(PrimitiveTask Task, String[] prerequisites) throws Exception{
         if(prerequisites==null||prerequisites.length==0) return;
         for (String str : prerequisites){
             Task temp = this.searchTaskList(str);
@@ -66,7 +65,7 @@ class StorageLists {
      * @param subtaskList
      * @throws Exception
      */
-    public void createNewCompositeTask(String name, String description,
+    void createNewCompositeTask(String name, String description,
                                        String[] subtaskList) throws Exception{
         CompositeTask newCompositeTask = new CompositeTask(name, description);
         setSubTaskList(newCompositeTask, subtaskList);
@@ -79,7 +78,7 @@ class StorageLists {
      * @param subTaskList
      * @throws Exception
      */
-    public void setSubTaskList(CompositeTask Task, String[] subTaskList) throws Exception{
+    void setSubTaskList(CompositeTask Task, String[] subTaskList) throws Exception{
         if(subTaskList==null||subTaskList.length==0) return;
         for (String str : subTaskList){
             Task temp = this.searchTaskList(str);
@@ -89,7 +88,17 @@ class StorageLists {
     }
 
     /* ************************************************************* */
+    /* Criterion List operations*/
 
+    Criterion searchCriterionList(String name){
+        for(Criterion c : criterionList) if(c.getName().equals(name)) return c;
+        return null;
+    }
 
+    //Todo
+    void defineBasicCriterion(String name, Property property, Operand operand, String[] value){
+        BasicCriterion newBasicCriterion = new BasicCriterion(name,property,operand,value);
+        criterionList.add(newBasicCriterion);
+    }
 
 }

@@ -10,7 +10,8 @@ public class BinaryCriterion extends Criterion{
         this.criterion[0] = criterion0;
         this.criterion[1] = criterion1;
         this.logicOP = logicop;
-        this.isPrimitive = false;
     }
+
+    //Todo
 
 }
