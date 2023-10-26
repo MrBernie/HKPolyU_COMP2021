@@ -33,7 +33,7 @@ public class PrimitiveTask extends Task {
 
     public boolean isContained(Task task){
         for (Task t : task.getList()) {
-            if (t.name.equals(task.getName())) return true;
+            if (t.getName().equals(this.name)) return true;
         }
         return false;
     }

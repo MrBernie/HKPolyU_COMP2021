@@ -8,6 +8,7 @@ public class CompositeTask extends Task{
 
     public CompositeTask(String name, String description){
         super(name, description);
+        subTaskList = new ArrayList<Task>();
         this.subTaskList = new ArrayList<>();
         isPrimitive = false;
     }
@@ -16,9 +17,9 @@ public class CompositeTask extends Task{
 
     public boolean isContained(Task task){
         for(Task t: task.getList()) {
-            if (t.name.equals(task.getName())) return true;
+            if (t.getName().equals(this.name)) return true;
         }
-        return true;
+        return false;
     }
 
     @Override

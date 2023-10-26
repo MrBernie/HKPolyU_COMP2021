@@ -20,7 +20,7 @@ public abstract class Task{
     abstract public double getDuration();
 
     /**
-     * Check if this task is contained in the prerequisite of tasklist of the input task.
+     * Check if this task is contained in the prerequisite or subtasks of tasklist of the input task.
      * @param task
      * @return
      */

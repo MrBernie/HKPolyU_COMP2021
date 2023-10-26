@@ -13,7 +13,7 @@ class TaskOperation {
      * @param prerequisites
      * @throws Exception
      */
-    public static String createSimpleTask (StorageLists storageLists, String name, String description,
+    static String createSimpleTask (StorageLists storageLists, String name, String description,
                                            double duration, String[] prerequisites) throws Exception {
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
@@ -32,7 +32,7 @@ class TaskOperation {
      * @param subTaskList
      * @throws Exception
      */
-    public static String createCompositeTask(StorageLists storageLists, String name, String description,
+    static String createCompositeTask(StorageLists storageLists, String name, String description,
                                            String[] subTaskList) throws Exception{
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
@@ -49,7 +49,7 @@ class TaskOperation {
      * @return
      * @throws Exception
      */
-    public static String deleteTask(StorageLists storageLists, String name) throws Exception{
+    static String deleteTask(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
         if(task == null) throw new Exception("This Task does not exist.");
         for(Task t : storageLists.taskList){
@@ -66,7 +66,7 @@ class TaskOperation {
      * @param newValue
      * @throws Exception
      */
-    public static String setProperty(StorageLists storageLists, String name,
+    static String setProperty(StorageLists storageLists, String name,
                                    String property, String[] newValue) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         switch (property.toLowerCase()){
@@ -102,7 +102,7 @@ class TaskOperation {
      * @param name
      * @throws Exception
      */
-    public static String printTask(StorageLists storageLists, String name) throws Exception{
+    static String printTask(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         return task.toString();
     }
@@ -112,8 +112,9 @@ class TaskOperation {
      * Print the information of all task.
      * @param storageLists
      */
-    public static String printAllTasks(StorageLists storageLists){
+    static String printAllTasks(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
+        if(storageLists.taskList.isEmpty()) strB.append("There are no tasks currently...");
         for(Task t : storageLists.taskList){
             strB.append(t.toString()+"\n");
         }
@@ -126,7 +127,7 @@ class TaskOperation {
      * @param storageLists
      * @param name
      */
-    public static String reportDuration(StorageLists storageLists, String name) throws Exception{
+    static String reportDuration(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(task.isPrimitive()) throw new Exception("Reporting Duration can only be applied to Composite Task.");
         return "\nThe Duration of the Composite Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
@@ -140,7 +141,7 @@ class TaskOperation {
      * @return
      * @throws Exception
      */
-    public static String reportEarliestFinishTime(StorageLists storageLists, String name) throws Exception{
+    static String reportEarliestFinishTime(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(!task.isPrimitive()) throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.");
         return "\nThe Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
