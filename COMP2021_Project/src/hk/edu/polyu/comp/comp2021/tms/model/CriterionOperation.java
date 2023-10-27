@@ -7,20 +7,19 @@ class CriterionOperation {
     /**
      * Req 9
      * @param name
-     * @param pro
-     * @param op
+     * @param property
+     * @param operand
      * @param value
      * @return
      */
     static String defineBasicCriterion(StorageLists storageList,String name,
-                                       String pro, String op, String[] value) throws Exception{
-
+                                       String property, String operand, String[] value) throws Exception{
         CheckAvailability.checkCriterionAlreadyExists(storageList,name);
-        Property property = CheckAvailability.checkProperty(pro);
-        Operand operand = CheckAvailability.checkOperand(op);
-
-        //Todo
-        return "";
+        Property pro = CheckAvailability.checkProperty(property);
+        Operand op = CheckAvailability.checkOperand(operand);
+        CheckAvailability.checkPropertyOperandValueMatch(pro,op,value);
+        storageList.defineBasicCriterion(name,pro,op,value);
+        return "Basic criterion \""+name+"\" has been defined successfully.";
     }
 
 }

@@ -17,14 +17,6 @@ public class PrimitiveTask extends Task {
         this.duration = duration;
     }
 
-    /**
-     * Only return the duration of this task.
-     * @return
-     */
-    public double getThisDuration(){
-        return this.duration;
-    }
-
     public void setDuration(double duration) { this.duration = duration; }
 
     public void addPrerequisites(Task task){

@@ -1,5 +1,5 @@
 package hk.edu.polyu.comp.comp2021.tms.model;
-import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.Property;
+import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
 class TaskOperation {
@@ -143,7 +143,8 @@ class TaskOperation {
      */
     static String reportEarliestFinishTime(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
-        if(!task.isPrimitive()) throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.");
+        if(!task.isPrimitive())
+            throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.");
         return "\nThe Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
     }
 

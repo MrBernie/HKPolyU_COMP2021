@@ -1,7 +1,5 @@
 package hk.edu.polyu.comp.comp2021.tms.model;
 
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
-
 import java.util.Scanner;
 
 public class TMS {
@@ -15,7 +13,24 @@ public class TMS {
     //Default input size of Req 0 is 1.
     //Req 11 has two sizes
     private static final int[] COMMAND_LENGTH = {1,
-            5,4,2,4,2,1,2,2,5,1,3,5,1,2,2,2,1 };
+            5,//Req1
+            4,//Req2
+            2,//Req3
+            4,//Req4
+            2,//Req5
+            1,//Req6
+            2,//Req7
+            2,//Req8
+            5,//Req9
+            1,//Req10
+            3,//Req11
+            5,//Req11
+            1,//Req12
+            2,//Req13
+            2,//Req14
+            2,//Req15
+            1 //Req16
+    };
 
     private static final Exception INVALID_COMMAND = new Exception("Invalid input command.");
     private static final Exception INVALID_PARAMETERS = new Exception("Invalid input parameters");
@@ -31,7 +46,7 @@ public class TMS {
         boolean flag = true;
         while(flag){
             String[] inputStringArray = input(); //Get the input
-            String output = null;
+            String output;
 
             //Get the output. Set output as the exception message if exception occurs.
             try {
@@ -111,7 +126,12 @@ public class TMS {
                         inputStringArray[1]);
 
             case "definebasiccriterion":
-                //Todo
+                if(inputStringArray.length != COMMAND_LENGTH[9]) throw INVALID_PARAMETERS;
+                return CriterionOperation.defineBasicCriterion(storageLists,
+                        inputStringArray[1],
+                        inputStringArray[2],
+                        inputStringArray[3],
+                        inputStringArray[4].split(","));
 
             case "isprimitive":
                 //Todo
@@ -130,7 +150,6 @@ public class TMS {
 
             case "load":
                 //Todo
-
 
             case "quit":
                 return "quit";

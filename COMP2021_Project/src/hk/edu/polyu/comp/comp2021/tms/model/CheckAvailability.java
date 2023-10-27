@@ -10,8 +10,16 @@ import java.util.regex.Pattern;
 
 class CheckAvailability {
 
+    /*Check the availability of task operation.*/
     private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]{0,7}$");
     private static final Pattern DESCRIPTION_PATTERN = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9-]*$");
+
+    private static final Exception ILLEGAL_NAME = new Exception("The task name is illegal.");
+    private static final Exception ILLEGAL_DESCRIPTION = new Exception("The task description is illegal.");
+    private static final Exception ILLEGAL_DURATION1 = new Exception ("Duration must be a number");
+    private static final Exception ILLEGAL_DURATION2 = new Exception("Duration must be positive.");
+    private static final Exception TASK_NOT_EXIST = new Exception("This task does not exist.");
+    private static final Exception TASK_ALREADY_EXIST = new Exception("This task already exists.");
 
     /**
      * Check if the name of a task is legal.
@@ -20,7 +28,7 @@ class CheckAvailability {
      */
     protected static void checkName(String name) throws Exception{
         Matcher matcher = NAME_PATTERN.matcher(name);
-        if(!matcher.matches())throw new Exception("The task name is illegal.");
+        if(!matcher.matches())throw ILLEGAL_NAME;
     }
 
     /**
@@ -30,7 +38,7 @@ class CheckAvailability {
      */
     protected static void checkDescription(String description) throws Exception{
         Matcher matcher = DESCRIPTION_PATTERN.matcher(description);
-        if(!matcher.matches())throw new Exception("The task description is illegal.");
+        if(!matcher.matches())throw ILLEGAL_DESCRIPTION;
     }
 
     /**
@@ -43,9 +51,9 @@ class CheckAvailability {
         try{
             duration = Double.parseDouble(dur);
         }catch(NumberFormatException e){
-            throw new Exception ("Duration must be a number");
+            throw ILLEGAL_DURATION1;
         }
-        if(!(duration > 0)) throw new Exception("Duration must be positive.");
+        if(!(duration > 0)) throw ILLEGAL_DURATION2;
         return duration;
     }
 
@@ -59,7 +67,7 @@ class CheckAvailability {
      */
     protected static Task checkTaskExists(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
-        if(task==null) throw new Exception("This task does not exist.");
+        if(task==null) throw TASK_NOT_EXIST;
         return task;
     }
 
@@ -71,8 +79,18 @@ class CheckAvailability {
      */
     protected static void checkTaskAlreadyExists(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
-        if(task != null) throw new Exception("This task already exists.");
+        if(task != null) throw TASK_ALREADY_EXIST;
     }
+
+    /******************************************************/
+    /*Check the availability of criterion operation.*/
+
+    private static final Exception CRITERION_NOT_EXIST = new Exception("This criterion does not exist.");
+    private static final Exception CRITERION_ALREADY_EXIST = new Exception("This criterion already exists.");
+
+    private static final Exception PROPERTY_OPERAND_EXCEPTION = new Exception("Property and Operand do not match.");
+    private static final Exception ILLEGAL_VALUE = new Exception("Too much input for value");
+    private static final Exception DOUBLE_QUOTE = new Exception("The value must be double-quoted.");
 
     /**
      * Check if a criterion name has corresponding criterion object in the list.
@@ -83,7 +101,7 @@ class CheckAvailability {
      */
     protected static Criterion checkCriterionExists(StorageLists storageLists, String name) throws Exception{
         Criterion criterion = storageLists.searchCriterionList(name);
-        if(criterion==null) throw new Exception("This criterion does not exist.");
+        if(criterion==null) throw CRITERION_NOT_EXIST;
         return criterion;
     }
 
@@ -95,7 +113,7 @@ class CheckAvailability {
      */
     protected static void checkCriterionAlreadyExists(StorageLists storageLists, String name) throws Exception{
         Criterion criterion = storageLists.searchCriterionList(name);
-        if(criterion != null) throw new Exception("This criterion already exists.");
+        if(criterion != null) throw CRITERION_ALREADY_EXIST;
     }
 
     /**
@@ -124,13 +142,30 @@ class CheckAvailability {
         return operand;
     }
 
-    protected static void checkOperandValueMatch(Operand operand, String[] value) throws Exception{
-        switch (operand){
-            case LESS,GREATER,GREATER_OR_EQUAL,LESS_OR_EQUAL,NOT_EQUAL:
-                if(value.length>1) throw new Exception("Too much input for value.");
-                CheckAvailability.checkDuration(value[0]);
+    /**
+     * Check if the input of basic criterion property, operand, and value are matched.
+     * @param property
+     * @param operand
+     * @param value
+     * @throws Exception
+     */
+    protected static void checkPropertyOperandValueMatch(Property property,
+                                                         Operand operand, String[] value) throws Exception{
+        switch (property){
+
+            case NAME,DESCRIPTION:
+                if(value.length>1) throw ILLEGAL_VALUE;
+                if(value[0].length()<2||!value[0].startsWith("\"")||!value[0].endsWith("\""))
+                    throw DOUBLE_QUOTE;
+            case PREREQUISITE:
+                if(!operand.equals(Operand.CONTAINS)) throw PROPERTY_OPERAND_EXCEPTION;
                 return;
-            //Todo
+
+            case DURATION:
+                if(operand.equals(Operand.CONTAINS)) throw PROPERTY_OPERAND_EXCEPTION;
+                CheckAvailability.checkDuration(value[0]);
+                if(value.length>1) throw ILLEGAL_VALUE;
+                return;
         }
     }
 
