@@ -10,5 +10,11 @@ public class NegatedCriterion extends Criterion{
         this.criterion = criterion;
     }
 
-    //Todo
+    public String toString(){
+        StringBuilder strB = new StringBuilder();
+        strB.append("\nNegated Criterion: ");
+        strB.append(super.toString());
+        strB.append("\nNegated: " + criterion.name);
+        return strB.toString();
+    }
 }

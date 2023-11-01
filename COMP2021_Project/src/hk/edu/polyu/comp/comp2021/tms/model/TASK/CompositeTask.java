@@ -8,7 +8,6 @@ public class CompositeTask extends Task{
 
     public CompositeTask(String name, String description){
         super(name, description);
-        subTaskList = new ArrayList<Task>();
         this.subTaskList = new ArrayList<>();
         isPrimitive = false;
     }
@@ -38,6 +37,7 @@ public class CompositeTask extends Task{
     @Override
     public String toString(){
         StringBuilder strB = new StringBuilder();
+        strB.append("\nComposite Task: ");
         strB.append(super.toString());
         strB.append("\nSubtasks: ");
         if(subTaskList.isEmpty()) strB.append("No Subtasks.");

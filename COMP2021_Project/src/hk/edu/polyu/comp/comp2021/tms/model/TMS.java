@@ -22,14 +22,13 @@ public class TMS {
             2,//Req7
             2,//Req8
             5,//Req9
-            1,//Req10
             3,//Req11
             5,//Req11
             1,//Req12
             2,//Req13
             2,//Req14
             2,//Req15
-            1 //Req16
+            1,//Req16
     };
 
     private static final Exception INVALID_COMMAND = new Exception("Invalid input command.");
@@ -133,14 +132,23 @@ public class TMS {
                         inputStringArray[3],
                         inputStringArray[4].split(","));
 
-            case "isprimitive":
-                //Todo
-
             case "definenegatedcriterion":
-                //Todo
+                if(inputStringArray.length != COMMAND_LENGTH[10]) throw INVALID_COMMAND;
+                return CriterionOperation.defineNegatedCriterion(storageLists,
+                        inputStringArray[1],
+                        inputStringArray[2]);
+
+            case "definebinarycriterion":
+                if(inputStringArray.length != COMMAND_LENGTH[11]) throw INVALID_COMMAND;
+                return CriterionOperation.defineBinaryCriterion(storageLists,
+                        inputStringArray[1],
+                        inputStringArray[2],
+                        inputStringArray[3],
+                        inputStringArray[4]);
 
             case "printallcriteria":
-                //Todo
+                if(inputStringArray.length != COMMAND_LENGTH[12]) throw INVALID_COMMAND;
+                return CriterionOperation.printAllCriteria(storageLists);
 
             case "search":
                 //Todo

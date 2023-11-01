@@ -52,6 +52,7 @@ public class PrimitiveTask extends Task {
     @Override
     public String toString(){
         StringBuilder strB = new StringBuilder();
+        strB.append("\nPrimitive Task: ");
         strB.append(super.toString());
         strB.append("\nDuration: " + this.duration + "h");
         strB.append("\nPrerequisites: ");

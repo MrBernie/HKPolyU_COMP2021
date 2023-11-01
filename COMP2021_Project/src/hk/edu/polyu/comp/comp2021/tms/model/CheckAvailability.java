@@ -1,10 +1,9 @@
 package hk.edu.polyu.comp.comp2021.tms.model;
 
-import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.Criterion;
-import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.Operand;
-import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.Property;
+import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -91,6 +90,7 @@ class CheckAvailability {
     private static final Exception PROPERTY_OPERAND_EXCEPTION = new Exception("Property and Operand do not match.");
     private static final Exception ILLEGAL_VALUE = new Exception("Too much input for value");
     private static final Exception DOUBLE_QUOTE = new Exception("The value must be double-quoted.");
+    private static final Exception ILLEGAL_OPERAND_INPUT = new Exception ("Invalid property input.");
 
     /**
      * Check if a criterion name has corresponding criterion object in the list.
@@ -124,8 +124,8 @@ class CheckAvailability {
      * @throws Exception
      */
     protected static Property checkProperty(String pro) throws Exception{
-        Property property = Property.getProperty(pro);
-        if(property == null) throw new Exception ("Invalid property input.");
+        Property property = Property.getProperty(pro.toLowerCase());
+        if(property == null) throw ILLEGAL_OPERAND_INPUT;
         return property;
     }
 
@@ -137,9 +137,15 @@ class CheckAvailability {
      * @throws Exception
      */
     protected static Operand checkOperand(String op) throws Exception{
-        Operand operand = Operand.getOperand(op);
-        if(operand == null) throw new Exception ("Invalid operand input.");
+        Operand operand = Operand.getOperand(op.toLowerCase());
+        if(operand == null) throw ILLEGAL_OPERAND_INPUT;
         return operand;
+    }
+
+    protected static LogicOp checkLogicOp(String lOp) throws Exception{
+        LogicOp logicOp = LogicOp.getLogicOp(lOp);
+        if(logicOp == null) throw new Exception ("Invalid logical operand.");
+        return logicOp;
     }
 
     /**

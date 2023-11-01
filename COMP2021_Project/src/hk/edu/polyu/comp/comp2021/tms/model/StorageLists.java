@@ -90,15 +90,41 @@ class StorageLists {
     /* ************************************************************* */
     /* Criterion List operations*/
 
+    /**
+     * Search a specific Criterion by name
+     * @param name
+     * @return
+     */
     Criterion searchCriterionList(String name){
         for(Criterion c : criterionList) if(c.getName().equals(name)) return c;
         return null;
     }
 
-    //Todo
+    /**
+     * Define a basic Criterion
+     * @param name
+     * @param property
+     * @param operand
+     * @param value
+     */
     void defineBasicCriterion(String name, Property property, Operand operand, String[] value){
-        BasicCriterion newBasicCriterion = new BasicCriterion(name,property,operand,value);
+        BasicCriterion newBasicCriterion = new BasicCriterion(name, property, operand, value);
         criterionList.add(newBasicCriterion);
+    }
+
+    /**
+     * Define a negated-criterion
+     * @param name
+     * @param criterion
+     */
+    void defineNegatedCriterion(String name, Criterion criterion){
+        NegatedCriterion newNegatedCriterion = new NegatedCriterion(name, criterion);
+        criterionList.add(newNegatedCriterion);
+    }
+
+    void defineBinaryCriterion(String name, Criterion criterion1, LogicOp logicOp, Criterion criterion2){
+        BinaryCriterion newBinaryCriterion = new BinaryCriterion(name, criterion1, logicOp, criterion2);
+        criterionList.add(newBinaryCriterion);
     }
 
 }

@@ -1,17 +1,23 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
 public enum Property {
-    NAME ,
-    DESCRIPTION ,
-    DURATION ,
-    PREREQUISITE ;
+    NAME("Name") ,
+    DESCRIPTION("Description") ,
+    DURATION("Duration") ,
+    PREREQUISITE("Prerequisites") ;
+
+    final private String name;
+
+    Property(String name){ this.name = name;}
+
+    public String toString(){ return this.name;}
 
     public static Property getProperty(String property){
         switch (property){
             case "name" : return NAME;
             case "description" : return DESCRIPTION;
             case "duration" : return DURATION;
-            case "prerequisite" : return PREREQUISITE;
+            case "prerequisites" : return PREREQUISITE;
             default : return null;
         }
     }

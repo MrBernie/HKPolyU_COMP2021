@@ -2,6 +2,8 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
+import java.util.Locale;
+
 class TaskOperation {
 
     /**
@@ -70,6 +72,7 @@ class TaskOperation {
     static String setProperty(StorageLists storageLists, String name,
                                    String property, String[] newValue) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
+        CheckAvailability.checkProperty(property.toLowerCase());
         switch (property.toLowerCase()){
             case "name":
                 task.setName(newValue[0]);
@@ -114,7 +117,7 @@ class TaskOperation {
      */
     static String printAllTasks(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
-        if(storageLists.taskList.isEmpty()) strB.append("There are no tasks currently...");
+        if(storageLists.taskList.isEmpty()) strB.append("There is no tasks currently...");
         for(Task t : storageLists.taskList){
             strB.append(t.toString()+"\n");
         }

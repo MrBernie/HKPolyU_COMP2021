@@ -2,32 +2,32 @@ package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
 public enum Operand {
 
-    GREATER {
+    GREATER (">"){
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) > Double.parseDouble(value2[0]);
         }
     },
-    LESS {
+    LESS ("<"){
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) < Double.parseDouble(value2[0]);
         }
     },
-    GREATER_OR_EQUAL {
+    GREATER_OR_EQUAL (">="){
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) >= Double.parseDouble(value2[0]);
         }
     },
-    LESS_OR_EQUAL {
+    LESS_OR_EQUAL ("<="){
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) <= Double.parseDouble(value2[0]);
         }
     },
-    NOT_EQUAL {
+    NOT_EQUAL ("!="){
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) != Double.parseDouble(value2[0]);
         }
     },
-    CONTAINS {
+    CONTAINS ("contains"){
         public boolean evaluate(String[] value1, String[] value2){
             boolean flag;
             for(String str2 : value2){
@@ -43,6 +43,12 @@ public enum Operand {
             return true;
         }
     };
+
+    private final String name;
+
+    Operand(String name){ this.name = name;}
+
+    public String toString() { return this.name;}
 
     public static Operand getOperand(String operand){
         switch (operand){

@@ -10,4 +10,6 @@ public abstract class Criterion{
 
     public String getName(){return name;}
 
+    public String toString(){ return "\nName: " + this.name; }
+
 }
