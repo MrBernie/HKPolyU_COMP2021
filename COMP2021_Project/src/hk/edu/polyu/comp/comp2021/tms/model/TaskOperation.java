@@ -72,24 +72,24 @@ class TaskOperation {
     static String setProperty(StorageLists storageLists, String name,
                                    String property, String[] newValue) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
-        CheckAvailability.checkProperty(property.toLowerCase());
-        switch (property.toLowerCase()){
-            case "name":
+        Property pro = CheckAvailability.checkProperty(property.toLowerCase());
+        switch (pro){
+            case NAME:
                 task.setName(newValue[0]);
                 break;
-            case "description":
+            case DESCRIPTION:
                 task.setDescription(newValue[0]);
                 break;
-            case "duration":
+            case DURATION:
                 if(!task.isPrimitive()) throw new Exception("Cannot set duration for composite task.");
                 PrimitiveTask primitiveTask = (PrimitiveTask) task;
                 primitiveTask.setDuration(CheckAvailability.checkDuration(newValue[0]));
                 break;
-            case "prerequisites":
+            case PREREQUISITE:
                 if(!task.isPrimitive()) throw new Exception("Cannot set prerequisites for composite task.");
                 storageLists.setPrerequisites( (PrimitiveTask)task, newValue);
                 break;
-            case "subtasks":
+            case SUBTASKS:
                 if(task.isPrimitive()) throw new Exception("Cannot set subtasks for primitive task.");
                 storageLists.setSubTaskList( (CompositeTask)task, newValue);
                 break;
