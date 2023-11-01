@@ -12,10 +12,10 @@ public enum LogicOp {
     public String toString(){return this.name;}
 
     public static LogicOp getLogicOp(String lOp){
-        switch (lOp){
-            case "&&": return AND;
-            case "||": return OR;
-            default: return null;
-        }
+        return switch (lOp) {
+            case "&&" -> AND;
+            case "||" -> OR;
+            default -> null;
+        };
     }
 }

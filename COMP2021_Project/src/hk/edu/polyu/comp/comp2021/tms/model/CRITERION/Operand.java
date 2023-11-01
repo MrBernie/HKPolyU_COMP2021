@@ -50,15 +50,15 @@ public enum Operand {
     public String toString() { return this.name;}
 
     public static Operand getOperand(String operand){
-        switch (operand){
-            case ">": return GREATER;
-            case "<": return LESS;
-            case ">=": return GREATER_OR_EQUAL;
-            case "<=": return LESS_OR_EQUAL;
-            case "!=": return NOT_EQUAL;
-            case "contains": return CONTAINS;
-            default: return null;
-        }
+        return switch (operand) {
+            case ">" -> GREATER;
+            case "<" -> LESS;
+            case ">=" -> GREATER_OR_EQUAL;
+            case "<=" -> LESS_OR_EQUAL;
+            case "!=" -> NOT_EQUAL;
+            case "contains" -> CONTAINS;
+            default -> null;
+        };
     }
 
     public abstract boolean evaluate(String[] value1, String[] value2);

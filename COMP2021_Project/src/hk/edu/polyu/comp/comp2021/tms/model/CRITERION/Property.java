@@ -14,13 +14,13 @@ public enum Property {
     public String toString(){ return this.name;}
 
     public static Property getProperty(String property){
-        switch (property){
-            case "name" : return NAME;
-            case "description" : return DESCRIPTION;
-            case "duration" : return DURATION;
-            case "prerequisites" : return PREREQUISITE;
-            case "subtasks" : return SUBTASKS;
-            default : return null;
-        }
+        return switch (property) {
+            case "name" -> NAME;
+            case "description" -> DESCRIPTION;
+            case "duration" -> DURATION;
+            case "prerequisites" -> PREREQUISITE;
+            case "subtasks" -> SUBTASKS;
+            default -> null;
+        };
     }
 }
