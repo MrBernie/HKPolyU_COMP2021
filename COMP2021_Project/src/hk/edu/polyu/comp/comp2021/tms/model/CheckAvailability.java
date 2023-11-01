@@ -158,12 +158,11 @@ class CheckAvailability {
     protected static void checkPropertyOperandValueMatch(Property property,
                                                          Operand operand, String[] value) throws Exception{
         switch (property){
-
             case NAME,DESCRIPTION:
                 if(value.length>1) throw ILLEGAL_VALUE;
                 if(value[0].length()<2||!value[0].startsWith("\"")||!value[0].endsWith("\""))
                     throw DOUBLE_QUOTE;
-            case PREREQUISITE:
+            case PREREQUISITE,SUBTASKS:
                 if(!operand.equals(Operand.CONTAINS)) throw PROPERTY_OPERAND_EXCEPTION;
                 return;
 

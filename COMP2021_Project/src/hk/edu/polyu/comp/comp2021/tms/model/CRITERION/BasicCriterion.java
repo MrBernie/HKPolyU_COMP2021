@@ -22,7 +22,7 @@ public class BasicCriterion extends Criterion{
         strB.append("\nProperty: " + property.toString());
         strB.append("\nOperand: " + operand.toString());
         strB.append("\nValue: ");
-        if(property!=Property.PREREQUISITE) strB.append(value[0]);
+        if(property!=Property.PREREQUISITE&&property!=Property.SUBTASKS) strB.append(value[0]);
         else {
             for(String str : value) strB.append(str + ",");
         }

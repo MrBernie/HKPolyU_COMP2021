@@ -4,7 +4,8 @@ public enum Property {
     NAME("Name") ,
     DESCRIPTION("Description") ,
     DURATION("Duration") ,
-    PREREQUISITE("Prerequisites") ;
+    PREREQUISITE("Prerequisites") ,
+    SUBTASKS("SubTasks");
 
     final private String name;
 
@@ -18,6 +19,7 @@ public enum Property {
             case "description" : return DESCRIPTION;
             case "duration" : return DURATION;
             case "prerequisites" : return PREREQUISITE;
+            case "subtasks" : return SUBTASKS;
             default : return null;
         }
     }

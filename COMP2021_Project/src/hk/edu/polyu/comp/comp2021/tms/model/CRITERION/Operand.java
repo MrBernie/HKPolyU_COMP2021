@@ -28,19 +28,18 @@ public enum Operand {
         }
     },
     CONTAINS ("contains"){
+        /*
+        Value 1 is the value of the criteria.
+        Value 2 is the value of the tasks.
+         */
         public boolean evaluate(String[] value1, String[] value2){
-            boolean flag;
+            if(value1.length==1&&value2.length==1) return value2[0].contains(value1[0]);
             for(String str2 : value2){
-                flag = false;
                 for(String str1 : value1){
-                    if(str1.equals(str2)){
-                        flag = true;
-                        break;
-                    }
+                    if(str1.equals(str2)) return true;
                 }
-                if(!flag) return false;
             }
-            return true;
+            return false;
         }
     };
 
