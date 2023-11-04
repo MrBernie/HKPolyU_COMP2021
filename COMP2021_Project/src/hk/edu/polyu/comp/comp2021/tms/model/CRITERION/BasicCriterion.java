@@ -1,10 +1,6 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.CompositeTask;
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.PrimitiveTask;
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
-
-import java.util.ArrayList;
+import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
 public class BasicCriterion extends Criterion{
     private Property property;
@@ -48,7 +44,6 @@ public class BasicCriterion extends Criterion{
             }
             case DURATION -> {
                 if(task instanceof PrimitiveTask){
-                    task = (PrimitiveTask) task;
                     return operand.evaluate(new String[]{String.valueOf(((PrimitiveTask) task).getThisDuration())} , value);
                 }
                 else return false;

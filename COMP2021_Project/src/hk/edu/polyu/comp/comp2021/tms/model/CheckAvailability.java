@@ -170,7 +170,6 @@ class CheckAvailability {
                 if(operand.equals(Operand.CONTAINS)) throw PROPERTY_OPERAND_EXCEPTION;
                 CheckAvailability.checkDuration(value[0]);
                 if(value.length>1) throw ILLEGAL_VALUE;
-                return;
         }
     }
 

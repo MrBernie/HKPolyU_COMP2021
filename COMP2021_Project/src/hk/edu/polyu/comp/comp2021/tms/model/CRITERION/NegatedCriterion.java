@@ -13,11 +13,10 @@ public class NegatedCriterion extends Criterion{
     }
 
     public String toString(){
-        StringBuilder strB = new StringBuilder();
-        strB.append("\nNegated Criterion: ");
-        strB.append(super.toString());
-        strB.append("\nNegated: " + criterion.name);
-        return strB.toString();
+        String str = "\nNegated Criterion: " +
+                super.toString() +
+                "\nNegated: " + criterion.name;
+        return str;
     }
 
     @Override

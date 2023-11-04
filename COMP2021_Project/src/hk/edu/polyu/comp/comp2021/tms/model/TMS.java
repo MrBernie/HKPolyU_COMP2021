@@ -133,13 +133,13 @@ public class TMS {
                         inputStringArray[4].split(","));
 
             case "definenegatedcriterion":
-                if(inputStringArray.length != COMMAND_LENGTH[10]) throw INVALID_COMMAND;
+                if(inputStringArray.length != COMMAND_LENGTH[10]) throw INVALID_PARAMETERS;
                 return CriterionOperation.defineNegatedCriterion(storageLists,
                         inputStringArray[1],
                         inputStringArray[2]);
 
             case "definebinarycriterion":
-                if(inputStringArray.length != COMMAND_LENGTH[11]) throw INVALID_COMMAND;
+                if(inputStringArray.length != COMMAND_LENGTH[11]) throw INVALID_PARAMETERS;
                 return CriterionOperation.defineBinaryCriterion(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
@@ -147,11 +147,11 @@ public class TMS {
                         inputStringArray[4]);
 
             case "printallcriteria":
-                if(inputStringArray.length != COMMAND_LENGTH[12]) throw INVALID_COMMAND;
+                if(inputStringArray.length != COMMAND_LENGTH[12]) throw INVALID_PARAMETERS;
                 return CriterionOperation.printAllCriteria(storageLists);
 
             case "search":
-                if(inputStringArray.length != COMMAND_LENGTH[13]) throw INVALID_COMMAND;
+                if(inputStringArray.length != COMMAND_LENGTH[13]) throw INVALID_PARAMETERS;
                 return CriterionOperation.search(storageLists,
                         inputStringArray[1]);
 

@@ -16,13 +16,12 @@ public class BinaryCriterion extends Criterion{
     }
 
     public String toString(){
-        StringBuilder strB = new StringBuilder();
-        strB.append("\nBinary Criterion: ");
-        strB.append(super.toString());
-        strB.append("\nFirst Criterion: " + criterion1.name);
-        strB.append("\nLogic Operand: " + logicOp.toString());
-        strB.append("\nFirst Criterion: " + criterion2.name);
-        return strB.toString();
+        String str = "\nBinary Criterion: " +
+                super.toString() +
+                "\nFirst Criterion: " + criterion1.name +
+                "\nLogic Operand: " + logicOp.toString() +
+                "\nFirst Criterion: " + criterion2.name;
+        return str;
     }
 
     @Override
