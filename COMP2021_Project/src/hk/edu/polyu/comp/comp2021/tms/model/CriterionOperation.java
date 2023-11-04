@@ -3,7 +3,7 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
 
-import java.awt.*;
+import java.util.ArrayList;
 
 class CriterionOperation {
 
@@ -76,6 +76,24 @@ class CriterionOperation {
         for(Criterion c : storageLists.criterionList){
             strB.append(c.toString()+"\n");
         }
+        return strB.toString();
+    }
+
+    /**
+     * Req 13
+     * @param storageLists
+     * @param nameOfCriterion
+     * @return
+     * @throws Exception
+     */
+
+    static String search(StorageLists storageLists, String nameOfCriterion) throws Exception{
+        Criterion criterion = CheckAvailability.checkCriterionExists(storageLists,nameOfCriterion);
+        ArrayList<Task> result = storageLists.search(criterion);
+        if(result.isEmpty()) return "Cannot find the corresponding tasks.";
+        StringBuilder strB = new StringBuilder();
+        strB.append("These tasks meets the criterion "+nameOfCriterion+ " : ");
+        for(Task t : result) strB.append(t.getName()+",");
         return strB.toString();
     }
 

@@ -1,5 +1,11 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
+import hk.edu.polyu.comp.comp2021.tms.model.TASK.CompositeTask;
+import hk.edu.polyu.comp.comp2021.tms.model.TASK.PrimitiveTask;
+import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
+
+import java.util.ArrayList;
+
 public class BasicCriterion extends Criterion{
     private Property property;
     private Operand operand;
@@ -27,6 +33,41 @@ public class BasicCriterion extends Criterion{
             for(String str : value) strB.append(str + ",");
         }
         return strB.toString();
+    }
+
+    /**
+     * The basic checking function.
+     * @param task
+     * @return
+     */
+    @Override
+    public boolean check(Task task){
+        switch (property){
+            case NAME -> {
+                return operand.evaluate(new String[]{task.getName()} , value);
+            }
+            case DURATION -> {
+                if(task instanceof PrimitiveTask){
+                    task = (PrimitiveTask) task;
+                    return operand.evaluate(new String[]{String.valueOf(((PrimitiveTask) task).getThisDuration())} , value);
+                }
+                else return false;
+            }
+            case DESCRIPTION -> {
+                return operand.evaluate(new String[]{task.getDescription()} , value);
+            }
+            case SUBTASKS -> {
+                if(task instanceof CompositeTask) return operand.evaluate(task.getNameArray() , value);
+                else return false;
+            }
+            case PREREQUISITE -> {
+                if(task instanceof PrimitiveTask) return operand.evaluate(task.getNameArray() , value);
+                else return false;
+            }
+            default -> {
+                return false;
+            }
+        }
     }
 
 }

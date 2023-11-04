@@ -33,6 +33,8 @@ public abstract class Task{
      */
     abstract public ArrayList<Task> getList();
 
+    abstract public String[] getNameArray();
+
     public String getName(){
         return name;
     }

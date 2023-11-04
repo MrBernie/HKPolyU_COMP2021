@@ -22,7 +22,7 @@ public class TMS {
             2,//Req7
             2,//Req8
             5,//Req9
-            3,//Req11
+            3,//Req11 index 10
             5,//Req11
             1,//Req12
             2,//Req13
@@ -151,7 +151,9 @@ public class TMS {
                 return CriterionOperation.printAllCriteria(storageLists);
 
             case "search":
-                //Todo
+                if(inputStringArray.length != COMMAND_LENGTH[13]) throw INVALID_COMMAND;
+                return CriterionOperation.search(storageLists,
+                        inputStringArray[1]);
 
             case "store":
                 //Todo

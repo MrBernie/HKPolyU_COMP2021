@@ -25,6 +25,13 @@ public class CompositeTask extends Task{
     public ArrayList<Task> getList(){return subTaskList;}
 
     @Override
+    public String[] getNameArray(){
+        String[] result = new String[subTaskList.size()];
+        for(int i = 0;i< result.length;i++) result[i] = subTaskList.get(i).name;
+        return result;
+    }
+
+    @Override
     public double getDuration() {
         double duration = 0;
         for(Task t : subTaskList) {

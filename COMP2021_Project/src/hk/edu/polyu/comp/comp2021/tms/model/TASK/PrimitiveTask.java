@@ -17,6 +17,8 @@ public class PrimitiveTask extends Task {
         this.duration = duration;
     }
 
+    public double getThisDuration() { return this.duration;}
+
     public void setDuration(double duration) { this.duration = duration; }
 
     public void addPrerequisites(Task task){
@@ -33,9 +35,16 @@ public class PrimitiveTask extends Task {
     @Override
     public ArrayList<Task> getList(){return prerequisites;}
 
+    @Override
+    public String[] getNameArray(){
+        String[] result = new String[prerequisites.size()];
+        for(int i = 0;i< result.length;i++) result[i] = prerequisites.get(i).name;
+        return result;
+    }
+
     /**
      * This method return the sum of duration of its prerequisite.
-     * Notice that this is different from the field "Duration".
+     * Notice that this is different from the field "this.duration".
      * @return
      */
     @Override

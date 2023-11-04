@@ -15,7 +15,8 @@ class StorageLists {
         criterionList = new ArrayList<>();
     }
 
-    /* Task List Operations*/
+    /***********************************************************/
+    /* Task List Operations */
     /**
      * Search a task in the list by task name.
      * Return null if the task is not found.
@@ -87,7 +88,7 @@ class StorageLists {
         }
     }
 
-    /* ************************************************************* */
+    /***************************************************************/
     /* Criterion List operations*/
 
     /**
@@ -113,7 +114,7 @@ class StorageLists {
     }
 
     /**
-     * Define a negated-criterion
+     * Define a negated criterion
      * @param name
      * @param criterion
      */
@@ -122,9 +123,31 @@ class StorageLists {
         criterionList.add(newNegatedCriterion);
     }
 
+    /**
+     * Define a binary criterion
+     * @param name
+     * @param criterion1
+     * @param logicOp
+     * @param criterion2
+     */
+
     void defineBinaryCriterion(String name, Criterion criterion1, LogicOp logicOp, Criterion criterion2){
         BinaryCriterion newBinaryCriterion = new BinaryCriterion(name, criterion1, logicOp, criterion2);
         criterionList.add(newBinaryCriterion);
     }
 
+    /**
+     * Search through the Task List based on a criterion.
+     * Return a list of tasks that meet the criterion.
+     * @param criterion
+     * @return
+     */
+
+    ArrayList<Task> search(Criterion criterion){
+        ArrayList<Task> result = new ArrayList<>();
+        for(Task t : taskList){
+            if(criterion.check(t)) result.add(t);
+        }
+        return result;
+    }
 }

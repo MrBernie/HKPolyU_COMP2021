@@ -1,9 +1,25 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
 public enum LogicOp {
-    AND ("&&"),
-    OR ("||"),
-    Negation ("!");
+    AND ("&&") {
+        @Override
+        public boolean evaluate(boolean criterionResult1, boolean criterionResult2) {
+            return criterionResult1 && criterionResult2;
+        }
+    },
+    OR ("||") {
+        @Override
+        public boolean evaluate(boolean criterionResult1, boolean criterionResult2){
+            return criterionResult1 || criterionResult2;
+        }
+    },
+    Negation ("!"){
+        @Override
+        // The second input is not used here.
+        public boolean evaluate(boolean criterionResult1, boolean criterionResult2){
+            return !criterionResult1;
+        }
+    };
 
     private final String name;
 
@@ -18,4 +34,6 @@ public enum LogicOp {
             default -> null;
         };
     }
+
+    public abstract boolean evaluate(boolean criterionResult1, boolean criterionResult2);
 }
