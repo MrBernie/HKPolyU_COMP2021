@@ -13,6 +13,8 @@ class StorageLists {
     public StorageLists(){
         taskList = new ArrayList<>();
         criterionList = new ArrayList<>();
+        defineBasicCriterion("IsPrimitive",Property.IS_PRIMITIVE,Operand.IS_PRIMITIVE,
+                new String[]{"Only for checking whether a task is primitive or not."});
     }
 
     /***********************************************************/

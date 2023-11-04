@@ -35,16 +35,22 @@ public enum Operand {
     CONTAINS ("contains"){
         @Override
         /*
-        Value 1 is the value of the criteria.
-        Value 2 is the value of the tasks.
+        Value 1 is the value of the task.
+        Value 2 is the value of the criterion.
          */
         public boolean evaluate(String[] value1, String[] value2){
-            if(value1.length==1&&value2.length==1) return value2[0].contains(value1[0]);
+            if(value1.length==1&&value2.length==1) return value1[0].contains(value2[0]);
             for(String str2 : value2){
                 for(String str1 : value1){
                     if(str1.contains(str2)) return true;
                 }
             }
+            return false;
+        }
+    },
+    IS_PRIMITIVE ("IsPrimitive"){
+        @Override
+        public boolean evaluate(String[] value1, String[] value2){
             return false;
         }
     };

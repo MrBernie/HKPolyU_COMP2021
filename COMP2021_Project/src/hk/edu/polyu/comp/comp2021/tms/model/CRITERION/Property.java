@@ -5,7 +5,8 @@ public enum Property {
     DESCRIPTION("Description") ,
     DURATION("Duration") ,
     PREREQUISITE("Prerequisites") ,
-    SUBTASKS("SubTasks");
+    SUBTASKS("SubTasks") ,
+    IS_PRIMITIVE("IsPrimitive");
 
     final private String name;
 

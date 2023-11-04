@@ -59,7 +59,7 @@ public class TMS {
     }
 
     /**
-     * Taking input from users, returning a String[] splitted by space.
+     * Taking input from users, returning a String[] split by space.
      * @return
      */
     private String[] input(){

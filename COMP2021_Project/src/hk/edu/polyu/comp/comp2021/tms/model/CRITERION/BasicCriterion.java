@@ -24,7 +24,7 @@ public class BasicCriterion extends Criterion{
         strB.append("\nProperty: " + property.toString());
         strB.append("\nOperand: " + operand.toString());
         strB.append("\nValue: ");
-        if(property!=Property.PREREQUISITE&&property!=Property.SUBTASKS) strB.append(value[0]);
+        if(property!=Property.PREREQUISITE&&property!=Property.SUBTASKS) strB.append("\""+value[0]+"\"");
         else {
             for(String str : value) strB.append(str + ",");
         }
@@ -38,6 +38,7 @@ public class BasicCriterion extends Criterion{
      */
     @Override
     public boolean check(Task task){
+        if(this.operand==Operand.IS_PRIMITIVE) return task.isPrimitive();
         switch (property){
             case NAME -> {
                 return operand.evaluate(new String[]{task.getName()} , value);

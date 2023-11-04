@@ -69,6 +69,7 @@ public class PrimitiveTask extends Task {
         for(Task t : prerequisites){
             strB.append(t.getName() + ",");
         }
+        if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();
     }
 

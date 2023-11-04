@@ -22,8 +22,13 @@ class CriterionOperation {
         Property pro = CheckAvailability.checkProperty(property);
         Operand op = CheckAvailability.checkOperand(operand);
         CheckAvailability.checkPropertyOperandValueMatch(pro,op,value);
+        if(pro == Property.NAME || pro == Property.DESCRIPTION) removeDoubleQuote(value);
         storageList.defineBasicCriterion(name,pro,op,value);
         return "Basic criterion \""+name+"\" has been defined successfully.";
+    }
+
+    private static void removeDoubleQuote(String[] input){
+        input[0] = input[0].replace("\"","");
     }
 
     /**
@@ -72,7 +77,7 @@ class CriterionOperation {
 
     static String printAllCriteria(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all criteria...\n");
-        if(storageLists.criterionList.isEmpty()) strB.append("There is no criterion currently...");
+        if(storageLists.criterionList.isEmpty()) return "There is no criterion currently...";
         for(Criterion c : storageLists.criterionList){
             strB.append(c.toString()+"\n");
         }
@@ -94,6 +99,7 @@ class CriterionOperation {
         StringBuilder strB = new StringBuilder();
         strB.append("These tasks meets the criterion "+nameOfCriterion+ " : ");
         for(Task t : result) strB.append(t.getName()+",");
+        if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();
     }
 
