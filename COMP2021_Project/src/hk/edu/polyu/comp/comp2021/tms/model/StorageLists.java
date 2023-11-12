@@ -3,9 +3,10 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-class StorageLists {
+class StorageLists implements Serializable {
 
     protected ArrayList<Task> taskList;
     protected ArrayList<Criterion> criterionList;
@@ -90,6 +91,14 @@ class StorageLists {
         }
     }
 
+    String taskListString(){
+        StringBuilder strB = new StringBuilder();
+        for(Task t : this.taskList){
+            strB.append(t.toString()+"\n");
+        }
+        return strB.toString();
+    }
+
     /***************************************************************/
     /* Criterion List operations*/
 
@@ -151,5 +160,22 @@ class StorageLists {
             if(criterion.check(t)) result.add(t);
         }
         return result;
+    }
+
+    String criterionListString(){
+        StringBuilder strB = new StringBuilder();
+        for(Criterion c : this.criterionList){
+            strB.append(c.toString()+"\n");
+        }
+        return strB.toString();
+    }
+
+    void reset(){
+        taskList = new ArrayList<>();
+        criterionList = new ArrayList<>();
+    }
+
+    Byte toByte(){
+        return Byte.parseByte(taskListString() + "\n" + criterionListString());
     }
 }

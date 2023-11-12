@@ -156,10 +156,14 @@ public class TMS {
                         inputStringArray[1]);
 
             case "store":
-                //Todo
+                if(inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
+                return FileOperation.writeFile(storageLists,
+                        inputStringArray[1]);
 
             case "load":
-                //Todo
+                if(inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
+                return FileOperation.readFile(storageLists,
+                        inputStringArray[1]);
 
             case "quit":
                 return "quit";

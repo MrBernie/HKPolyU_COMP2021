@@ -78,9 +78,7 @@ class CriterionOperation {
     static String printAllCriteria(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all criteria...\n");
         if(storageLists.criterionList.isEmpty()) return "There is no criterion currently...";
-        for(Criterion c : storageLists.criterionList){
-            strB.append(c.toString()+"\n");
-        }
+        strB.append(storageLists.criterionListString());
         return strB.toString();
     }
 

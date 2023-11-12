@@ -113,9 +113,7 @@ class TaskOperation {
     static String printAllTasks(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
         if(storageLists.taskList.isEmpty()) strB.append("There is no tasks currently...");
-        for(Task t : storageLists.taskList){
-            strB.append(t.toString()+"\n");
-        }
+        strB.append(storageLists.taskListString());
         return strB.toString();
     }
 
