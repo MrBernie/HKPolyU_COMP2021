@@ -12,7 +12,7 @@ public class PrimitiveTask extends Task {
 
     public PrimitiveTask(String name, String description, double duration){
         super(name, description);
-        prerequisites = new ArrayList<Task>();
+        prerequisites = new ArrayList<>();
         isPrimitive = true;
         this.duration = duration;
     }
@@ -72,7 +72,5 @@ public class PrimitiveTask extends Task {
         if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();
     }
-
-    //Todo
 
 }
