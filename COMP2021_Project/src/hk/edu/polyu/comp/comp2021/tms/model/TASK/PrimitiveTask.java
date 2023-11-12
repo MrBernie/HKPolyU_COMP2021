@@ -25,13 +25,6 @@ public class PrimitiveTask extends Task {
         prerequisites.add(task);
     }
 
-    public boolean isContained(Task task){
-        for (Task t : task.getList()) {
-            if (t.getName().equals(this.name)) return true;
-        }
-        return false;
-    }
-
     @Override
     public ArrayList<Task> getList(){return prerequisites;}
 

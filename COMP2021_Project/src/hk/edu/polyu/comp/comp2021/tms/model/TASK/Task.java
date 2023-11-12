@@ -20,11 +20,29 @@ public abstract class Task{
     abstract public double getDuration();
 
     /**
-     * Check if this task is contained in the prerequisite or subtasks of tasklist of the input task.
+     * Check if this task is contained in the prerequisite or subtasks list of the input task.
+     * For example, t1 contains t2, t3 and t4 as its subtask or prerequisite. Then t2.isContained(t1) is true.
      * @param task
      * @return
      */
-    abstract public boolean isContained(Task task);
+    public boolean isContained(Task task){
+        for (Task t : task.getList()) {
+            if (t.getName().equals(this.name)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Check if this task is contained in the family tree of the input task.
+     * For example, t1 contains t2 and t3, t4 contains t1. Then t2 is part of t4.
+     * @param task
+     * @return
+     */
+    public boolean isPartOf(Task task){
+        if(task.getList().isEmpty()) return false;
+        for(Task t : task.getList()) if( this.name.equals(t.getName()) || this.isPartOf(t) ) return true;
+        return false;
+    }
 
     /**
      * Return Prerequisites List for primitive task.

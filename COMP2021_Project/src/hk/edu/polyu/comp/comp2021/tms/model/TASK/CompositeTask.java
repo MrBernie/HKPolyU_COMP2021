@@ -14,13 +14,6 @@ public class CompositeTask extends Task{
 
     public void addTask(Task task){subTaskList.add(task);}
 
-    public boolean isContained(Task task){
-        for(Task t: task.getList()) {
-            if (t.getName().equals(this.name)) return true;
-        }
-        return false;
-    }
-
     @Override
     public ArrayList<Task> getList(){return subTaskList;}
 
@@ -55,5 +48,4 @@ public class CompositeTask extends Task{
         return strB.toString();
     }
 
-    //Todo
 }

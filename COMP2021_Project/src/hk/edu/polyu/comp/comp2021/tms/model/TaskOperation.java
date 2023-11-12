@@ -2,6 +2,7 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 class TaskOperation {
@@ -22,7 +23,7 @@ class TaskOperation {
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
         Double dur = CheckAvailability.checkDuration(duration);
-        storageLists.createNewPrimitiveTask(name, description, dur, prerequisites);
+        storageLists.createNewPrimitiveTask(name, description, dur, nameListToTaskList(storageLists,prerequisites));
         return "Simple task \""+name+"\" has been created successfully.";
     }
 
@@ -40,7 +41,7 @@ class TaskOperation {
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
-        storageLists.createNewCompositeTask(name, description, subTaskList);
+        storageLists.createNewCompositeTask(name, description, nameListToTaskList(storageLists,subTaskList));
         return "Composite task \""+name+"\" has been created successfully.";
     }
 
@@ -53,12 +54,15 @@ class TaskOperation {
      * @throws Exception
      */
     static String deleteTask(StorageLists storageLists, String name) throws Exception{
-        Task task = storageLists.searchTaskList(name);
-        if(task == null) throw new Exception("This Task does not exist.");
-        for(Task t : storageLists.taskList){
-            if(task.isContained(t)) throw new Exception("This Task is required by other tasks.");
+        Task task = CheckAvailability.checkTaskExists(storageLists,name);
+        if(task instanceof PrimitiveTask){
+            CheckAvailability.isPrerequisite(storageLists,task);
+        }else{ //It is Composite task
+            //check if the subtask of this composite task is the prerequisite of other task.
+            CheckAvailability.isSubTasksPrerequisite(storageLists,task);
+            for(Task t : task.getList()) storageLists.deleteTask(t);
         }
-        storageLists.taskList.remove(task);
+        storageLists.deleteTask(task);
         return "Task \""+name+"\" has been deleted successfully.";
     }
 
@@ -83,15 +87,23 @@ class TaskOperation {
             }
             case PREREQUISITE -> {
                 if (!task.isPrimitive()) throw new Exception("Cannot set prerequisites for composite task.");
-                storageLists.setPrerequisites((PrimitiveTask) task, newValue);
+                if(newValue.length==0) break;
+                ArrayList<Task> prerequisiteTask = nameListToTaskList(storageLists,newValue);
+                if(prerequisiteTask.contains(task)) throw new Exception("A task cannot be the prerequisite of itself.");
+                CheckAvailability.isPartOf(task,prerequisiteTask);
+                storageLists.setPrerequisites((PrimitiveTask) task, prerequisiteTask);
             }
             case SUBTASKS -> {
                 if (task.isPrimitive()) throw new Exception("Cannot set subtasks for primitive task.");
-                storageLists.setSubTaskList((CompositeTask) task, newValue);
+                if(newValue.length==0) break;
+                ArrayList<Task> subTask = nameListToTaskList(storageLists,newValue);
+                if(subTask.contains(task)) throw new Exception("A task cannot be the subtask of itself.");
+                CheckAvailability.isPartOf(task,subTask);
+                storageLists.setSubTaskList((CompositeTask) task, subTask);
             }
             default -> throw new Exception("Invalid Property input.");
         }
-        return "Task \""+name+"\"'s property \""+ property+"\" has been set successfully.";
+        return "Task "+name+"'s property "+ property+" has been set successfully.";
     }
 
     /**
@@ -112,7 +124,7 @@ class TaskOperation {
      */
     static String printAllTasks(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
-        if(storageLists.taskList.isEmpty()) strB.append("There is no tasks currently...");
+        if(storageLists.getTaskList().isEmpty()) strB.append("There is no tasks currently...");
         strB.append(storageLists.taskListString());
         return strB.toString();
     }
@@ -142,6 +154,12 @@ class TaskOperation {
         if(!task.isPrimitive())
             throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.");
         return "\nThe Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
+    }
+
+    static ArrayList<Task> nameListToTaskList(StorageLists storageLists, String[] name) throws Exception{
+        ArrayList<Task> taskList = new ArrayList<>();
+        for(String str : name) taskList.add(CheckAvailability.checkTaskExists(storageLists, str));
+        return taskList;
     }
 
 }

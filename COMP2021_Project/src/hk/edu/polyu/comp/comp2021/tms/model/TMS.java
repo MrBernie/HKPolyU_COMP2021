@@ -76,7 +76,7 @@ public class TMS {
      * @return
      * @throws Exception
      */
-    private String operation(String[] inputStringArray) throws Exception {
+    protected String operation(String[] inputStringArray) throws Exception {
         switch(inputStringArray[0].toLowerCase()){
 
             case "createsimpletask":
@@ -155,15 +155,15 @@ public class TMS {
                 return CriterionOperation.search(storageLists,
                         inputStringArray[1]);
 
-            case "store":
-                if(inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
-                return FileOperation.writeFile(storageLists,
-                        inputStringArray[1]);
-
-            case "load":
-                if(inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
-                return FileOperation.readFile(storageLists,
-                        inputStringArray[1]);
+//            case "store":
+//                if(inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
+//                return FileOperation.writeFile(storageLists,
+//                        inputStringArray[1]);
+//
+//            case "load":
+//                if(inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
+//                return FileOperation.readFile(storageLists,
+//                        inputStringArray[1]);
 
             case "quit":
                 return "quit";

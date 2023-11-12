@@ -3,6 +3,7 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,10 @@ class CheckAvailability {
     private static final Exception ILLEGAL_DURATION2 = new Exception("Duration must be positive.");
     private static final Exception TASK_NOT_EXIST = new Exception("The required task does not exist.");
     private static final Exception TASK_ALREADY_EXIST = new Exception("This task already exists.");
+
+    private static final Exception TASK_IS_PREREQUISITE = new Exception("Task is the prerequisite of an other task.");
+    private static final Exception SUBTASK_IS_PREREQUISITE = new Exception("The subtask of this task is the prerequisite of an other task.");
+    private static final Exception IS_PART_OF = new Exception("It is illegal to create a task referencing loop.");
 
     /**
      * Check if the name of a task is legal.
@@ -78,6 +83,43 @@ class CheckAvailability {
     protected static void checkTaskAlreadyExists(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
         if(task != null) throw TASK_ALREADY_EXIST;
+    }
+
+    /**
+     * Check if the task is the prerequisite of another task
+     * @param storageLists
+     * @param task
+     * @throws Exception
+     */
+    protected static void isPrerequisite(StorageLists storageLists, Task task) throws Exception{
+        for(Task t : storageLists.getTaskList()){
+            if(task.isContained(t) && t instanceof PrimitiveTask) throw TASK_IS_PREREQUISITE;
+        }
+    }
+
+    /**
+     * Check if the task's subtask is prerequisite of another task
+     * @param storageLists
+     * @param task
+     * @throws Exception
+     */
+    protected static void isSubTasksPrerequisite(StorageLists storageLists, Task task) throws Exception{
+        for(Task task1 : task.getList()){
+            for(Task task2 : storageLists.getTaskList()){
+                if((!task.getList().contains(task2)) && task1.isContained(task2) && task2 instanceof PrimitiveTask)
+                    throw SUBTASK_IS_PREREQUISITE;
+            }
+        }
+    }
+
+    /**
+     * Check if a list of tasks exist in the family tree of a single task.
+     * @param task
+     * @param taskList
+     * @throws Exception
+     */
+    protected static void isPartOf(Task task, ArrayList<Task> taskList) throws Exception{
+        for(Task t : taskList) if( task.isPartOf(t) ) throw IS_PART_OF;
     }
 
     /******************************************************/
