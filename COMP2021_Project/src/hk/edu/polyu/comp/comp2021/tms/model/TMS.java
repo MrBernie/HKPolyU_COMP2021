@@ -93,101 +93,99 @@ public class TMS {
      * @throws Exception
      */
     protected String operation(String[] inputStringArray) throws Exception {
-        switch(inputStringArray[0].toLowerCase()){
-
-            case "createsimpletask":
-                if(inputStringArray.length != COMMAND_LENGTH[1]) throw INVALID_PARAMETERS;
+        switch (inputStringArray[0].toLowerCase()) {
+            case "createsimpletask" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[1]) throw INVALID_PARAMETERS;
                 return TaskOperation.createSimpleTask(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3],
                         inputStringArray[4].split(","));
-
-            case "createcompositetask":
-                if(inputStringArray.length != COMMAND_LENGTH[2]) throw INVALID_PARAMETERS;
+            }
+            case "createcompositetask" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[2]) throw INVALID_PARAMETERS;
                 return TaskOperation.createCompositeTask(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3].split(","));
-
-            case "deletetask":
-                if(inputStringArray.length != COMMAND_LENGTH[3]) throw INVALID_PARAMETERS;
+            }
+            case "deletetask" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[3]) throw INVALID_PARAMETERS;
                 return TaskOperation.deleteTask(storageLists,
                         inputStringArray[1]);
-
-            case "changetask":
-                if(inputStringArray.length != COMMAND_LENGTH[4]) throw INVALID_PARAMETERS;
+            }
+            case "changetask" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[4]) throw INVALID_PARAMETERS;
                 return TaskOperation.setProperty(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3].split(","));
-
-            case "printtask":
-                if(inputStringArray.length != COMMAND_LENGTH[5]) throw INVALID_PARAMETERS;
-                return TaskOperation.printTask(storageLists,inputStringArray[1]);
-
-            case "printalltasks":
-                if(inputStringArray.length != COMMAND_LENGTH[6]) throw INVALID_PARAMETERS;
+            }
+            case "printtask" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[5]) throw INVALID_PARAMETERS;
+                return TaskOperation.printTask(storageLists, inputStringArray[1]);
+            }
+            case "printalltasks" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[6]) throw INVALID_PARAMETERS;
                 return TaskOperation.printAllTasks(storageLists);
-
-            case "reportduration":
-                if(inputStringArray.length != COMMAND_LENGTH[7]) throw INVALID_PARAMETERS;
+            }
+            case "reportduration" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[7]) throw INVALID_PARAMETERS;
                 return TaskOperation.reportDuration(storageLists,
                         inputStringArray[1]);
-
-            case "reportearliestfinishtime":
-                if(inputStringArray.length != COMMAND_LENGTH[8]) throw INVALID_PARAMETERS;
+            }
+            case "reportearliestfinishtime" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[8]) throw INVALID_PARAMETERS;
                 return TaskOperation.reportEarliestFinishTime(storageLists,
                         inputStringArray[1]);
-
-            case "definebasiccriterion":
-                if(inputStringArray.length != COMMAND_LENGTH[9]) throw INVALID_PARAMETERS;
+            }
+            case "definebasiccriterion" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[9]) throw INVALID_PARAMETERS;
                 return CriterionOperation.defineBasicCriterion(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3],
                         inputStringArray[4].split(","));
-
-            case "definenegatedcriterion":
-                if(inputStringArray.length != COMMAND_LENGTH[10]) throw INVALID_PARAMETERS;
+            }
+            case "definenegatedcriterion" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[10]) throw INVALID_PARAMETERS;
                 return CriterionOperation.defineNegatedCriterion(storageLists,
                         inputStringArray[1],
                         inputStringArray[2]);
-
-            case "definebinarycriterion":
-                if(inputStringArray.length != COMMAND_LENGTH[11]) throw INVALID_PARAMETERS;
+            }
+            case "definebinarycriterion" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[11]) throw INVALID_PARAMETERS;
                 return CriterionOperation.defineBinaryCriterion(storageLists,
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3],
                         inputStringArray[4]);
-
-            case "printallcriteria":
-                if(inputStringArray.length != COMMAND_LENGTH[12]) throw INVALID_PARAMETERS;
+            }
+            case "printallcriteria" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[12]) throw INVALID_PARAMETERS;
                 return CriterionOperation.printAllCriteria(storageLists);
-
-            case "search":
-                if(inputStringArray.length != COMMAND_LENGTH[13]) throw INVALID_PARAMETERS;
+            }
+            case "search" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[13]) throw INVALID_PARAMETERS;
                 return CriterionOperation.search(storageLists,
                         inputStringArray[1]);
-
-            case "store":
-                if(inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
+            }
+            case "store" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
                 return FileOperation.writeFile(storageLists,
                         inputStringArray[1]);
-
-            case "load":
-                if(inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
+            }
+            case "load" -> {
+                if (inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
                 storageLists = FileOperation.readFile(storageLists,
                         inputStringArray[1]);
                 return "File has been loaded";
-
-            case "quit":
+            }
+            case "quit" -> {
                 stop();
                 return "quit";
-
-            default:
-                throw INVALID_COMMAND;
+            }
+            default -> throw INVALID_COMMAND;
         }
     }
 
