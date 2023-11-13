@@ -22,7 +22,7 @@ public class TMS {
             2,//Req7
             2,//Req8
             5,//Req9
-            3,//Req11 index 10
+            3,//Req11 index = 10
             5,//Req11
             1,//Req12
             2,//Req13
@@ -155,15 +155,16 @@ public class TMS {
                 return CriterionOperation.search(storageLists,
                         inputStringArray[1]);
 
-//            case "store":
-//                if(inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
-//                return FileOperation.writeFile(storageLists,
-//                        inputStringArray[1]);
-//
-//            case "load":
-//                if(inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
-//                return FileOperation.readFile(storageLists,
-//                        inputStringArray[1]);
+            case "store":
+                if(inputStringArray.length != COMMAND_LENGTH[14]) throw INVALID_PARAMETERS;
+                return FileOperation.writeFile(storageLists,
+                        inputStringArray[1]);
+
+            case "load":
+                if(inputStringArray.length != COMMAND_LENGTH[15]) throw INVALID_PARAMETERS;
+                storageLists = FileOperation.readFile(storageLists,
+                        inputStringArray[1]);
+                return "File has been loaded";
 
             case "quit":
                 return "quit";
@@ -178,7 +179,6 @@ public class TMS {
      */
     private void output(String output){
         System.out.println(output + "\n");
-        //Todo may need further implementation.
     }
 
 }

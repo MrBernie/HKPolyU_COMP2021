@@ -1,8 +1,9 @@
 package hk.edu.polyu.comp.comp2021.tms.model.TASK;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Task{
+public abstract class Task implements Serializable {
     protected String name;
     protected String description;
     protected boolean isPrimitive;

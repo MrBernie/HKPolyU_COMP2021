@@ -2,7 +2,9 @@ package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
 
-public abstract class Criterion{
+import java.io.Serializable;
+
+public abstract class Criterion implements Serializable {
 
     protected String name;
 

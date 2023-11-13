@@ -6,7 +6,7 @@ import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-class StorageLists implements Serializable {
+class StorageLists implements Serializable{
 
     private ArrayList<Task> taskList;
     private ArrayList<Criterion> criterionList;
@@ -16,6 +16,11 @@ class StorageLists implements Serializable {
         criterionList = new ArrayList<>();
         defineBasicCriterion("IsPrimitive",Property.IS_PRIMITIVE,Operand.IS_PRIMITIVE,
                 new String[]{"Only for checking whether a task is primitive or not."});
+    }
+
+    @Override
+    public String toString(){
+        return taskListString() + criterionListString();
     }
 
     /***********************************************************/
