@@ -183,7 +183,7 @@ public class TMS {
                 return "File has been loaded";
 
             case "quit":
-                flag = false;
+                stop();
                 return "quit";
 
             default:

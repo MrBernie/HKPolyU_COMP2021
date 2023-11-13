@@ -6,7 +6,7 @@ import java.io.*;
 
 public class TMSTest {
 
-    private String[] taskCommands = {
+    private final String[] taskCommands = {
             "asdoufihaoushe",
             "createsimpletask weriuu",
             "createcompositetask 123 49",
@@ -23,6 +23,7 @@ public class TMSTest {
             "deletetask t4",
             "reportearliestfinishtime t5",
             "deletetask t5",
+            "deletetasj t10",
             "changetask t1 name t0",
             "printtask t5",
             "printtask t2",
@@ -35,17 +36,39 @@ public class TMSTest {
             "quit"
     };
 
-    private String[] criteriaCommands = {
+    private final String[] criteriaCommands = {
             "load ../data1.bin",
             "definebasiccriterion c1 name contains t",
             "definebasiccriterion 23408 eufoaiwe awoe8",
             "definebasiccriterion c1 name contains \"n\"",
             "definebasiccriterion c2 description contains \"t\"",
             "definebasiccriterion c3 duration > 10",
-            "definebascicriterion c4 duration > 5",
+            "definebasiccriterion c4 duration > 5",
             "definebasiccriterion c5 ",
+            "definenegatedcriterion NIP IsPrimitive",
+            "definenegatedcriterion c8 c7",
+            "definebinarycriterion c5 c3 && c4",
+            "definebinarycriterion c6 c2 || c3",
+            "definebinarycriterion c7 c5 && IsPrimitive",
+            "definebasiccriterion c10 prerequisites contains t0",
+            "definebasiccriterion c11 subtasks contains t4",
+            "search c5",
+            "search c6",
+            "search c7",
+            "search NIP",
+            "search c8",
+            "search c10",
+            "search c11",
+            "printallcriteria",
             "store ../data2.bin",
             "quit"
+    };
+
+    private final String[] fileOpTestCommands = {
+            "load ../data2.abc",
+            "store test",
+            "load er.",
+            "load ../README.md"
     };
 
     TMS tms;
@@ -64,6 +87,11 @@ public class TMSTest {
     @Test
     public void testCriteria(){
         tms.testRun(criteriaCommands);
+    }
+
+    @Test
+    public void testFileOp(){
+        tms.testRun(fileOpTestCommands);
     }
 
 }
