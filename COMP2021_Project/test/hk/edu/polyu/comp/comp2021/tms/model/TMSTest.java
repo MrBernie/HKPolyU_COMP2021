@@ -2,7 +2,6 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import java.io.*;
 
 public class TMSTest {
 
@@ -14,6 +13,7 @@ public class TMSTest {
             "createsimpletask t1 t1 4 ,",
             "createsimpletask t1 t1 3 ,",
             "createsimpletask t2 t2 3 t1",
+            "createsimpletask t3 t3 -8 t1",
             "createsimpletask t3 t3 6 t2",
             "createsimpletask t4 t4 -34 ,",
             "changetask t1 prerequisites t3",
@@ -75,7 +75,6 @@ public class TMSTest {
     };
 
     TMS tms;
-    private static ByteArrayInputStream in;
 
     @Before
     public void setUp(){
@@ -88,9 +87,7 @@ public class TMSTest {
     }
 
     @Test
-    public void testCriteria(){
-        tms.testRun(criteriaCommands);
-    }
+    public void testCriteria(){tms.testRun(criteriaCommands);}
 
     @Test
     public void testFileOp(){
