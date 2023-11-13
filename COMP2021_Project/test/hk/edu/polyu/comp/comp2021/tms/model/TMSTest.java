@@ -2,20 +2,17 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import java.io.*;
 
 public class TMSTest {
 
-//    @Test
-//    public void testTMSConstructor(){
-//        TMS tms = new TMS();
-//        tms.run();
-//    }
-
-    String[] taskCommands = {
+    private String[] taskCommands = {
             "asdoufihaoushe",
             "createsimpletask weriuu",
             "createcompositetask 123 49",
+            "createsimpletask t1 t1 3 t3",
             "createsimpletask t1 t1 4 ,",
+            "createsimpletask t1 t1 3 ,",
             "createsimpletask t2 t2 3 t1",
             "createsimpletask t3 t3 6 t2",
             "createsimpletask t4 t4 -34 ,",
@@ -34,22 +31,39 @@ public class TMSTest {
             "changetask t0 duration 12",
             "reportduration t4",
             "changetask t3 prerequisites t0",
-            "store ../data.bin"
+            "store ../data1.bin",
+            "quit"
     };
 
-    TMS tms = new TMS();
+    private String[] criteriaCommands = {
+            "load ../data1.bin",
+            "definebasiccriterion c1 name contains t",
+            "definebasiccriterion 23408 eufoaiwe awoe8",
+            "definebasiccriterion c1 name contains \"n\"",
+            "definebasiccriterion c2 description contains \"t\"",
+            "definebasiccriterion c3 duration > 10",
+            "definebascicriterion c4 duration > 5",
+            "definebasiccriterion c5 ",
+            "store ../data2.bin",
+            "quit"
+    };
+
+    TMS tms;
+    private static ByteArrayInputStream in;
+
+    @Before
+    public void setUp(){
+        tms = new TMS();
+    }
 
     @Test
-    public void testTask(){
+    public void testTask() {
+        tms.testRun(taskCommands);
+    }
 
-        for(String command : taskCommands){
-            try {
-                System.out.println(tms.operation(command.split(" ")));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
+    @Test
+    public void testCriteria(){
+        tms.testRun(criteriaCommands);
     }
 
 }

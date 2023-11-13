@@ -138,7 +138,7 @@ class TaskOperation {
     static String reportDuration(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(task.isPrimitive()) throw new Exception("Reporting Duration can only be applied to Composite Task.");
-        return "\nThe Duration of the Composite Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
+        return "The Duration of the Composite Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
     }
 
     /**
@@ -153,7 +153,7 @@ class TaskOperation {
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(!task.isPrimitive())
             throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.");
-        return "\nThe Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
+        return "The Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
     }
 
     static ArrayList<Task> nameListToTaskList(StorageLists storageLists, String[] name) throws Exception{

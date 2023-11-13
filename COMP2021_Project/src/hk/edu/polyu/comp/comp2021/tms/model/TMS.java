@@ -37,23 +37,39 @@ public class TMS {
     public TMS(){
         storageLists = new StorageLists();
     }
+    private boolean flag;
 
+    private Scanner scanner;
     /**
      * This is the primary function that should be executed when running the TMS.
      */
     public void run(){
-        boolean flag = true;
+        flag = true;
         while(flag){
             String[] inputStringArray = input(); //Get the input
             String output;
-
             //Get the output. Set output as the exception message if exception occurs.
             try {
                 output = operation(inputStringArray);
             } catch (Exception e) {
                 output = e.getMessage();
             }
-            if(output.equals("quit")) flag = false;
+            output(output);
+        }
+        scanner.close();
+    }
+
+    public void testRun(String[] commandLines){
+        flag = true;
+        for(String command : commandLines){
+            String[] inputStringArray = command.split(" "); //Get the input
+            String output;
+            //Get the output. Set output as the exception message if exception occurs.
+            try {
+                output = operation(inputStringArray);
+            } catch (Exception e) {
+                output = e.getMessage();
+            }
             output(output);
         }
     }
@@ -63,9 +79,9 @@ public class TMS {
      * @return
      */
     private String[] input(){
-        Scanner s = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         System.out.println("Input your command here: ");
-        String rawInput = s.nextLine();
+        String rawInput = scanner.nextLine();
         return rawInput.split(" ");
     }
 
@@ -167,7 +183,9 @@ public class TMS {
                 return "File has been loaded";
 
             case "quit":
+                flag = false;
                 return "quit";
+
             default:
                 throw INVALID_COMMAND;
         }
@@ -180,5 +198,7 @@ public class TMS {
     private void output(String output){
         System.out.println(output + "\n");
     }
+
+    protected void stop() {flag = false;}
 
 }
