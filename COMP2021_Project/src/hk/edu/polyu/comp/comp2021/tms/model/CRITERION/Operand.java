@@ -61,6 +61,11 @@ public enum Operand {
 
     public String toString() { return this.name;}
 
+    /**
+     * Get the operand by its name.
+     * @param operand operand name
+     * @return operand
+     */
     public static Operand getOperand(String operand){
         return switch (operand) {
             case ">" -> GREATER;
@@ -77,9 +82,9 @@ public enum Operand {
      * This method takes in two String arrays as input.
      * The first input is supposed to be the value of task.
      * The second input is supposed to be the value of criterion.
-     * @param value1
-     * @param value2
-     * @return
+     * @param value1 First input in String array.
+     * @param value2 Second input in String array.
+     * @return The result of the evaluation.
      */
     public abstract boolean evaluate(String[] value1, String[] value2);
 }

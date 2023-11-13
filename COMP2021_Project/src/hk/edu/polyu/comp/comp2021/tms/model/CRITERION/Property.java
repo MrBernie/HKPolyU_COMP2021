@@ -14,6 +14,11 @@ public enum Property {
 
     public String toString(){ return this.name;}
 
+    /**
+     * Get the property by its name.
+     * @param property property name
+     * @return property
+     */
     public static Property getProperty(String property){
         return switch (property) {
             case "name" -> NAME;

@@ -5,43 +5,45 @@ import java.util.*;
 
 public class FileOperation {
 
+    /**
+     * Write the data to the file.
+     * @param storageLists The data to be stored.
+     * @param filePath The file path.
+     * @return The message of the operation.
+     * @throws Exception The exception of the operation.
+     */
     static String writeFile(StorageLists storageLists, String filePath) throws Exception{
-        FileOutputStream fileOut = null;
-        ObjectOutputStream ObjOut = null;
-        try {
-            fileOut = new FileOutputStream(filePath);
-            ObjOut = new ObjectOutputStream(fileOut);
+        try (FileOutputStream fileOut = new FileOutputStream(filePath);
+             ObjectOutputStream ObjOut = new ObjectOutputStream(fileOut)) {
             ObjOut.writeObject(storageLists);
-        } catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new Exception("The file path is illegal.");
-        } catch(IOException e){
+        } catch (IOException e) {
             //throw e;
             throw new Exception("IO exception.");
-        }finally{
-            if(ObjOut != null) ObjOut.close();
-            if(fileOut != null) fileOut.close();
         }
         return "The data has been stored to the file.";
     }
 
+    /**
+     * Read the data from the file.
+     * @param storageLists The data to be stored.
+     * @param filePath The file path.
+     * @return The message of the operation.
+     * @throws Exception The exception of the operation.
+     */
     static StorageLists readFile(StorageLists storageLists, String filePath) throws Exception {
 
-        FileInputStream fileIn = null;
-        ObjectInputStream ObjIn = null;
-        try {
-            fileIn = new FileInputStream(filePath);
-            ObjIn = new ObjectInputStream(fileIn);
+        try (FileInputStream fileIn = new FileInputStream(filePath);
+             ObjectInputStream ObjIn = new ObjectInputStream(fileIn)) {
             storageLists = (StorageLists) ObjIn.readObject();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new Exception("The file cannot be found.");
-        } catch(IOException e) {
+        } catch (IOException e) {
             //throw e;
             throw new Exception("IO exception.");
-        } catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             throw new Exception("The file content is unreadable.");
-        }finally{
-            if(ObjIn != null) ObjIn.close();
-            if(fileIn != null) fileIn.close();
         }
         return storageLists;
     }

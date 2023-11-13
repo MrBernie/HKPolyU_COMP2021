@@ -76,7 +76,7 @@ public class TMS {
 
     /**
      * Taking input from users, returning a String[] split by space.
-     * @return
+     * @return String[]
      */
     private String[] input(){
         scanner = new Scanner(System.in);
@@ -88,9 +88,9 @@ public class TMS {
     /**
      * The primary switch-case method that decides which operation should be executed.
      * The switch-case follows the order of Reqs.
-     * @param inputStringArray
-     * @return
-     * @throws Exception
+     * @param inputStringArray The input String[] split by space.
+     * @return The output String.
+     * @throws Exception If the input command is invalid or the input parameters are invalid.
      */
     protected String operation(String[] inputStringArray) throws Exception {
         switch (inputStringArray[0].toLowerCase()) {
@@ -191,7 +191,7 @@ public class TMS {
 
     /**
      * Simply prints out the output.
-     * @param output
+     * @param output the output to be printed.
      */
     private void output(String output){
         System.out.println(output + "\n");

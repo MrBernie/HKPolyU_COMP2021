@@ -38,7 +38,7 @@ public class PrimitiveTask extends Task {
     /**
      * This method return the sum of duration of its prerequisite.
      * Notice that this is different from the field "this.duration".
-     * @return
+     * @return the sum of duration of its prerequisite.
      */
     @Override
     public double getDuration() {

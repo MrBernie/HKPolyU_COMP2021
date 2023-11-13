@@ -9,11 +9,11 @@ class CriterionOperation {
 
     /**
      * Req 9
-     * @param name
-     * @param property
-     * @param operand
-     * @param value
-     * @return
+     * @param name the name of the criterion
+     * @param property the property of the criterion
+     * @param operand the operand of the criterion
+     * @param value the value of the criterion
+     * @return the message
      */
     static String defineBasicCriterion(StorageLists storageList,String name,
                                        String property, String operand, String[] value) throws Exception{
@@ -33,11 +33,11 @@ class CriterionOperation {
 
     /**
      * Req 11_1
-     * @param storageLists
-     * @param name
-     * @param nameOfCriterion
-     * @return
-     * @throws Exception
+     * @param storageLists the storageLists
+     * @param name the name of the criterion
+     * @param nameOfCriterion the name of the criterion
+     * @return the message
+     * @throws Exception from the check methods
      */
     static String defineNegatedCriterion(StorageLists storageLists, String name,
                                          String nameOfCriterion) throws Exception{
@@ -50,13 +50,13 @@ class CriterionOperation {
 
     /**
      * Req 11_2
-     * @param storageLists
-     * @param name
-     * @param nameOfCriterion1
-     * @param lOp
-     * @param nameOfCriterion2
-     * @return
-     * @throws Exception
+     * @param storageLists the storageLists
+     * @param name the name of the criterion
+     * @param nameOfCriterion1 the name of the criterion
+     * @param lOp the logic operator
+     * @param nameOfCriterion2 the name of the criterion
+     * @return the message
+     * @throws Exception from the check methods
      */
     static String defineBinaryCriterion(StorageLists storageLists, String name, String nameOfCriterion1,
                                         String lOp, String nameOfCriterion2) throws Exception{
@@ -71,8 +71,8 @@ class CriterionOperation {
 
     /**
      * Req 12
-     * @param storageLists
-     * @return
+     * @param storageLists the storageLists
+     * @return the message
      */
 
     static String printAllCriteria(StorageLists storageLists){
@@ -84,10 +84,10 @@ class CriterionOperation {
 
     /**
      * Req 13
-     * @param storageLists
-     * @param nameOfCriterion
-     * @return
-     * @throws Exception
+     * @param storageLists the storageLists
+     * @param nameOfCriterion the name of the criterion
+     * @return the message
+     * @throws Exception from the check methods
      */
 
     static String search(StorageLists storageLists, String nameOfCriterion) throws Exception{

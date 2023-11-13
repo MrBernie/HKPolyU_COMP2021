@@ -14,8 +14,6 @@ public class BasicCriterion extends Criterion{
         this.value = value;
     }
 
-    public String getName(){ return super.name;}
-
     @Override
     public String toString(){
         StringBuilder strB = new StringBuilder();
@@ -33,8 +31,8 @@ public class BasicCriterion extends Criterion{
 
     /**
      * The basic checking function.
-     * @param task
-     * @return
+     * @param task task to be checked
+     * @return true if the task satisfies the criterion
      */
     @Override
     public boolean check(Task task){

@@ -13,16 +13,17 @@ public class NegatedCriterion extends Criterion{
     }
 
     public String toString(){
-        String str = "\nNegated Criterion: " +
+        return "\nNegated Criterion: " +
                 super.toString() +
                 "\nNegated: " + criterion.name;
-        return str;
     }
 
-    @Override
     /**
-     * Return the result of boolean calculation of the criterion.
+     * Check if the task satisfies the criterion.
+     * @param task task to be checked
+     * @return true if the task satisfies the criterion
      */
+    @Override
     public boolean check(Task task){
         return logicOp.evaluate(criterion.check(task),false);
     }

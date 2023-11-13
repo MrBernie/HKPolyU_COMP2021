@@ -14,6 +14,7 @@ public abstract class Criterion implements Serializable {
 
     public String getName(){return name;}
 
+    @Override
     public String toString(){ return "\nName: " + this.name; }
 
     public abstract boolean check(Task task);

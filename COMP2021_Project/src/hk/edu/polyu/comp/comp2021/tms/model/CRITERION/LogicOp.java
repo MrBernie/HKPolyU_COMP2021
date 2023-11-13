@@ -27,6 +27,11 @@ public enum LogicOp {
 
     public String toString(){return this.name;}
 
+    /**
+     * Get the logic operator by its name.
+     * @param lOp logic operator name
+     * @return logic operator
+     */
     public static LogicOp getLogicOp(String lOp){
         return switch (lOp) {
             case "&&" -> AND;
@@ -35,5 +40,11 @@ public enum LogicOp {
         };
     }
 
+    /**
+     * Evaluate the logic operator.
+     * @param criterionResult1 result of the first criterion
+     * @param criterionResult2 result of the second criterion
+     * @return result of the logic operator
+     */
     public abstract boolean evaluate(boolean criterionResult1, boolean criterionResult2);
 }

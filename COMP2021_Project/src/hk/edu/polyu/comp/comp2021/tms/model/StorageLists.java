@@ -32,8 +32,8 @@ class StorageLists implements Serializable{
     /**
      * Search a task in the list by task name.
      * Return null if the task is not found.
-     * @param name
-     * @return
+     * @param name task name
+     * @return task
      */
     Task searchTaskList(String name){
         for(Task t : taskList) if(t.getName().equals(name)) return t;
@@ -42,14 +42,13 @@ class StorageLists implements Serializable{
 
     /**
      * Create new Primitive Task
-     * @param name
-     * @param description
-     * @param duration
-     * @param prerequisites
-     * @throws Exception
+     * @param name task name
+     * @param description task description
+     * @param duration task duration
+     * @param prerequisites task prerequisites
      */
     void createNewPrimitiveTask(String name, String description,
-                                       double duration, ArrayList<Task> prerequisites) throws Exception {
+                                       double duration, ArrayList<Task> prerequisites) {
         PrimitiveTask newPrimitiveTask = new PrimitiveTask(name, description,duration);
         setPrerequisites(newPrimitiveTask,prerequisites);
         taskList.add(newPrimitiveTask);
@@ -57,13 +56,12 @@ class StorageLists implements Serializable{
 
     /**
      * Create new Composite Task
-     * @param name
-     * @param description
-     * @param subtaskList
-     * @throws Exception
+     * @param name task name
+     * @param description task description
+     * @param subtaskList task subtask list
      */
     void createNewCompositeTask(String name, String description,
-                                ArrayList<Task> subtaskList) throws Exception{
+                                ArrayList<Task> subtaskList) {
         CompositeTask newCompositeTask = new CompositeTask(name, description);
         setSubTaskList(newCompositeTask, subtaskList);
         taskList.add(newCompositeTask);
@@ -71,11 +69,10 @@ class StorageLists implements Serializable{
 
     /**
      * Check if the prerequisite tasks of a primitive task exists in the task list
-     * @param Task
-     * @param prerequisites
-     * @throws Exception
+     * @param Task primitive task
+     * @param prerequisites prerequisite tasks
      */
-    void setPrerequisites(PrimitiveTask Task, ArrayList<Task> prerequisites) throws Exception{
+    void setPrerequisites(PrimitiveTask Task, ArrayList<Task> prerequisites) {
         if(prerequisites==null||prerequisites.size()==0) return;
         for (Task t : prerequisites){
             Task.addPrerequisites(t);
@@ -84,22 +81,29 @@ class StorageLists implements Serializable{
 
     /**
      * Check if the tasks in subTask List exists in the task list
-     * @param Task
-     * @param subTaskList
-     * @throws Exception
+     * @param Task composite task
+     * @param subTaskList subtask list
      */
-    void setSubTaskList(CompositeTask Task, ArrayList<Task> subTaskList) throws Exception{
+    void setSubTaskList(CompositeTask Task, ArrayList<Task> subTaskList) {
         if(subTaskList==null||subTaskList.size()==0) return;
         for (Task t : subTaskList){
             Task.addTask(t);
         }
     }
 
+    /**
+     * Delete a task from the task list
+     * @param task task to be deleted
+     */
     void deleteTask(Task task){
         for(Task t : taskList) if(t instanceof CompositeTask) t.getList().remove(task);
         taskList.remove(task);
     }
 
+    /**
+     * Print the task list
+     * @return task list string
+     */
     String taskListString(){
         StringBuilder strB = new StringBuilder();
         for(Task t : this.taskList){
@@ -108,13 +112,13 @@ class StorageLists implements Serializable{
         return strB.toString();
     }
 
-    /***************************************************************/
+    /* ************************************************************* */
     /* Criterion List operations*/
 
     /**
      * Search a specific Criterion by name
-     * @param name
-     * @return
+     * @param name criterion name
+     * @return criterion
      */
     Criterion searchCriterionList(String name){
         for(Criterion c : criterionList) if(c.getName().equals(name)) return c;
@@ -123,10 +127,10 @@ class StorageLists implements Serializable{
 
     /**
      * Define a basic Criterion
-     * @param name
-     * @param property
-     * @param operand
-     * @param value
+     * @param name criterion name
+     * @param property property
+     * @param operand operand
+     * @param value value
      */
     void defineBasicCriterion(String name, Property property, Operand operand, String[] value){
         BasicCriterion newBasicCriterion = new BasicCriterion(name, property, operand, value);
@@ -135,8 +139,8 @@ class StorageLists implements Serializable{
 
     /**
      * Define a negated criterion
-     * @param name
-     * @param criterion
+     * @param name criterion name
+     * @param criterion criterion
      */
     void defineNegatedCriterion(String name, Criterion criterion){
         NegatedCriterion newNegatedCriterion = new NegatedCriterion(name, criterion);
@@ -145,10 +149,10 @@ class StorageLists implements Serializable{
 
     /**
      * Define a binary criterion
-     * @param name
-     * @param criterion1
-     * @param logicOp
-     * @param criterion2
+     * @param name criterion name
+     * @param criterion1 criterion 1
+     * @param logicOp logic operator
+     * @param criterion2 criterion 2
      */
 
     void defineBinaryCriterion(String name, Criterion criterion1, LogicOp logicOp, Criterion criterion2){
@@ -159,8 +163,8 @@ class StorageLists implements Serializable{
     /**
      * Search through the Task List based on a criterion.
      * Return a list of tasks that meet the criterion.
-     * @param criterion
-     * @return
+     * @param criterion criterion
+     * @return list of tasks
      */
 
     ArrayList<Task> search(Criterion criterion){
@@ -171,6 +175,10 @@ class StorageLists implements Serializable{
         return result;
     }
 
+    /**
+     * Print the criterion list
+     * @return criterion list string
+     */
     String criterionListString(){
         StringBuilder strB = new StringBuilder();
         for(Criterion c : this.criterionList){
@@ -179,12 +187,4 @@ class StorageLists implements Serializable{
         return strB.toString();
     }
 
-    void reset(){
-        taskList = new ArrayList<>();
-        criterionList = new ArrayList<>();
-    }
-
-    Byte toByte(){
-        return Byte.parseByte(taskListString() + "\n" + criterionListString());
-    }
 }

@@ -15,21 +15,21 @@ public class BinaryCriterion extends Criterion{
         this.logicOp = logicOp;
     }
 
+    @Override
     public String toString(){
-        String str = "\nBinary Criterion: " +
+        return "\nBinary Criterion: " +
                 super.toString() +
                 "\nFirst Criterion: " + criterion1.name +
                 "\nLogic Operand: " + logicOp.toString() +
                 "\nFirst Criterion: " + criterion2.name;
-        return str;
     }
 
-    @Override
     /**
-     * Return the result of binary boolean calculation of these two criterion.
-     * @param task
-     * @return
+     * Check if the task satisfies the criterion.
+     * @param task task to be checked
+     * @return true if the task satisfies the criterion
      */
+    @Override
     public boolean check(Task task){
         return logicOp.evaluate(criterion1.check(task),criterion2.check(task));
     }

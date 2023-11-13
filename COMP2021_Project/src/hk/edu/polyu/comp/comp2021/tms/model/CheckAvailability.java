@@ -26,8 +26,8 @@ class CheckAvailability {
 
     /**
      * Check if the name of a task is legal.
-     * @param name
-     * @throws Exception
+     * @param name the name of the task
+     * @throws Exception if the name is illegal
      */
     protected static void checkName(String name) throws Exception{
         Matcher matcher = NAME_PATTERN.matcher(name);
@@ -36,8 +36,8 @@ class CheckAvailability {
 
     /**
      * Check if the description of a task is legal.
-     * @param description
-     * @throws Exception
+     * @param description the description of the task
+     * @throws Exception if the description is illegal
      */
     protected static void checkDescription(String description) throws Exception{
         Matcher matcher = DESCRIPTION_PATTERN.matcher(description);
@@ -46,11 +46,11 @@ class CheckAvailability {
 
     /**
      * Check the availability of the duration
-     * @param dur
-     * @throws Exception
+     * @param dur the duration of the task
+     * @throws Exception if the duration is illegal
      */
-    protected static Double checkDuration(String dur) throws Exception{
-        Double duration;
+    protected static double checkDuration(String dur) throws Exception{
+        double duration;
         try{
             duration = Double.parseDouble(dur);
         }catch(NumberFormatException e){
@@ -63,10 +63,10 @@ class CheckAvailability {
     /**
      * Check if a task name has corresponding task object in the list.
      * Return the task if it exists in the list.
-     * @param storageLists
-     * @param name
-     * @return
-     * @throws Exception
+     * @param storageLists the storageLists object
+     * @param name the name of the task
+     * @return the task object
+     * @throws Exception if the task does not exist
      */
     protected static Task checkTaskExists(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
@@ -76,9 +76,9 @@ class CheckAvailability {
 
     /**
      * Check if a task is already existing in the list.
-     * @param storageLists
-     * @param name
-     * @throws Exception
+     * @param storageLists the storageLists object
+     * @param name the name of the task
+     * @throws Exception if the task already exists
      */
     protected static void checkTaskAlreadyExists(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
@@ -87,9 +87,9 @@ class CheckAvailability {
 
     /**
      * Check if the task is the prerequisite of another task
-     * @param storageLists
-     * @param task
-     * @throws Exception
+     * @param storageLists the storageLists object
+     * @param task the task object
+     * @throws Exception if the task is the prerequisite of another task
      */
     protected static void isPrerequisite(StorageLists storageLists, Task task) throws Exception{
         for(Task t : storageLists.getTaskList()){
@@ -99,9 +99,9 @@ class CheckAvailability {
 
     /**
      * Check if the task's subtask is prerequisite of another task
-     * @param storageLists
-     * @param task
-     * @throws Exception
+     * @param storageLists the storageLists object
+     * @param task the task object
+     * @throws Exception if the task's subtask is prerequisite of another task
      */
     protected static void isSubTasksPrerequisite(StorageLists storageLists, Task task) throws Exception{
         for(Task task1 : task.getList()){
@@ -114,9 +114,9 @@ class CheckAvailability {
 
     /**
      * Check if a list of tasks exist in the family tree of a single task.
-     * @param task
-     * @param taskList
-     * @throws Exception
+     * @param task the task object
+     * @param taskList the list of tasks
+     * @throws Exception if the task is part of the list of tasks
      */
     protected static void isPartOf(Task task, ArrayList<Task> taskList) throws Exception{
         for(Task t : taskList) if( task.isPartOf(t) ) throw IS_PART_OF;
@@ -136,10 +136,10 @@ class CheckAvailability {
 
     /**
      * Check if a criterion name has corresponding criterion object in the list.
-     * @param storageLists
-     * @param name
-     * @return
-     * @throws Exception
+     * @param storageLists  the storageLists object
+     * @param name the name of the criterion
+     * @return the criterion object
+     * @throws Exception if the criterion does not exist
      */
     protected static Criterion checkCriterionExists(StorageLists storageLists, String name) throws Exception{
         Criterion criterion = storageLists.searchCriterionList(name);
@@ -149,9 +149,9 @@ class CheckAvailability {
 
     /**
      * Check if a criterion is already existing in the list.
-     * @param storageLists
-     * @param name
-     * @throws Exception
+     * @param storageLists the storageLists object
+     * @param name the name of the criterion
+     * @throws Exception if the criterion already exists
      */
     protected static void checkCriterionAlreadyExists(StorageLists storageLists, String name) throws Exception{
         Criterion criterion = storageLists.searchCriterionList(name);
@@ -161,9 +161,9 @@ class CheckAvailability {
     /**
      * Check if a property exists.
      * Return that property if it exists.
-     * @param pro
-     * @return
-     * @throws Exception
+     * @param pro the property
+     * @return the property object
+     * @throws Exception if the property does not exist
      */
     protected static Property checkProperty(String pro) throws Exception{
         Property property = Property.getProperty(pro.toLowerCase());
@@ -174,9 +174,9 @@ class CheckAvailability {
     /**
      * Check if an operand exists.
      * Return that operand if it exists.
-     * @param op
-     * @return
-     * @throws Exception
+     * @param op the operand
+     * @return the operand object
+     * @throws Exception if the operand does not exist
      */
     protected static Operand checkOperand(String op) throws Exception{
         Operand operand = Operand.getOperand(op.toLowerCase());
@@ -184,6 +184,13 @@ class CheckAvailability {
         return operand;
     }
 
+    /**
+     * Check if a logical operand exists.
+     * Return that logical operand if it exists.
+     * @param lOp the logical operand
+     * @return the logical operand object
+     * @throws Exception if the logical operand does not exist
+     */
     protected static LogicOp checkLogicOp(String lOp) throws Exception{
         LogicOp logicOp = LogicOp.getLogicOp(lOp);
         if(logicOp == null) throw ILLEGAL_LOGICAL_OPERAND;
@@ -192,10 +199,10 @@ class CheckAvailability {
 
     /**
      * Check if the input of basic criterion property, operand, and value are matched.
-     * @param property
-     * @param operand
-     * @param value
-     * @throws Exception
+     * @param property the property
+     * @param operand the operand
+     * @param value the value
+     * @throws Exception if the property, operand, and value are not matched
      */
     protected static void checkPropertyOperandValueMatch(Property property,
                                                          Operand operand, String[] value) throws Exception{

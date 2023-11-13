@@ -24,6 +24,10 @@ public class CompositeTask extends Task{
         return result;
     }
 
+    /**
+     * This method return the max duration of its subtasks.
+     * @return the max duration of its subtasks.
+     */
     @Override
     public double getDuration() {
         double duration = 0;
