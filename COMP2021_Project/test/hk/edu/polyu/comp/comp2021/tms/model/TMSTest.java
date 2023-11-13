@@ -34,7 +34,7 @@ public class TMSTest {
             "changetask t0 duration 12",
             "reportduration t4",
             "changetask t3 prerequisites t0",
-            "store data.bin"
+            "store ../data.bin"
     };
 
     TMS tms = new TMS();
