@@ -3,6 +3,9 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This class is used to test the TMS class.
+ */
 public class TMSTest {
 
     private final String[] taskCommands = {
@@ -75,24 +78,52 @@ public class TMSTest {
             "load ../README.md"
     };
 
-    TMS tms;
+    private TMS tms;
 
+    /**
+     * Set up the TMS object.
+     */
     @Before
     public void setUp(){
-        tms = new TMS();
+        setTms(new TMS());
     }
 
+    /**
+     * Test the TMS object.
+     */
     @Test
     public void testTask() {
-        tms.testRun(taskCommands);
+        getTms().testRun(taskCommands);
     }
 
+    /**
+     * Test the TMS object.
+     */
     @Test
-    public void testCriteria(){tms.testRun(criteriaCommands);}
+    public void testCriteria(){
+        getTms().testRun(criteriaCommands);}
 
+    /**
+     * Test the TMS object.
+     */
     @Test
     public void testFileOp(){
-        tms.testRun(fileOpTestCommands);
+        getTms().testRun(fileOpTestCommands);
     }
 
+    /**
+     * The TMS object used to test.
+     * @return the TMS object
+     */
+    public TMS getTms() {
+        return tms;
+    }
+
+    /**
+     * Set the TMS object used to test.
+     * @param tms the TMS object
+     */
+    public void setTms(TMS tms) {
+        this.tms = tms;
+    }
 }

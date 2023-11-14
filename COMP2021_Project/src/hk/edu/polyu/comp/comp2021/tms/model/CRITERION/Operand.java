@@ -1,37 +1,59 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
+/**
+ * This enum represents an operand.
+ * An operand is an operator that operates on two values.
+ */
 public enum Operand {
 
+    /**
+     * Greater than operator.
+     */
     GREATER (">"){
         @Override
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) > Double.parseDouble(value2[0]);
         }
     },
+    /**
+     * Less than operator.
+     */
     LESS ("<"){
         @Override
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) < Double.parseDouble(value2[0]);
         }
     },
+    /**
+     * Equal operator.
+     */
     GREATER_OR_EQUAL (">="){
         @Override
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) >= Double.parseDouble(value2[0]);
         }
     },
+    /**
+     * Not equal operator.
+     */
     LESS_OR_EQUAL ("<="){
         @Override
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) <= Double.parseDouble(value2[0]);
         }
     },
+    /**
+     * Not equal operator.
+     */
     NOT_EQUAL ("!="){
         @Override
         public boolean evaluate(String[] value1, String[] value2){
             return Double.parseDouble(value1[0]) != Double.parseDouble(value2[0]);
         }
     },
+    /**
+     * Equal operator.
+     */
     CONTAINS ("contains"){
         @Override
         /*
@@ -48,6 +70,9 @@ public enum Operand {
             return false;
         }
     },
+    /**
+     * Equal operator.
+     */
     IS_PRIMITIVE ("IsPrimitive"){
         @Override
         public boolean evaluate(String[] value1, String[] value2){

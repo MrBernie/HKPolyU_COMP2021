@@ -5,14 +5,20 @@ import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the operations of criterion.
+ * It is consists of static methods.
+ */
 class CriterionOperation {
 
     /**
      * Req 9
+     * @param storageList the storageList
      * @param name the name of the criterion
      * @param property the property of the criterion
      * @param operand the operand of the criterion
      * @param value the value of the criterion
+     * @throws Exception from the check methods
      * @return the message
      */
     static String defineBasicCriterion(StorageLists storageList,String name,

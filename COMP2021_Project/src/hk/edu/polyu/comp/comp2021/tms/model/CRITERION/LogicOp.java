@@ -1,18 +1,31 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
+/**
+ * This enum represents a logic operator.
+ * A logic operator is an operator that operates on two boolean values.
+ */
 public enum LogicOp {
+    /**
+     * AND operator.
+     */
     AND ("&&") {
         @Override
         public boolean evaluate(boolean criterionResult1, boolean criterionResult2) {
             return criterionResult1 && criterionResult2;
         }
     },
+    /**
+     * OR operator.
+     */
     OR ("||") {
         @Override
         public boolean evaluate(boolean criterionResult1, boolean criterionResult2){
             return criterionResult1 || criterionResult2;
         }
     },
+    /**
+     * Negation operator.
+     */
     Negation ("!"){
         @Override
         // The second input is not used here.

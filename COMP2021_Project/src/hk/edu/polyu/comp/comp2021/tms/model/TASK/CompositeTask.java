@@ -2,16 +2,29 @@ package hk.edu.polyu.comp.comp2021.tms.model.TASK;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a composite task.
+ * A composite task is a task that is composed of other tasks.
+ */
 public class CompositeTask extends Task{
 
     private ArrayList<Task> subTaskList;
 
+    /**
+     * Constructor of CompositeTask.
+     * @param name name of the composite task
+     * @param description description of the composite task
+     */
     public CompositeTask(String name, String description){
         super(name, description);
         this.subTaskList = new ArrayList<>();
         isPrimitive = false;
     }
 
+    /**
+     * Add a subtask to the composite task.
+     * @param task subtask to be added
+     */
     public void addTask(Task task){subTaskList.add(task);}
 
     @Override
@@ -20,7 +33,7 @@ public class CompositeTask extends Task{
     @Override
     public String[] getNameArray(){
         String[] result = new String[subTaskList.size()];
-        for(int i = 0;i< result.length;i++) result[i] = subTaskList.get(i).name;
+        for(int i = 0;i< result.length;i++) result[i] = subTaskList.get(i).getName();
         return result;
     }
 

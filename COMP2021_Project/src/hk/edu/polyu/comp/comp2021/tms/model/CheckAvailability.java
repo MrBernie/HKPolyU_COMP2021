@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class checks the availability of task operations.
+ * It is consists of static methods.
+ * Most of the exceptions are defined in this class as final static variables.
+ */
+public
 class CheckAvailability {
 
     /*Check the availability of task operation.*/
@@ -45,8 +51,9 @@ class CheckAvailability {
     }
 
     /**
-     * Check the availability of the duration
+     * Check if the duration of a task is legal.
      * @param dur the duration of the task
+     * @return the duration of the task
      * @throws Exception if the duration is illegal
      */
     protected static double checkDuration(String dur) throws Exception{
@@ -212,11 +219,11 @@ class CheckAvailability {
                 if(value[0].length()<2||!value[0].startsWith("\"")||!value[0].endsWith("\""))
                     throw DOUBLE_QUOTE;
             case PREREQUISITE,SUBTASKS:
-                if(!operand.equals(Operand.CONTAINS)) throw PROPERTY_OPERAND_EXCEPTION;
+                if(operand != Operand.CONTAINS) throw PROPERTY_OPERAND_EXCEPTION;
                 return;
 
             case DURATION:
-                if(operand.equals(Operand.CONTAINS)) throw PROPERTY_OPERAND_EXCEPTION;
+                if(operand == Operand.CONTAINS) throw PROPERTY_OPERAND_EXCEPTION;
                 CheckAvailability.checkDuration(value[0]);
                 if(value.length>1) throw ILLEGAL_VALUE;
         }

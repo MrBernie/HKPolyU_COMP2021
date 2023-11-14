@@ -6,11 +6,21 @@ import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+/**
+ * This class represents the storage lists.
+ * The storage lists consist of the task list and the criterion list.
+ */
+public
 class StorageLists implements Serializable{
 
     private ArrayList<Task> taskList;
     private ArrayList<Criterion> criterionList;
 
+
+    /**
+     * Constructor of Storage Lists.
+     */
     public StorageLists(){
         taskList = new ArrayList<>();
         criterionList = new ArrayList<>();
@@ -23,10 +33,19 @@ class StorageLists implements Serializable{
         return taskListString() + criterionListString();
     }
 
-    /***********************************************************/
+    /* ********************************************************* */
     /* Task List Operations */
 
+    /**
+     * Get the string representation of the task list.
+     * @return string representation of the task list
+     */
     protected ArrayList<Task> getTaskList(){ return taskList; }
+
+    /**
+     * Get the string representation of the task list.
+     * @return string representation of the task list
+     */
     protected ArrayList<Criterion> getCriterionList() { return criterionList; }
 
     /**

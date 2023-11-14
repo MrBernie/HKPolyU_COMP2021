@@ -3,6 +3,11 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class represents the file operation.
+ * The file operation is used to read and write the data to the file.
+ * It is consits of two static methods: writeFile and readFile.
+ */
 public class FileOperation {
 
     /**

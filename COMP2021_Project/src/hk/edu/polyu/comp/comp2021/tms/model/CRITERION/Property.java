@@ -1,11 +1,39 @@
 package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
+/**
+ * This enum represents a property.
+ * A property is a property of a task.
+ */
 public enum Property {
+
+    /**
+     * Name of the task.
+     */
     NAME("Name") ,
+
+    /**
+     * Description of the task.
+     */
     DESCRIPTION("Description") ,
+
+    /**
+     * Duration of the task.
+     */
     DURATION("Duration") ,
+
+    /**
+     * Prerequisites of the task.
+     */
     PREREQUISITE("Prerequisites") ,
+
+    /**
+     * Subtasks of the task.
+     */
     SUBTASKS("SubTasks") ,
+
+    /**
+     * Is the task primitive.
+     */
     IS_PRIMITIVE("IsPrimitive");
 
     final private String name;

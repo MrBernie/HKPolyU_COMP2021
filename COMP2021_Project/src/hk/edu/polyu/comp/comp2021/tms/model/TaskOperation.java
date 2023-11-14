@@ -4,6 +4,10 @@ import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the operations of task.
+ * It is consists of static methods.
+ */
 class TaskOperation {
 
     /**
@@ -15,6 +19,7 @@ class TaskOperation {
      * @param duration the duration of the task
      * @param prerequisites the prerequisites of the task
      * @throws Exception from the check methods
+     * @return the message
      */
     static String createSimpleTask(StorageLists storageLists, String name, String description,
                                            String duration, String[] prerequisites) throws Exception {
@@ -34,6 +39,7 @@ class TaskOperation {
      * @param description the description of the task
      * @param subTaskList the subTaskList of the task
      * @throws Exception from the check methods
+     * @return the message
      */
     static String createCompositeTask(StorageLists storageLists, String name, String description,
                                            String[] subTaskList) throws Exception{
@@ -68,9 +74,12 @@ class TaskOperation {
     /**
      * Req 4
      * Change Property
+     * @param storageLists the storageLists
+     * @param name the name of the task
      * @param property the property of the task
      * @param newValue the new value of the property
      * @throws Exception from the check methods
+     * @return the message
      */
     static String setProperty(StorageLists storageLists, String name,
                                    String property, String[] newValue) throws Exception{
@@ -108,8 +117,10 @@ class TaskOperation {
     /**
      * Req 5
      * Print the information of a task.
+     * @param storageLists the storageLists
      * @param name the name of the task
      * @throws Exception from the check methods
+     * @return the message
      */
     static String printTask(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
@@ -118,8 +129,9 @@ class TaskOperation {
 
     /**
      * Req 6
-     * Print the information of all task.
+     * Print all the tasks
      * @param storageLists the storageLists
+     * @return the message
      */
     static String printAllTasks(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
@@ -133,6 +145,8 @@ class TaskOperation {
      * Print the duration of a composite task
      * @param storageLists the storageLists
      * @param name the name of the task
+     * @return the message
+     * @throws Exception from the check methods
      */
     static String reportDuration(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
@@ -155,6 +169,13 @@ class TaskOperation {
         return "The Earliest finish time of the Simple Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
     }
 
+    /**
+     * Change a list of task name to a list of task
+     * @param storageLists the storageLists
+     * @param name the name of the task
+     * @return the message
+     * @throws Exception from the check methods
+     */
     static ArrayList<Task> nameListToTaskList(StorageLists storageLists, String[] name) throws Exception{
         ArrayList<Task> taskList = new ArrayList<>();
         for(String str : name) taskList.add(CheckAvailability.checkTaskExists(storageLists, str));

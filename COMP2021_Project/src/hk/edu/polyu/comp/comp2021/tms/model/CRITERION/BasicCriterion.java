@@ -2,11 +2,25 @@ package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
 
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
+/**
+ * Basic Criterion is a criterion that contains a property, an operand and a value.
+ * The property can be name, description, duration, prerequisite and subtasks.
+ * The operand can be greater, less, greater or equal, less or equal, not equal, contains and is primitive.
+ * The value is a string array.
+ * The criterion is satisfied if the property of the task satisfies the operand with the value.
+ */
 public class BasicCriterion extends Criterion{
     private Property property;
     private Operand operand;
     private String[] value;
 
+    /**
+     * Constructor of Basic Criterion.
+     * @param name name of the criterion
+     * @param property property of the criterion
+     * @param operand operand of the criterion
+     * @param value value of the criterion
+     */
     public BasicCriterion(String name, Property property, Operand operand, String[] value){
         super(name);
         this.property = property;
