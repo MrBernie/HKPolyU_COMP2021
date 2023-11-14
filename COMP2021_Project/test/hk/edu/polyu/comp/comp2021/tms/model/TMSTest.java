@@ -22,6 +22,7 @@ public class TMSTest {
             "createsimpletask t4 t4 -34 ,",
             "changetask t1 prerequisites t3",
             "createcompositetask t4 t4 t1,t2,t3",
+            "changetask t4 subtasks t1,t2",
             "createsimpletask t5 t5 10 t2,t4",
             "deletetask t1",
             "deletetask t4",
