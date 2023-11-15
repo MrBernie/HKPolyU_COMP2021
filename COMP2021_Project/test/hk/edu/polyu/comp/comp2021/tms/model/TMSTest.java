@@ -60,6 +60,7 @@ public class TMSTest {
             "search c10",
             "search c11",
             "search c12",
+            "search IsPrimitive",
             "printallcriteria"
     };
 
