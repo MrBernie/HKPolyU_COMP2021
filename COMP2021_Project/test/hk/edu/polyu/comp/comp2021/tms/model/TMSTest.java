@@ -3,6 +3,9 @@ package hk.edu.polyu.comp.comp2021.tms.model;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This class is for testing the TMS class.
+ */
 public class TMSTest {
 
 //    @Test
@@ -73,7 +76,7 @@ public class TMSTest {
             "store ../data.bin"
     };
 
-    TMS tms;
+    private TMS tms;
 
 //    @Test
 //    public void testTask(){
@@ -88,21 +91,33 @@ public class TMSTest {
 //
 //    }
 
+    /**
+     * Initialize the TMS before each test.
+     */
     @Before
     public void init(){
         tms = new TMS();
     }
 
+    /**
+     * Test the task commands.
+     */
     @Test
     public void testTask(){
         tms.testRun(taskCommands);
     }
 
+    /**
+     * Test the criterion commands.
+     */
     @Test
     public void testCriterion(){
         tms.testRun(criterionCommand);
     }
 
+    /**
+     * Test the file commands.
+     */
     @Test
     public void testFile(){
         tms.testRun(fileCommand);
