@@ -138,7 +138,8 @@ public class CheckAvailability {
     private static final Exception PROPERTY_OPERAND_EXCEPTION = new Exception("Property and Operand do not match.");
     private static final Exception ILLEGAL_VALUE = new Exception("Too much input for value.");
     private static final Exception DOUBLE_QUOTE = new Exception("The value must be double-quoted.");
-    private static final Exception ILLEGAL_OPERAND_INPUT = new Exception ("Invalid property input.");
+    private static final Exception ILLEGAL_PROPERTY_INPUT = new Exception("Invalid property input.");
+    private static final Exception ILLEGAL_OPERAND_INPUT = new Exception ("Invalid operand input.");
     private static final Exception ILLEGAL_LOGICAL_OPERAND = new Exception ("Invalid logical operand.");
 
     /**
@@ -174,7 +175,7 @@ public class CheckAvailability {
      */
     protected static Property checkProperty(String pro) throws Exception{
         Property property = Property.getProperty(pro.toLowerCase());
-        if(property == null) throw ILLEGAL_OPERAND_INPUT;
+        if(property == null) throw ILLEGAL_PROPERTY_INPUT;
         return property;
     }
 
