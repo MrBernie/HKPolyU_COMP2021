@@ -12,8 +12,7 @@ import java.util.regex.Pattern;
  * It is consists of static methods.
  * Most of the exceptions are defined in this class as final static variables.
  */
-public
-class CheckAvailability {
+public class CheckAvailability {
 
     /*Check the availability of task operation.*/
     private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]{0,7}$");
@@ -26,7 +25,7 @@ class CheckAvailability {
     private static final Exception TASK_NOT_EXIST = new Exception("The required task does not exist.");
     private static final Exception TASK_ALREADY_EXIST = new Exception("This task already exists.");
 
-    private static final Exception TASK_IS_PREREQUISITE = new Exception("Task is the required of another task.");
+    private static final Exception TASK_IS_PREREQUISITE = new Exception("Task is the prerequisite of another task.");
     private static final Exception SUBTASK_IS_PREREQUISITE = new Exception("The subtask of this task is required by an other task.");
     private static final Exception IS_PART_OF = new Exception("It is illegal to create a task referencing loop.");
 
