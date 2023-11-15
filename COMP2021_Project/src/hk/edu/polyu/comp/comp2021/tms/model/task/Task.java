@@ -1,4 +1,4 @@
-package hk.edu.polyu.comp.comp2021.tms.model.TASK;
+package hk.edu.polyu.comp.comp2021.tms.model.task;
 
 import java.io.Serializable;
 import java.util.ArrayList;

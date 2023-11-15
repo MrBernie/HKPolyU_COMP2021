@@ -1,6 +1,6 @@
-package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
+package hk.edu.polyu.comp.comp2021.tms.model.criterion;
 
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
+import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
 
 import java.io.Serializable;
 

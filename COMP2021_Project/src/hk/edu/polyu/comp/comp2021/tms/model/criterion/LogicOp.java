@@ -1,4 +1,4 @@
-package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
+package hk.edu.polyu.comp.comp2021.tms.model.criterion;
 
 /**
  * This enum represents a logic operator.

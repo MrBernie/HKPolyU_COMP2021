@@ -1,6 +1,6 @@
-package hk.edu.polyu.comp.comp2021.tms.model.CRITERION;
+package hk.edu.polyu.comp.comp2021.tms.model.criterion;
 
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
+import hk.edu.polyu.comp.comp2021.tms.model.task.*;
 
 /**
  * Basic Criterion is a criterion that contains a property, an operand and a value.

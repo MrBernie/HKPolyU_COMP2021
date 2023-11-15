@@ -1,7 +1,7 @@
 package hk.edu.polyu.comp.comp2021.tms.model;
 
-import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
-import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
+import hk.edu.polyu.comp.comp2021.tms.model.task.*;
+import hk.edu.polyu.comp.comp2021.tms.model.criterion.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
