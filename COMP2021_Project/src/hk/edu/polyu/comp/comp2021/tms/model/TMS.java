@@ -86,6 +86,24 @@ public class TMS {
         }
     }
 
+//    /**
+//     * This is the primary function that should be executed when testing the TMS.
+//     * @param commandLine The command line to be executed.
+//     * @return The output String.
+//     */
+//    public String testCommand(String commandLine){
+//        flag = true;
+//        String[] inputStringArray = commandLine.split(" "); //Get the input
+//        String output;
+//        //Get the output. Set output as the exception message if exception occurs.
+//        try {
+//            output = operation(inputStringArray);
+//        } catch (Exception e) {
+//            output = e.getMessage();
+//        }
+//        return output;
+//    }
+
     /**
      * Taking input from users, returning a String[] split by space.
      * @return String[]

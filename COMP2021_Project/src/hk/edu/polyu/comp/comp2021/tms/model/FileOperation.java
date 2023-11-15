@@ -24,7 +24,6 @@ public class FileOperation {
         } catch (FileNotFoundException e) {
             throw new Exception("The file path is illegal.");
         } catch (IOException e) {
-            //throw e;
             throw new Exception("IO exception.");
         }
         return "The data has been stored to the file.";
