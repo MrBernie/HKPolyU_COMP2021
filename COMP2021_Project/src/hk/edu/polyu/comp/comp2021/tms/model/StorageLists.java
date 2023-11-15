@@ -88,25 +88,27 @@ class StorageLists implements Serializable{
 
     /**
      * Check if the prerequisite tasks of a primitive task exists in the task list
-     * @param Task primitive task
+     * @param task primitive task
      * @param prerequisites prerequisite tasks
      */
-    void setPrerequisites(PrimitiveTask Task, ArrayList<Task> prerequisites) {
+    void setPrerequisites(PrimitiveTask task, ArrayList<Task> prerequisites) {
         if(prerequisites==null||prerequisites.size()==0) return;
         for (Task t : prerequisites){
-            Task.addPrerequisites(t);
+            if(t.isContained(task)) continue;
+            task.addPrerequisites(t);
         }
     }
 
     /**
      * Check if the tasks in subTask List exists in the task list
-     * @param Task composite task
+     * @param task composite task
      * @param subTaskList subtask list
      */
-    void setSubTaskList(CompositeTask Task, ArrayList<Task> subTaskList) {
+    void setSubTaskList(CompositeTask task, ArrayList<Task> subTaskList) {
         if(subTaskList==null||subTaskList.size()==0) return;
         for (Task t : subTaskList){
-            Task.addTask(t);
+            if(t.isContained(task)) continue;
+            task.addTask(t);
         }
     }
 
