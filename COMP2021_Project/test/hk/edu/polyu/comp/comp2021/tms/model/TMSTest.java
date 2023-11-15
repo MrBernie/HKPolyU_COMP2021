@@ -8,12 +8,6 @@ import org.junit.Test;
  */
 public class TMSTest {
 
-//    @Test
-//    public void testTMSConstructor(){
-//        TMS tms = new TMS();
-//        tms.run();
-//    }
-
     private static final String[] taskCommands = {
             "asdoufihaoushe",
             "createsimpletask weriuu",
@@ -77,19 +71,6 @@ public class TMSTest {
     };
 
     private TMS tms;
-
-//    @Test
-//    public void testTask(){
-//
-//        for(String command : taskCommands){
-//            try {
-//                System.out.println(tms.operation(command.split(" ")));
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//
-//    }
 
     /**
      * Initialize the TMS before each test.
