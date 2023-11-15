@@ -1,5 +1,6 @@
-package hk.edu.polyu.comp.comp2021.tms.model;
+package hk.edu.polyu.comp.comp2021.tms.controller;
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
+import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.*;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * This class represents the operations of task.
  * It is consists of static methods.
  */
-class TaskOperation {
+public class TaskOperation {
 
     /**
      * Req 1
@@ -21,8 +22,8 @@ class TaskOperation {
      * @throws Exception from the check methods
      * @return the message
      */
-    static String createSimpleTask(StorageLists storageLists, String name, String description,
-                                           String duration, String[] prerequisites) throws Exception {
+    public static String createSimpleTask(StorageLists storageLists, String name, String description,
+                                          String duration, String[] prerequisites) throws Exception {
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
@@ -41,7 +42,7 @@ class TaskOperation {
      * @throws Exception from the check methods
      * @return the message
      */
-    static String createCompositeTask(StorageLists storageLists, String name, String description,
+    public static String createCompositeTask(StorageLists storageLists, String name, String description,
                                            String[] subTaskList) throws Exception{
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
@@ -58,7 +59,7 @@ class TaskOperation {
      * @return the message
      * @throws Exception from the check methods
      */
-    static String deleteTask(StorageLists storageLists, String name) throws Exception{
+    public static String deleteTask(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(task instanceof PrimitiveTask){
             CheckAvailability.isPrerequisite(storageLists,task);
@@ -81,8 +82,8 @@ class TaskOperation {
      * @throws Exception from the check methods
      * @return the message
      */
-    static String setProperty(StorageLists storageLists, String name,
-                                   String property, String[] newValue) throws Exception{
+    public static String setProperty(StorageLists storageLists, String name,
+                                     String property, String[] newValue) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         Property pro = CheckAvailability.checkProperty(property.toLowerCase());
         switch (pro) {
@@ -122,7 +123,7 @@ class TaskOperation {
      * @throws Exception from the check methods
      * @return the message
      */
-    static String printTask(StorageLists storageLists, String name) throws Exception{
+    public static String printTask(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         return task.toString();
     }
@@ -133,7 +134,7 @@ class TaskOperation {
      * @param storageLists the storageLists
      * @return the message
      */
-    static String printAllTasks(StorageLists storageLists){
+    public static String printAllTasks(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all tasks...\n");
         if(storageLists.getTaskList().isEmpty()) strB.append("There is no tasks currently...");
         strB.append(storageLists.taskListString());
@@ -148,7 +149,7 @@ class TaskOperation {
      * @return the message
      * @throws Exception from the check methods
      */
-    static String reportDuration(StorageLists storageLists, String name) throws Exception{
+    public static String reportDuration(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(task.isPrimitive()) throw new Exception("Reporting Duration can only be applied to Composite Task.");
         return "The Duration of the Composite Task \""+task.getName()+"\" is " +task.getDuration()+"h.";
@@ -162,7 +163,7 @@ class TaskOperation {
      * @return the message
      * @throws Exception from the check methods
      */
-    static String reportEarliestFinishTime(StorageLists storageLists, String name) throws Exception{
+    public static String reportEarliestFinishTime(StorageLists storageLists, String name) throws Exception{
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(!task.isPrimitive())
             throw new Exception("Reporting the earliest finish time can only be applied to Simple Task.");

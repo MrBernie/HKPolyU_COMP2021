@@ -1,5 +1,6 @@
-package hk.edu.polyu.comp.comp2021.tms.model;
+package hk.edu.polyu.comp.comp2021.tms;
 
+import hk.edu.polyu.comp.comp2021.tms.view.TMS;
 import org.junit.Before;
 import org.junit.Test;
 

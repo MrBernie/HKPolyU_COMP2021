@@ -40,13 +40,13 @@ class StorageLists implements Serializable{
      * Get the string representation of the task list.
      * @return string representation of the task list
      */
-    protected ArrayList<Task> getTaskList(){ return taskList; }
+    public ArrayList<Task> getTaskList(){ return taskList; }
 
     /**
      * Get the string representation of the task list.
      * @return string representation of the task list
      */
-    protected ArrayList<Criterion> getCriterionList() { return criterionList; }
+    public ArrayList<Criterion> getCriterionList() { return criterionList; }
 
     /**
      * Search a task in the list by task name.
@@ -54,7 +54,7 @@ class StorageLists implements Serializable{
      * @param name task name
      * @return task
      */
-    Task searchTaskList(String name){
+    public Task searchTaskList(String name){
         for(Task t : taskList) if(t.getName().equals(name)) return t;
         return null;
     }
@@ -66,7 +66,7 @@ class StorageLists implements Serializable{
      * @param duration task duration
      * @param prerequisites task prerequisites
      */
-    void createNewPrimitiveTask(String name, String description,
+    public void createNewPrimitiveTask(String name, String description,
                                        double duration, ArrayList<Task> prerequisites) {
         PrimitiveTask newPrimitiveTask = new PrimitiveTask(name, description,duration);
         setPrerequisites(newPrimitiveTask,prerequisites);
@@ -79,8 +79,8 @@ class StorageLists implements Serializable{
      * @param description task description
      * @param subtaskList task subtask list
      */
-    void createNewCompositeTask(String name, String description,
-                                ArrayList<Task> subtaskList) {
+    public void createNewCompositeTask(String name, String description,
+                                       ArrayList<Task> subtaskList) {
         CompositeTask newCompositeTask = new CompositeTask(name, description);
         setSubTaskList(newCompositeTask, subtaskList);
         taskList.add(newCompositeTask);
@@ -91,7 +91,7 @@ class StorageLists implements Serializable{
      * @param task primitive task
      * @param prerequisites prerequisite tasks
      */
-    void setPrerequisites(PrimitiveTask task, ArrayList<Task> prerequisites) {
+    public void setPrerequisites(PrimitiveTask task, ArrayList<Task> prerequisites) {
         if(prerequisites==null||prerequisites.size()==0) return;
         for (Task t : prerequisites){
             if(t.isContained(task)) continue;
@@ -104,7 +104,7 @@ class StorageLists implements Serializable{
      * @param task composite task
      * @param subTaskList subtask list
      */
-    void setSubTaskList(CompositeTask task, ArrayList<Task> subTaskList) {
+    public void setSubTaskList(CompositeTask task, ArrayList<Task> subTaskList) {
         if(subTaskList==null||subTaskList.size()==0) return;
         for (Task t : subTaskList){
             if(t.isContained(task)) continue;
@@ -116,7 +116,7 @@ class StorageLists implements Serializable{
      * Delete a task from the task list
      * @param task task to be deleted
      */
-    void deleteTask(Task task){
+    public void deleteTask(Task task){
         for(Task t : taskList) if(t instanceof CompositeTask) t.getList().remove(task);
         taskList.remove(task);
     }
@@ -125,7 +125,7 @@ class StorageLists implements Serializable{
      * Print the task list
      * @return task list string
      */
-    String taskListString(){
+    public String taskListString(){
         StringBuilder strB = new StringBuilder();
         for(Task t : this.taskList){
             strB.append(t.toString()+"\n");
@@ -141,7 +141,7 @@ class StorageLists implements Serializable{
      * @param name criterion name
      * @return criterion
      */
-    Criterion searchCriterionList(String name){
+    public Criterion searchCriterionList(String name){
         for(Criterion c : criterionList) if(c.getName().equals(name)) return c;
         return null;
     }
@@ -153,7 +153,7 @@ class StorageLists implements Serializable{
      * @param operand operand
      * @param value value
      */
-    void defineBasicCriterion(String name, Property property, Operand operand, String[] value){
+    public void defineBasicCriterion(String name, Property property, Operand operand, String[] value){
         BasicCriterion newBasicCriterion = new BasicCriterion(name, property, operand, value);
         criterionList.add(newBasicCriterion);
     }
@@ -163,7 +163,7 @@ class StorageLists implements Serializable{
      * @param name criterion name
      * @param criterion criterion
      */
-    void defineNegatedCriterion(String name, Criterion criterion){
+    public void defineNegatedCriterion(String name, Criterion criterion){
         NegatedCriterion newNegatedCriterion = new NegatedCriterion(name, criterion);
         criterionList.add(newNegatedCriterion);
     }
@@ -176,7 +176,7 @@ class StorageLists implements Serializable{
      * @param criterion2 criterion 2
      */
 
-    void defineBinaryCriterion(String name, Criterion criterion1, LogicOp logicOp, Criterion criterion2){
+    public void defineBinaryCriterion(String name, Criterion criterion1, LogicOp logicOp, Criterion criterion2){
         BinaryCriterion newBinaryCriterion = new BinaryCriterion(name, criterion1, logicOp, criterion2);
         criterionList.add(newBinaryCriterion);
     }
@@ -188,7 +188,7 @@ class StorageLists implements Serializable{
      * @return list of tasks
      */
 
-    ArrayList<Task> search(Criterion criterion){
+    public ArrayList<Task> search(Criterion criterion){
         ArrayList<Task> result = new ArrayList<>();
         for(Task t : taskList){
             if(criterion.check(t)) result.add(t);
@@ -200,7 +200,7 @@ class StorageLists implements Serializable{
      * Print the criterion list
      * @return criterion list string
      */
-    String criterionListString(){
+    public String criterionListString(){
         StringBuilder strB = new StringBuilder();
         for(Criterion c : this.criterionList){
             strB.append(c.toString()+"\n");

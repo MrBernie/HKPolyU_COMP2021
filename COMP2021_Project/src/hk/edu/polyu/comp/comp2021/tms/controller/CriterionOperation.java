@@ -1,6 +1,7 @@
-package hk.edu.polyu.comp.comp2021.tms.model;
+package hk.edu.polyu.comp.comp2021.tms.controller;
 
 import hk.edu.polyu.comp.comp2021.tms.model.CRITERION.*;
+import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
 import hk.edu.polyu.comp.comp2021.tms.model.TASK.Task;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * This class represents the operations of criterion.
  * It is consists of static methods.
  */
-class CriterionOperation {
+public class CriterionOperation {
 
     /**
      * Req 9
@@ -21,8 +22,8 @@ class CriterionOperation {
      * @throws Exception from the check methods
      * @return the message
      */
-    static String defineBasicCriterion(StorageLists storageList,String name,
-                                       String property, String operand, String[] value) throws Exception{
+    public static String defineBasicCriterion(StorageLists storageList, String name,
+                                              String property, String operand, String[] value) throws Exception{
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageList,name);
         Property pro = CheckAvailability.checkProperty(property);
@@ -45,8 +46,8 @@ class CriterionOperation {
      * @return the message
      * @throws Exception from the check methods
      */
-    static String defineNegatedCriterion(StorageLists storageLists, String name,
-                                         String nameOfCriterion) throws Exception{
+    public static String defineNegatedCriterion(StorageLists storageLists, String name,
+                                                String nameOfCriterion) throws Exception{
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageLists,name);
         Criterion criterion = CheckAvailability.checkCriterionExists(storageLists,nameOfCriterion);
@@ -64,8 +65,8 @@ class CriterionOperation {
      * @return the message
      * @throws Exception from the check methods
      */
-    static String defineBinaryCriterion(StorageLists storageLists, String name, String nameOfCriterion1,
-                                        String lOp, String nameOfCriterion2) throws Exception{
+    public static String defineBinaryCriterion(StorageLists storageLists, String name, String nameOfCriterion1,
+                                               String lOp, String nameOfCriterion2) throws Exception{
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageLists, name);
         Criterion criterion1 = CheckAvailability.checkCriterionExists(storageLists, nameOfCriterion1);
@@ -81,7 +82,7 @@ class CriterionOperation {
      * @return the message
      */
 
-    static String printAllCriteria(StorageLists storageLists){
+    public static String printAllCriteria(StorageLists storageLists){
         StringBuilder strB = new StringBuilder("\nStart printing all criteria...\n");
         if(storageLists.getCriterionList().isEmpty()) return "There is no criterion currently...";
         strB.append(storageLists.criterionListString());
@@ -96,7 +97,7 @@ class CriterionOperation {
      * @throws Exception from the check methods
      */
 
-    static String search(StorageLists storageLists, String nameOfCriterion) throws Exception{
+    public static String search(StorageLists storageLists, String nameOfCriterion) throws Exception{
         Criterion criterion = CheckAvailability.checkCriterionExists(storageLists,nameOfCriterion);
         ArrayList<Task> result = storageLists.search(criterion);
         if(result.isEmpty()) return "Cannot find the corresponding tasks.";

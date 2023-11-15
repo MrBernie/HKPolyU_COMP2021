@@ -1,4 +1,6 @@
-package hk.edu.polyu.comp.comp2021.tms.model;
+package hk.edu.polyu.comp.comp2021.tms.controller;
+
+import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
 
 import java.io.*;
 import java.util.*;
@@ -17,7 +19,7 @@ public class FileOperation {
      * @return The message of the operation.
      * @throws Exception The exception of the operation.
      */
-    static String writeFile(StorageLists storageLists, String filePath) throws Exception{
+    public static String writeFile(StorageLists storageLists, String filePath) throws Exception{
         try (FileOutputStream fileOut = new FileOutputStream(filePath);
              ObjectOutputStream ObjOut = new ObjectOutputStream(fileOut)) {
             ObjOut.writeObject(storageLists);
@@ -36,7 +38,7 @@ public class FileOperation {
      * @return The message of the operation.
      * @throws Exception The exception of the operation.
      */
-    static StorageLists readFile(StorageLists storageLists, String filePath) throws Exception {
+    public static StorageLists readFile(StorageLists storageLists, String filePath) throws Exception {
 
         try (FileInputStream fileIn = new FileInputStream(filePath);
              ObjectInputStream ObjIn = new ObjectInputStream(fileIn)) {

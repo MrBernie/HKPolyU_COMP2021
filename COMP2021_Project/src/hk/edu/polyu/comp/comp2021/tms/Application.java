@@ -1,5 +1,5 @@
 package hk.edu.polyu.comp.comp2021.tms;
-import hk.edu.polyu.comp.comp2021.tms.model.TMS;
+import hk.edu.polyu.comp.comp2021.tms.view.TMS;
 
 /**
  * This is the main class of the program.
