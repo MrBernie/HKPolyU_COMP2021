@@ -11,8 +11,6 @@ public class TMS {
 
     //if we need to implement Undo and Redo, we need to create multiple storageLists.
     private StorageLists storageLists;
-    private ArrayList<StorageLists> redoList;
-    private ArrayList<StorageLists> undoList;
 
 //    This is the corresponding input size of each command
 //    The index of this array corresponding to the number of Req
