@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.tms.model;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -10,12 +11,14 @@ public class TMS {
 
     //if we need to implement Undo and Redo, we need to create multiple storageLists.
     private StorageLists storageLists;
+    private ArrayList<StorageLists> redoList;
+    private ArrayList<StorageLists> undoList;
 
-    //This is the corresponding input size of each command
-    //The index of this array corresponding to the number of Req
-    //Ex Req 1 requires 5 input string splitted by space
-    //Default input size of Req 0 is 1.
-    //Req 11 has two sizes
+//    This is the corresponding input size of each command
+//    The index of this array corresponding to the number of Req
+//    Ex Req 1 requires 5 input string splitted by space
+//    Default input size of Req 0 is 1.
+//    Req 11 has two sizes
 //    private static final int[] COMMAND_LENGTH = {1,
 //            5,//Req1
 //            4,//Req2
