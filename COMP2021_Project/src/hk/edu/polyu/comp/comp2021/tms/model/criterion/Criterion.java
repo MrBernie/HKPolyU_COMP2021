@@ -13,7 +13,7 @@ public abstract class Criterion implements Serializable {
     /**
      * Name of the criterion.
      */
-    protected String name;
+    protected final String name;
 
     /**
      * Constructor of Criterion.

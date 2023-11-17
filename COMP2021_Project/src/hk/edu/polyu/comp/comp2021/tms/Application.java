@@ -1,7 +1,6 @@
 package hk.edu.polyu.comp.comp2021.tms;
 import hk.edu.polyu.comp.comp2021.tms.view.TMS;
 
-//Git Brach bonuss
 /**
  * This is the main class of the program.
  */
@@ -15,5 +14,4 @@ public class Application {
         TMS tms = new TMS();
         tms.run();
     }
-
 }

@@ -4,15 +4,15 @@ import hk.edu.polyu.comp.comp2021.tms.model.task.*;
 
 /**
  * Basic Criterion is a criterion that contains a property, an operand and a value.
- * The property can be name, description, duration, prerequisite and subtasks.
+ * The property can be named, description, duration, prerequisite and subtasks.
  * The operand can be greater, less, greater or equal, less or equal, not equal, contains and is primitive.
  * The value is a string array.
  * The criterion is satisfied if the property of the task satisfies the operand with the value.
  */
 public class BasicCriterion extends Criterion{
-    private Property property;
-    private Operand operand;
-    private String[] value;
+    private final Property property;
+    private final Operand operand;
+    private final String[] value;
 
     /**
      * Constructor of Basic Criterion.
@@ -33,12 +33,12 @@ public class BasicCriterion extends Criterion{
         StringBuilder strB = new StringBuilder();
         strB.append("\nBasic Criterion: ");
         strB.append(super.toString());
-        strB.append("\nProperty: " + property.toString());
-        strB.append("\nOperand: " + operand.toString());
+        strB.append("\nProperty: ").append(property.toString());
+        strB.append("\nOperand: ").append(operand.toString());
         strB.append("\nValue: ");
-        if(property!=Property.PREREQUISITE&&property!=Property.SUBTASKS) strB.append("\""+value[0]+"\"");
+        if(property!=Property.PREREQUISITE&&property!=Property.SUBTASKS) strB.append("\"").append(value[0]).append("\"");
         else {
-            for(String str : value) strB.append(str + ",");
+            for(String str : value) strB.append(str).append(",");
         }
         return strB.toString();
     }

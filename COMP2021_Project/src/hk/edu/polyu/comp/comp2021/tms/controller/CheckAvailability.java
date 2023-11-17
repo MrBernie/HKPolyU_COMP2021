@@ -35,7 +35,7 @@ public class CheckAvailability {
      * @param name the name of the task
      * @throws Exception if the name is illegal
      */
-    protected static void checkName(String name) throws Exception{
+    public static void checkName(String name) throws Exception{
         Matcher matcher = NAME_PATTERN.matcher(name);
         if(!matcher.matches())throw ILLEGAL_NAME;
     }
@@ -45,7 +45,7 @@ public class CheckAvailability {
      * @param description the description of the task
      * @throws Exception if the description is illegal
      */
-    protected static void checkDescription(String description) throws Exception{
+    public static void checkDescription(String description) throws Exception{
         Matcher matcher = DESCRIPTION_PATTERN.matcher(description);
         if(!matcher.matches())throw ILLEGAL_DESCRIPTION;
     }
@@ -56,7 +56,7 @@ public class CheckAvailability {
      * @return the duration of the task
      * @throws Exception if the duration is illegal
      */
-    protected static double checkDuration(String dur) throws Exception{
+    public static double checkDuration(String dur) throws Exception{
         double duration;
         try{
             duration = Double.parseDouble(dur);
@@ -75,7 +75,7 @@ public class CheckAvailability {
      * @return the task object
      * @throws Exception if the task does not exist
      */
-    protected static Task checkTaskExists(StorageLists storageLists, String name) throws Exception{
+    public static Task checkTaskExists(StorageLists storageLists, String name) throws Exception{
         Task task = storageLists.searchTaskList(name);
         if(task==null) throw TASK_NOT_EXIST;
         return task;
@@ -229,5 +229,4 @@ public class CheckAvailability {
                 if(value.length>1) throw ILLEGAL_VALUE;
         }
     }
-
 }

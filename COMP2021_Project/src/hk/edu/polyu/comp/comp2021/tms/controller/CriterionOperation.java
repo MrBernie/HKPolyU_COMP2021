@@ -24,6 +24,7 @@ public class CriterionOperation {
      */
     public static String defineBasicCriterion(StorageLists storageList, String name,
                                               String property, String operand, String[] value) throws Exception{
+        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageList,name);
         Property pro = CheckAvailability.checkProperty(property);
@@ -48,6 +49,7 @@ public class CriterionOperation {
      */
     public static String defineNegatedCriterion(StorageLists storageLists, String name,
                                                 String nameOfCriterion) throws Exception{
+        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageLists,name);
         Criterion criterion = CheckAvailability.checkCriterionExists(storageLists,nameOfCriterion);
@@ -67,6 +69,7 @@ public class CriterionOperation {
      */
     public static String defineBinaryCriterion(StorageLists storageLists, String name, String nameOfCriterion1,
                                                String lOp, String nameOfCriterion2) throws Exception{
+        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageLists, name);
         Criterion criterion1 = CheckAvailability.checkCriterionExists(storageLists, nameOfCriterion1);
@@ -89,6 +92,22 @@ public class CriterionOperation {
         return strB.toString();
     }
 
+    public static Criterion getCriterion (String criterionName) {
+        for (Criterion criterion : FileOperation.getStorageLists().getCriterionList()) {
+            if(criterion.getName().equals(criterionName)) return criterion;
+        }
+        return null;
+    }
+    public static String deleteCriteria(String criterionName){
+        FileOperation.transaction();
+        Object obj = getCriterion(criterionName);
+        if(obj == null) {
+            return criterionName + "does not exist";
+        }
+        FileOperation.getStorageLists().getCriterionList().remove(obj);
+        return "criterion " + criterionName + " is deleted";
+    }
+
     /**
      * Req 13
      * @param storageLists the storageLists
@@ -96,14 +115,13 @@ public class CriterionOperation {
      * @return the message
      * @throws Exception from the check methods
      */
-
     public static String search(StorageLists storageLists, String nameOfCriterion) throws Exception{
         Criterion criterion = CheckAvailability.checkCriterionExists(storageLists,nameOfCriterion);
         ArrayList<Task> result = storageLists.search(criterion);
         if(result.isEmpty()) return "Cannot find the corresponding tasks.";
         StringBuilder strB = new StringBuilder();
-        strB.append("These tasks meets the criterion "+nameOfCriterion+ " : ");
-        for(Task t : result) strB.append(t.getName()+",");
+        strB.append("These tasks meets the criterion ").append(nameOfCriterion).append(" : ");
+        for(Task t : result) strB.append(t.getName()).append(",");
         if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();
     }

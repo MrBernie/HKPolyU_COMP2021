@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class PrimitiveTask extends Task {
 
-    private ArrayList<Task> prerequisites;
+    private final ArrayList<Task> prerequisites;
     /**
      * This duration field only denote the duration of this task itself.
      */
@@ -78,11 +78,11 @@ public class PrimitiveTask extends Task {
         StringBuilder strB = new StringBuilder();
         strB.append("\nPrimitive Task: ");
         strB.append(super.toString());
-        strB.append("\nDuration: " + this.duration + "h");
+        strB.append("\nDuration: ").append(this.duration).append("h");
         strB.append("\nPrerequisites: ");
         if(prerequisites.isEmpty()) strB.append("No Prerequisites.");
         for(Task t : prerequisites){
-            strB.append(t.getName() + ",");
+            strB.append(t.getName()).append(",");
         }
         if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();

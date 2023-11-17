@@ -8,7 +8,7 @@ import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
  */
 public class NegatedCriterion extends Criterion{
 
-    private Criterion criterion;
+    private final Criterion criterion;
     private final LogicOp logicOp = LogicOp.Negation;
 
     /**

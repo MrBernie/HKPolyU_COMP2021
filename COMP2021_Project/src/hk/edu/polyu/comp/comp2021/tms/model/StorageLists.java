@@ -6,7 +6,6 @@ import hk.edu.polyu.comp.comp2021.tms.model.criterion.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 /**
  * This class represents the storage lists.
  * The storage lists consist of the task list and the criterion list.
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 public
 class StorageLists implements Serializable{
 
-    private ArrayList<Task> taskList;
-    private ArrayList<Criterion> criterionList;
+    private final ArrayList<Task> taskList;
+    private final ArrayList<Criterion> criterionList;
 
 
     /**
@@ -92,7 +91,7 @@ class StorageLists implements Serializable{
      * @param prerequisites prerequisite tasks
      */
     public void setPrerequisites(PrimitiveTask task, ArrayList<Task> prerequisites) {
-        if(prerequisites==null||prerequisites.size()==0) return;
+        if(prerequisites==null|| prerequisites.isEmpty()) return;
         for (Task t : prerequisites){
             if(t.isContained(task)) continue;
             task.addPrerequisites(t);
@@ -105,7 +104,7 @@ class StorageLists implements Serializable{
      * @param subTaskList subtask list
      */
     public void setSubTaskList(CompositeTask task, ArrayList<Task> subTaskList) {
-        if(subTaskList==null||subTaskList.size()==0) return;
+        if(subTaskList==null|| subTaskList.isEmpty()) return;
         for (Task t : subTaskList){
             if(t.isContained(task)) continue;
             task.addTask(t);
@@ -128,7 +127,7 @@ class StorageLists implements Serializable{
     public String taskListString(){
         StringBuilder strB = new StringBuilder();
         for(Task t : this.taskList){
-            strB.append(t.toString()+"\n");
+            strB.append(t.toString()).append("\n");
         }
         return strB.toString();
     }
@@ -203,7 +202,7 @@ class StorageLists implements Serializable{
     public String criterionListString(){
         StringBuilder strB = new StringBuilder();
         for(Criterion c : this.criterionList){
-            strB.append(c.toString()+"\n");
+            strB.append(c.toString()).append("\n");
         }
         return strB.toString();
     }

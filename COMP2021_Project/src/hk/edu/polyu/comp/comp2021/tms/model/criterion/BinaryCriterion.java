@@ -9,9 +9,9 @@ import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
 
 public class BinaryCriterion extends Criterion{
 
-    private Criterion criterion1;
-    private Criterion criterion2;
-    private LogicOp logicOp;
+    private final Criterion criterion1;
+    private final Criterion criterion2;
+    private final LogicOp logicOp;
 
 
     /**
@@ -46,5 +46,4 @@ public class BinaryCriterion extends Criterion{
     public boolean check(Task task){
         return logicOp.evaluate(criterion1.check(task),criterion2.check(task));
     }
-
 }

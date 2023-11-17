@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class CompositeTask extends Task{
 
-    private ArrayList<Task> subTaskList;
+    private final ArrayList<Task> subTaskList;
 
     /**
      * Constructor of CompositeTask.
@@ -59,7 +59,7 @@ public class CompositeTask extends Task{
         strB.append("\nSubtasks: ");
         if(subTaskList.isEmpty()) strB.append("No Subtasks.");
         for(Task t : subTaskList){
-            strB.append(t.getName() + ",");
+            strB.append(t.getName()).append(",");
         }
         if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();

@@ -1,4 +1,5 @@
 package hk.edu.polyu.comp.comp2021.tms.controller;
+
 import hk.edu.polyu.comp.comp2021.tms.model.criterion.*;
 import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
 import hk.edu.polyu.comp.comp2021.tms.model.task.*;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
  * It is consists of static methods.
  */
 public class TaskOperation {
-
     /**
      * Req 1
      * Create new Primitive Task
@@ -24,6 +24,7 @@ public class TaskOperation {
      */
     public static String createSimpleTask(StorageLists storageLists, String name, String description,
                                           String duration, String[] prerequisites) throws Exception {
+        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
@@ -43,7 +44,8 @@ public class TaskOperation {
      * @return the message
      */
     public static String createCompositeTask(StorageLists storageLists, String name, String description,
-                                           String[] subTaskList) throws Exception{
+                                             String[] subTaskList) throws Exception{
+        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
@@ -60,6 +62,7 @@ public class TaskOperation {
      * @throws Exception from the check methods
      */
     public static String deleteTask(StorageLists storageLists, String name) throws Exception{
+        FileOperation.transaction();
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(task instanceof PrimitiveTask){
             CheckAvailability.isPrerequisite(storageLists,task);
@@ -84,6 +87,7 @@ public class TaskOperation {
      */
     public static String setProperty(StorageLists storageLists, String name,
                                      String property, String[] newValue) throws Exception{
+        FileOperation.transaction();
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         Property pro = CheckAvailability.checkProperty(property.toLowerCase());
         switch (pro) {
@@ -182,5 +186,4 @@ public class TaskOperation {
         for(String str : name) taskList.add(CheckAvailability.checkTaskExists(storageLists, str));
         return taskList;
     }
-
 }
