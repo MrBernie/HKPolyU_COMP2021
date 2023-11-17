@@ -65,4 +65,10 @@ public class CompositeTask extends Task{
         return strB.toString();
     }
 
+    /**
+     * This method clear all subtasks of this composite task.
+     */
+    public void clearSubTasks() {
+        subTaskList.clear();
+    }
 }
