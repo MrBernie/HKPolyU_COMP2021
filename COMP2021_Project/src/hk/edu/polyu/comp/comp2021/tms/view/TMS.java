@@ -2,6 +2,7 @@ package hk.edu.polyu.comp.comp2021.tms.view;
 
 import hk.edu.polyu.comp.comp2021.tms.controller.CriterionOperation;
 import hk.edu.polyu.comp.comp2021.tms.controller.FileOperation;
+import hk.edu.polyu.comp.comp2021.tms.controller.StorageListsOperation;
 import hk.edu.polyu.comp.comp2021.tms.controller.TaskOperation;
 
 import java.util.Scanner;
@@ -86,7 +87,7 @@ public class TMS {
         switch (inputStringArray[0].toLowerCase()) {
             case "createsimpletask" -> {
                 if (inputStringArray.length != 5) throw INVALID_PARAMETERS;
-                return TaskOperation.createSimpleTask(FileOperation.getStorageLists(),
+                return TaskOperation.createSimpleTask(StorageListsOperation.getStorageLists(),
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3],
@@ -94,44 +95,44 @@ public class TMS {
             }
             case "createcompositetask" -> {
                 if (inputStringArray.length != 4) throw INVALID_PARAMETERS;
-                return TaskOperation.createCompositeTask(FileOperation.getStorageLists(),
+                return TaskOperation.createCompositeTask(StorageListsOperation.getStorageLists(),
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3].split(","));
             }
             case "deletetask" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return TaskOperation.deleteTask(FileOperation.getStorageLists(),
+                return TaskOperation.deleteTask(StorageListsOperation.getStorageLists(),
                         inputStringArray[1]);
             }
             case "changetask" -> {
                 if (inputStringArray.length != 4) throw INVALID_PARAMETERS;
-                return TaskOperation.setProperty(FileOperation.getStorageLists(),
+                return TaskOperation.setProperty(StorageListsOperation.getStorageLists(),
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3].split(","));
             }
             case "printtask" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return TaskOperation.printTask(FileOperation.getStorageLists(), inputStringArray[1]);
+                return TaskOperation.printTask(StorageListsOperation.getStorageLists(), inputStringArray[1]);
             }
             case "printalltasks" -> {
                 if (inputStringArray.length != 1) throw INVALID_PARAMETERS;
-                return TaskOperation.printAllTasks(FileOperation.getStorageLists());
+                return TaskOperation.printAllTasks(StorageListsOperation.getStorageLists());
             }
             case "reportduration" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return TaskOperation.reportDuration(FileOperation.getStorageLists(),
+                return TaskOperation.reportDuration(StorageListsOperation.getStorageLists(),
                         inputStringArray[1]);
             }
             case "reportearliestfinishtime" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return TaskOperation.reportEarliestFinishTime(FileOperation.getStorageLists(),
+                return TaskOperation.reportEarliestFinishTime(StorageListsOperation.getStorageLists(),
                         inputStringArray[1]);
             }
             case "definebasiccriterion" -> {
                 if (inputStringArray.length != 5) throw INVALID_PARAMETERS;
-                return CriterionOperation.defineBasicCriterion(FileOperation.getStorageLists(),
+                return CriterionOperation.defineBasicCriterion(StorageListsOperation.getStorageLists(),
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3],
@@ -139,13 +140,13 @@ public class TMS {
             }
             case "definenegatedcriterion" -> {
                 if (inputStringArray.length != 3) throw INVALID_PARAMETERS;
-                return CriterionOperation.defineNegatedCriterion(FileOperation.getStorageLists(),
+                return CriterionOperation.defineNegatedCriterion(StorageListsOperation.getStorageLists(),
                         inputStringArray[1],
                         inputStringArray[2]);
             }
             case "definebinarycriterion" -> {
                 if (inputStringArray.length != 5) throw INVALID_PARAMETERS;
-                return CriterionOperation.defineBinaryCriterion(FileOperation.getStorageLists(),
+                return CriterionOperation.defineBinaryCriterion(StorageListsOperation.getStorageLists(),
                         inputStringArray[1],
                         inputStringArray[2],
                         inputStringArray[3],
@@ -153,41 +154,38 @@ public class TMS {
             }
             case "printallcriteria" -> {
                 if (inputStringArray.length != 1) throw INVALID_PARAMETERS;
-                return CriterionOperation.printAllCriteria(FileOperation.getStorageLists());
+                return CriterionOperation.printAllCriteria(StorageListsOperation.getStorageLists());
             }
             case "deletecriterion" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return CriterionOperation.deleteCriteria(
+                return CriterionOperation.deleteCriteria(StorageListsOperation.getStorageLists(),
                         inputStringArray[1]);
             }
             case "search" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return CriterionOperation.search(FileOperation.getStorageLists(),
+                return CriterionOperation.search(StorageListsOperation.getStorageLists(),
                         inputStringArray[1]);
             }
             case "store" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return FileOperation.writeFile(FileOperation.getStorageLists(),
+                return FileOperation.writeFile(StorageListsOperation.getStorageLists(),
                         inputStringArray[1]);
             }
             case "load" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                FileOperation.setStorageLists(FileOperation.readFile(
-                        inputStringArray[1]));
-                return "File has been loaded";
+                return FileOperation.readFile(StorageListsOperation.getStorageLists(),
+                        inputStringArray[1]);
             }
             case "undo" -> {
-                FileOperation.undo();
-                return "Undo executing...";
+                return StorageListsOperation.undo();
             }
             case "redo" -> {
-                FileOperation.redo();
-                return "Redo executing...";
+                return StorageListsOperation.redo();
             }
-            case "gui" -> {
-                view.GUI.run();
-                return "Running...";
-            }
+//            case "gui" -> {
+//                view.GUI.run();
+//                return "Running...";
+//            }
             case "quit" -> {
                 stop();
                 return "quit";

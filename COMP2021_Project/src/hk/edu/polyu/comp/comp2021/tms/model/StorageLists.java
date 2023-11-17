@@ -16,7 +16,6 @@ class StorageLists implements Serializable{
     private final ArrayList<Task> taskList;
     private final ArrayList<Criterion> criterionList;
 
-
     /**
      * Constructor of Storage Lists.
      */
@@ -206,5 +205,4 @@ class StorageLists implements Serializable{
         }
         return strB.toString();
     }
-
 }

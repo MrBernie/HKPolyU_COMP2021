@@ -24,13 +24,14 @@ public class CriterionOperation {
      */
     public static String defineBasicCriterion(StorageLists storageList, String name,
                                               String property, String operand, String[] value) throws Exception{
-        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageList,name);
         Property pro = CheckAvailability.checkProperty(property);
         Operand op = CheckAvailability.checkOperand(operand);
         CheckAvailability.checkPropertyOperandValueMatch(pro,op,value);
         if(pro == Property.NAME || pro == Property.DESCRIPTION) removeDoubleQuote(value);
+
+        StorageListsOperation.transaction();
         storageList.defineBasicCriterion(name,pro,op,value);
         return "Basic criterion \""+name+"\" has been defined successfully.";
     }
@@ -49,10 +50,11 @@ public class CriterionOperation {
      */
     public static String defineNegatedCriterion(StorageLists storageLists, String name,
                                                 String nameOfCriterion) throws Exception{
-        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageLists,name);
         Criterion criterion = CheckAvailability.checkCriterionExists(storageLists,nameOfCriterion);
+
+        StorageListsOperation.transaction();
         storageLists.defineNegatedCriterion(name,criterion);
         return "Negated criterion \"" + name + "\" has been defined successfully.";
     }
@@ -69,12 +71,13 @@ public class CriterionOperation {
      */
     public static String defineBinaryCriterion(StorageLists storageLists, String name, String nameOfCriterion1,
                                                String lOp, String nameOfCriterion2) throws Exception{
-        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkCriterionAlreadyExists(storageLists, name);
         Criterion criterion1 = CheckAvailability.checkCriterionExists(storageLists, nameOfCriterion1);
         Criterion criterion2 = CheckAvailability.checkCriterionExists(storageLists, nameOfCriterion2);
         LogicOp logicOp = CheckAvailability.checkLogicOp(lOp);
+
+        StorageListsOperation.transaction();
         storageLists.defineBinaryCriterion(name, criterion1, logicOp, criterion2);
         return "Binary criterion \"" + name + "\" has been defined successfully.";
     }
@@ -92,19 +95,17 @@ public class CriterionOperation {
         return strB.toString();
     }
 
-    public static Criterion getCriterion (String criterionName) {
-        for (Criterion criterion : FileOperation.getStorageLists().getCriterionList()) {
-            if(criterion.getName().equals(criterionName)) return criterion;
-        }
-        return null;
-    }
-    public static String deleteCriteria(String criterionName){
-        FileOperation.transaction();
-        Object obj = getCriterion(criterionName);
-        if(obj == null) {
-            return criterionName + "does not exist";
-        }
-        FileOperation.getStorageLists().getCriterionList().remove(obj);
+    /**
+     * This is not a requirement, but we implemented it.
+     * @param storageLists the storageLists
+     * @param criterionName the name of the criterion
+     * @return the message
+     * @throws Exception from the check methods
+     */
+    public static String deleteCriteria(StorageLists storageLists, String criterionName) throws Exception{
+        Criterion criterion = CheckAvailability.getCriterion(storageLists,criterionName);
+        if(criterion == null) throw new Exception( "Criterion does not exist");
+        storageLists.getCriterionList().remove(criterion);
         return "criterion " + criterionName + " is deleted";
     }
 

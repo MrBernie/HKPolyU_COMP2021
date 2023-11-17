@@ -229,4 +229,17 @@ public class CheckAvailability {
                 if(value.length>1) throw ILLEGAL_VALUE;
         }
     }
+
+    /**
+     * Check if the input of logical criterion property, operand, and value are matched.
+     * @param storageLists the storageLists object
+     * @param criterionName the name of the criterion
+     * @return the criterion object
+     */
+    public static Criterion getCriterion (StorageLists storageLists, String criterionName) {
+        for (Criterion criterion : storageLists.getCriterionList()) {
+            if(criterion.getName().equals(criterionName)) return criterion;
+        }
+        return null;
+    }
 }

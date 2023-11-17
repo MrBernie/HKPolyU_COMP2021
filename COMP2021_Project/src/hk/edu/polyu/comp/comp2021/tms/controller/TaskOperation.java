@@ -24,11 +24,12 @@ public class TaskOperation {
      */
     public static String createSimpleTask(StorageLists storageLists, String name, String description,
                                           String duration, String[] prerequisites) throws Exception {
-        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
         double dur = CheckAvailability.checkDuration(duration);
+
+        StorageListsOperation.transaction();
         storageLists.createNewPrimitiveTask(name, description, dur, nameListToTaskList(storageLists,prerequisites));
         return "Simple task \""+name+"\" has been created successfully.";
     }
@@ -45,10 +46,11 @@ public class TaskOperation {
      */
     public static String createCompositeTask(StorageLists storageLists, String name, String description,
                                              String[] subTaskList) throws Exception{
-        FileOperation.transaction();
         CheckAvailability.checkName(name);
         CheckAvailability.checkTaskAlreadyExists(storageLists, name);
         CheckAvailability.checkDescription(description);
+
+        StorageListsOperation.transaction();
         storageLists.createNewCompositeTask(name, description, nameListToTaskList(storageLists,subTaskList));
         return "Composite task \""+name+"\" has been created successfully.";
     }
@@ -62,7 +64,6 @@ public class TaskOperation {
      * @throws Exception from the check methods
      */
     public static String deleteTask(StorageLists storageLists, String name) throws Exception{
-        FileOperation.transaction();
         Task task = CheckAvailability.checkTaskExists(storageLists,name);
         if(task instanceof PrimitiveTask){
             CheckAvailability.isPrerequisite(storageLists,task);
@@ -71,6 +72,7 @@ public class TaskOperation {
             CheckAvailability.isSubTasksPrerequisite(storageLists,task);
             for(Task t : task.getList()) storageLists.deleteTask(t);
         }
+        StorageListsOperation.transaction();
         storageLists.deleteTask(task);
         return "Task \""+name+"\" has been deleted successfully.";
     }
@@ -87,7 +89,6 @@ public class TaskOperation {
      */
     public static String setProperty(StorageLists storageLists, String name,
                                      String property, String[] newValue) throws Exception{
-        FileOperation.transaction();
         Task task = CheckAvailability.checkTaskExists(storageLists, name);
         Property pro = CheckAvailability.checkProperty(property.toLowerCase());
         switch (pro) {
@@ -96,6 +97,7 @@ public class TaskOperation {
             case DURATION -> {
                 if (!task.isPrimitive()) throw new Exception("Cannot set duration for composite task.");
                 PrimitiveTask primitiveTask = (PrimitiveTask) task;
+                StorageListsOperation.transaction();
                 primitiveTask.setDuration(CheckAvailability.checkDuration(newValue[0]));
             }
             case PREREQUISITE -> {
@@ -104,6 +106,7 @@ public class TaskOperation {
                 ArrayList<Task> prerequisiteTask = nameListToTaskList(storageLists,newValue);
                 if(prerequisiteTask.contains(task)) throw new Exception("A task cannot be the prerequisite of itself.");
                 CheckAvailability.isPartOf(task,prerequisiteTask);
+                StorageListsOperation.transaction();
                 storageLists.setPrerequisites((PrimitiveTask) task, prerequisiteTask);
             }
             case SUBTASKS -> {
@@ -112,6 +115,7 @@ public class TaskOperation {
                 ArrayList<Task> subTask = nameListToTaskList(storageLists,newValue);
                 if(subTask.contains(task)) throw new Exception("A task cannot be the subtask of itself.");
                 CheckAvailability.isPartOf(task,subTask);
+                StorageListsOperation.transaction();
                 storageLists.setSubTaskList((CompositeTask) task, subTask);
             }
             default -> throw new Exception("Invalid Property input.");

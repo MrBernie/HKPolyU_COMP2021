@@ -62,7 +62,8 @@ public class TMSTest {
             "search c11",
             "search c12",
             "search IsPrimitive",
-            "printallcriteria"
+            "printallcriteria",
+            "quit"
     };
 
     private static final String[] fileCommand = {
@@ -70,6 +71,25 @@ public class TMSTest {
             "load ../data.binefhouhiafebjb",
             "load data.bin",
             "store ../data.bin"
+    };
+
+    private static final String[] undoRedoCommand = {
+            "createsimpletask t1 t1 4 ,",
+            "createsimpletask t2 t2 3 t1",
+            "undo",
+            "printalltasks",
+            "redo",
+            "printalltasks",
+            "definebasiccriterion c1 name contains \"t\"",
+            "definebasiccriterion c2 duration > 5",
+            "undo",
+            "printallcriteria",
+            "redo",
+            "printallcriteria",
+            "undo",
+            "definebasiccriterion c3 duration >= 5",
+            "redo",
+            "undo",
     };
 
     private TMS tms;
@@ -83,9 +103,19 @@ public class TMSTest {
     }
 
     /**
-     * Test the task commands.
+     * Test all the commands.
      */
     @Test
+    public void testAll(){
+        testTask();
+        testCriterion();
+        testFile();
+        testUndoRedo();
+    }
+
+    /**
+     * Test the task commands.
+     */
     public void testTask(){
         tms.testRun(taskCommands);
     }
@@ -93,7 +123,6 @@ public class TMSTest {
     /**
      * Test the criterion commands.
      */
-    @Test
     public void testCriterion(){
         tms.testRun(criterionCommand);
     }
@@ -101,9 +130,14 @@ public class TMSTest {
     /**
      * Test the file commands.
      */
-    @Test
     public void testFile(){
         tms.testRun(fileCommand);
     }
 
+    /**
+     * Test the undo and redo commands.
+     */
+    public void testUndoRedo(){
+        tms.testRun(undoRedoCommand);
+    }
 }
