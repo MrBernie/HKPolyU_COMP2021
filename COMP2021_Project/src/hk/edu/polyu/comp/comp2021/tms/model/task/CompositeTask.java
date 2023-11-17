@@ -51,6 +51,10 @@ public class CompositeTask extends Task{
         return duration;
     }
 
+    public void clearSubTasks() {
+        this.subTaskList.clear();
+    }
+
     @Override
     public String toString(){
         StringBuilder strB = new StringBuilder();

@@ -182,10 +182,10 @@ public class TMS {
             case "redo" -> {
                 return StorageListsOperation.redo();
             }
-//            case "gui" -> {
-//                view.GUI.run();
-//                return "Running...";
-//            }
+            case "gui" -> {
+                GUI.run();
+                return "Running...";
+            }
             case "quit" -> {
                 stop();
                 return "quit";

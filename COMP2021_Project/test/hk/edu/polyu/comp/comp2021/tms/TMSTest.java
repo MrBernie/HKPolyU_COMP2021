@@ -116,6 +116,7 @@ public class TMSTest {
     /**
      * Test the task commands.
      */
+    @Test
     public void testTask(){
         tms.testRun(taskCommands);
     }
@@ -123,6 +124,7 @@ public class TMSTest {
     /**
      * Test the criterion commands.
      */
+    @Test
     public void testCriterion(){
         tms.testRun(criterionCommand);
     }
@@ -130,6 +132,7 @@ public class TMSTest {
     /**
      * Test the file commands.
      */
+    @Test
     public void testFile(){
         tms.testRun(fileCommand);
     }
@@ -137,6 +140,7 @@ public class TMSTest {
     /**
      * Test the undo and redo commands.
      */
+    @Test
     public void testUndoRedo(){
         tms.testRun(undoRedoCommand);
     }
