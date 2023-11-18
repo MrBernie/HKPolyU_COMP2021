@@ -1,6 +1,10 @@
 package hk.edu.polyu.comp.comp2021.tms.view;
 
 import hk.edu.polyu.comp.comp2021.tms.controller.*;
+<<<<<<< HEAD
+=======
+import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
+>>>>>>> origin/main
 import hk.edu.polyu.comp.comp2021.tms.model.task.CompositeTask;
 import hk.edu.polyu.comp.comp2021.tms.model.task.PrimitiveTask;
 import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
@@ -11,6 +15,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+<<<<<<< HEAD
+=======
+/**
+ * This class represents the GUI of the program.
+ */
+>>>>>>> origin/main
 public class GUI {
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 800;
@@ -20,6 +30,12 @@ public class GUI {
     private static final int COLUMNS1 = 20;
     private static final int COLUMNS2 = 50;
 
+<<<<<<< HEAD
+=======
+    /**
+     * Run the GUI.
+     */
+>>>>>>> origin/main
     public static void run() {
         JFrame frame = new JFrame("TMS");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
