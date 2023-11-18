@@ -1,10 +1,6 @@
 package hk.edu.polyu.comp.comp2021.tms.view;
 
 import hk.edu.polyu.comp.comp2021.tms.controller.*;
-<<<<<<< HEAD
-=======
-import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
->>>>>>> origin/main
 import hk.edu.polyu.comp.comp2021.tms.model.task.CompositeTask;
 import hk.edu.polyu.comp.comp2021.tms.model.task.PrimitiveTask;
 import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
@@ -15,12 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-<<<<<<< HEAD
-=======
 /**
  * This class represents the GUI of the program.
  */
->>>>>>> origin/main
 public class GUI {
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 800;
@@ -30,27 +23,24 @@ public class GUI {
     private static final int COLUMNS1 = 20;
     private static final int COLUMNS2 = 50;
 
-<<<<<<< HEAD
-=======
     /**
      * Run the GUI.
      */
->>>>>>> origin/main
     public static void run() {
         JFrame frame = new JFrame("TMS");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout(HORIZONTAL_GAP, VERTICAL_GAP));
 
-        JPanel[] userManualPanels = createUserManualPanel();
+        JPanel[] userMenuPanels = createUserMenuPanel();
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.PAGE_AXIS));
-        containerPanel.add(userManualPanels[0]);
-        containerPanel.add(userManualPanels[1]);
-        containerPanel.add(userManualPanels[2]);
-        containerPanel.add(userManualPanels[3]);
-        containerPanel.add(userManualPanels[4]);
-        containerPanel.add(userManualPanels[5]);
+        containerPanel.add(userMenuPanels[0]);
+        containerPanel.add(userMenuPanels[1]);
+        containerPanel.add(userMenuPanels[2]);
+        containerPanel.add(userMenuPanels[3]);
+        containerPanel.add(userMenuPanels[4]);
+        containerPanel.add(userMenuPanels[5]);
 
         frame.add(containerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
@@ -62,27 +52,27 @@ public class GUI {
         return button;
     }
 
-    private static JPanel[] createUserManualPanel() {
-        JPanel userManualPanel1 = new JPanel();
-        userManualPanel1.add(createFileOperationPanel());
+    private static JPanel[] createUserMenuPanel() {
+        JPanel userMenuPanel1 = new JPanel();
+        userMenuPanel1.add(createFileOperationPanel());
 
-        JPanel userManualPanel2 = new JPanel();
-        userManualPanel2.add(createTaskOperationPanel());
+        JPanel userMenuPanel2 = new JPanel();
+        userMenuPanel2.add(createTaskOperationPanel());
 
-        JPanel userManualPanel3 = new JPanel();
-        userManualPanel3.add(createCriterionOperationPanel());
+        JPanel userMenuPanel3 = new JPanel();
+        userMenuPanel3.add(createCriterionOperationPanel());
 
-        JPanel userManualPanel4 = new JPanel();
-        userManualPanel4.add(createSearchOperationPanel());
+        JPanel userMenuPanel4 = new JPanel();
+        userMenuPanel4.add(createSearchOperationPanel());
 
-        JPanel userManualPanel5 = new JPanel();
-        userManualPanel5.add(createStorageListsOperationPanel());
+        JPanel userMenuPanel5 = new JPanel();
+        userMenuPanel5.add(createStorageListsOperationPanel());
 
-        JPanel userManualPanel6 = new JPanel();
-        userManualPanel6.add(createProgramOperationPanel());
+        JPanel userMenuPanel6 = new JPanel();
+        userMenuPanel6.add(createProgramOperationPanel());
 
-        return new JPanel[] {userManualPanel1, userManualPanel2, userManualPanel3,
-                userManualPanel4, userManualPanel5, userManualPanel6};
+        return new JPanel[] {userMenuPanel1, userMenuPanel2, userMenuPanel3,
+                userMenuPanel4, userMenuPanel5, userMenuPanel6};
     }
 
     private static JPanel createFileOperationPanel() {
@@ -271,7 +261,7 @@ public class GUI {
             try {
                 double duration = Double.parseDouble(durationStr);
                 TaskOperation.createSimpleTask(StorageListsOperation.getStorageLists(), name, description, durationStr, prerequisites);
-                JOptionPane.showMessageDialog(dialog, "Primitive Task Created Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(dialog, "Simple Task Created Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dialog.dispose();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(dialog, "Invalid duration format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
