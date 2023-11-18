@@ -297,7 +297,6 @@ public class GUI {
             String[] prerequisites = prerequisitesTextField.getText().split(",\\s*");
 
             try {
-                double duration = Double.parseDouble(durationStr);
                 TaskOperation.createSimpleTask(StorageListsOperation.getStorageLists(), name, description, durationStr, prerequisites);
                 JOptionPane.showMessageDialog(dialog, "Primitive Task Created Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dialog.dispose();
