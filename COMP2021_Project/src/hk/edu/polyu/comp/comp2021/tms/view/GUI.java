@@ -1,9 +1,6 @@
 package hk.edu.polyu.comp.comp2021.tms.view;
 
 import hk.edu.polyu.comp.comp2021.tms.controller.*;
-import hk.edu.polyu.comp.comp2021.tms.model.StorageLists;
-import hk.edu.polyu.comp.comp2021.tms.model.task.CompositeTask;
-import hk.edu.polyu.comp.comp2021.tms.model.task.PrimitiveTask;
 import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
 
 import javax.swing.*;
