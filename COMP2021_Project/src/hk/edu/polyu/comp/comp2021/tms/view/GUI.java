@@ -414,15 +414,16 @@ public class GUI {
             String name = nameTextField.getText();
             String newDescription = newDescriptionTextField.getText();
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-                CheckAvailability.checkDescription(newDescription);
-
-                if (existingTask instanceof PrimitiveTask) {
-                    existingTask.setDescription(newDescription);
-                    JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//                CheckAvailability.checkDescription(newDescription);
+//
+//                if (existingTask instanceof PrimitiveTask) {
+//                    existingTask.setDescription(newDescription);
+//                    JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "description", new String[]{newDescription});
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
