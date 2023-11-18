@@ -424,6 +424,7 @@ public class GUI {
 //                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
 //                }
                 TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "description", new String[]{newDescription});
+                JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -474,6 +475,7 @@ public class GUI {
 //                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
 //                }
                 TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", newPrerequisites);
+                JOptionPane.showMessageDialog(dialog, "Task prerequisites updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -519,6 +521,7 @@ public class GUI {
 //                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
 //                }
                 TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "duration", new String[]{newDurationStr});
+                JOptionPane.showMessageDialog(dialog, "Task duration changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(dialog, "Invalid duration format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
@@ -662,6 +665,7 @@ public class GUI {
 //                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
 //                }
                 TaskOperation.setProperty(StorageListsOperation.getStorageLists(), currentName, "prerequisites", new String[]{newName});
+                JOptionPane.showMessageDialog(dialog, "Composite Task name changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -696,15 +700,17 @@ public class GUI {
             String name = nameTextField.getText();
             String newDescription = newDescriptionTextField.getText();
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-                CheckAvailability.checkDescription(newDescription);
-
-                if (existingTask instanceof CompositeTask) {
-                    existingTask.setDescription(newDescription);
-                    JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//                CheckAvailability.checkDescription(newDescription);
+//
+//                if (existingTask instanceof CompositeTask) {
+//                    existingTask.setDescription(newDescription);
+//                    JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", new String[]{newDescription});
+                JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -751,6 +757,7 @@ public class GUI {
 //                        }
 //                    }
                 TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "subtasks", newSubtasks);
+                JOptionPane.showMessageDialog(dialog, "Composite Task subtasks changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
