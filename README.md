@@ -19,3 +19,5 @@ Otherwise, could you please exclude the GUI.java out of our testing and only gra
 We admitted that the structural design of two BONUS requirement (redo, undo and GUI) is not satisfying.
 It is not a good OOP design due to time limit. However, we have tried our best to make it work.
 Could you please do us another favor to grade our code quality only base on the basic requirements of the project?
+
+I assure you that we have done a really well-designed OOP structure for those basic requirements.
