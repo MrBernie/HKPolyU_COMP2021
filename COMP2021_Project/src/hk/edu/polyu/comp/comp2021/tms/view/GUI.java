@@ -1,8 +1,6 @@
 package hk.edu.polyu.comp.comp2021.tms.view;
 
 import hk.edu.polyu.comp.comp2021.tms.controller.*;
-import hk.edu.polyu.comp.comp2021.tms.model.task.CompositeTask;
-import hk.edu.polyu.comp.comp2021.tms.model.task.PrimitiveTask;
 import hk.edu.polyu.comp.comp2021.tms.model.task.Task;
 
 import javax.swing.*;
@@ -32,49 +30,66 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout(HORIZONTAL_GAP, VERTICAL_GAP));
 
-        JPanel[] userMenuPanels = createUserMenuPanel();
+        JPanel[] userManualPanels = createUserManualPanel();
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.PAGE_AXIS));
-        containerPanel.add(userMenuPanels[0]);
-        containerPanel.add(userMenuPanels[1]);
-        containerPanel.add(userMenuPanels[2]);
-        containerPanel.add(userMenuPanels[3]);
-        containerPanel.add(userMenuPanels[4]);
-        containerPanel.add(userMenuPanels[5]);
+        containerPanel.add(userManualPanels[0]);
+        containerPanel.add(userManualPanels[1]);
+        containerPanel.add(userManualPanels[2]);
+        containerPanel.add(userManualPanels[3]);
+        containerPanel.add(userManualPanels[4]);
+        containerPanel.add(userManualPanels[5]);
 
         frame.add(containerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
+    /**
+     * Create the file operation panel.
+     *
+     * @param buttonText     The button text.
+     * @param actionListener The action listener.
+     * @return fileOperationPanel The file operation panel.
+     */
     private static JButton createButton(String buttonText, ActionListener actionListener) {
         JButton button = new JButton(buttonText);
         button.addActionListener(actionListener);
         return button;
     }
 
-    private static JPanel[] createUserMenuPanel() {
-        JPanel userMenuPanel1 = new JPanel();
-        userMenuPanel1.add(createFileOperationPanel());
+    /**
+     * Create the file operation panel.
+     *
+     * @return fileOperationPanel The file operation panel.
+     */
+    private static JPanel[] createUserManualPanel() {
+        JPanel userManualPanel1 = new JPanel();
+        userManualPanel1.add(createFileOperationPanel());
 
-        JPanel userMenuPanel2 = new JPanel();
-        userMenuPanel2.add(createTaskOperationPanel());
+        JPanel userManualPanel2 = new JPanel();
+        userManualPanel2.add(createTaskOperationPanel());
 
-        JPanel userMenuPanel3 = new JPanel();
-        userMenuPanel3.add(createCriterionOperationPanel());
+        JPanel userManualPanel3 = new JPanel();
+        userManualPanel3.add(createCriterionOperationPanel());
 
-        JPanel userMenuPanel4 = new JPanel();
-        userMenuPanel4.add(createSearchOperationPanel());
+        JPanel userManualPanel4 = new JPanel();
+        userManualPanel4.add(createSearchOperationPanel());
 
-        JPanel userMenuPanel5 = new JPanel();
-        userMenuPanel5.add(createStorageListsOperationPanel());
+        JPanel userManualPanel5 = new JPanel();
+        userManualPanel5.add(createStorageListsOperationPanel());
 
-        JPanel userMenuPanel6 = new JPanel();
-        userMenuPanel6.add(createProgramOperationPanel());
+        JPanel userManualPanel6 = new JPanel();
+        userManualPanel6.add(createProgramOperationPanel());
 
-        return new JPanel[] {userMenuPanel1, userMenuPanel2, userMenuPanel3,
-                userMenuPanel4, userMenuPanel5, userMenuPanel6};
+        return new JPanel[]{userManualPanel1, userManualPanel2, userManualPanel3,
+                userManualPanel4, userManualPanel5, userManualPanel6};
     }
 
+    /**
+     * Create the file operation panel.
+     *
+     * @return fileOperationPanel The file operation panel.
+     */
     private static JPanel createFileOperationPanel() {
         JPanel fileOperationPanel = new JPanel();
         fileOperationPanel.setLayout(new BoxLayout(fileOperationPanel, BoxLayout.X_AXIS));
@@ -86,6 +101,9 @@ public class GUI {
         return fileOperationPanel;
     }
 
+    /**
+     * Create the task operation panel.
+     */
     private static void loadFile() {
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -101,6 +119,9 @@ public class GUI {
         }
     }
 
+    /**
+     * Create the task operation panel.
+     */
     private static void storeFile() {
         JFileChooser jFileChooser = new JFileChooser();
         int option = jFileChooser.showSaveDialog(null);
@@ -115,6 +136,11 @@ public class GUI {
         }
     }
 
+    /**
+     * Create the task operation panel.
+     *
+     * @return taskOperationPanel The task operation panel.
+     */
     private static JPanel createTaskOperationPanel() {
         JPanel taskOperationPanel = new JPanel();
         taskOperationPanel.setLayout(new BoxLayout(taskOperationPanel, BoxLayout.X_AXIS));
@@ -133,6 +159,9 @@ public class GUI {
         return taskOperationPanel;
     }
 
+    /**
+     * Create the simple task operation panel.
+     */
     private static void deleteTask() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Delete Task");
@@ -161,6 +190,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the simple task operation panel.
+     */
     private static void printTask() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Print Task Details");
@@ -196,6 +228,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the simple task operation panel.
+     */
     private static void printAllTasks() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Print All Tasks");
@@ -216,6 +251,11 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     *
+     * @return the panel for composite task operation
+     */
     private static JPanel createSimpleTaskOperationPanel() {
         JPanel simpleTaskOperationPanel = new JPanel();
         simpleTaskOperationPanel.setLayout(new BoxLayout(simpleTaskOperationPanel, BoxLayout.Y_AXIS));
@@ -238,6 +278,9 @@ public class GUI {
         return simpleTaskOperationPanel;
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void createSimpleTask() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Create Simple Task");
@@ -259,9 +302,8 @@ public class GUI {
             String[] prerequisites = prerequisitesTextField.getText().split(",\\s*");
 
             try {
-                double duration = Double.parseDouble(durationStr);
                 TaskOperation.createSimpleTask(StorageListsOperation.getStorageLists(), name, description, durationStr, prerequisites);
-                JOptionPane.showMessageDialog(dialog, "Simple Task Created Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(dialog, "Primitive Task Created Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dialog.dispose();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(dialog, "Invalid duration format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -286,6 +328,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void reportEarliestFinishTime() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Report Earliest Finish Time");
@@ -314,6 +359,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeSimpleTaskName() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Sample Task Name");
@@ -350,6 +398,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeSimpleTaskDescription() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Sample Task Description");
@@ -364,15 +415,17 @@ public class GUI {
             String name = nameTextField.getText();
             String newDescription = newDescriptionTextField.getText();
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-                CheckAvailability.checkDescription(newDescription);
-
-                if (existingTask instanceof PrimitiveTask) {
-                    existingTask.setDescription(newDescription);
-                    JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//                CheckAvailability.checkDescription(newDescription);
+//
+//                if (existingTask instanceof PrimitiveTask) {
+//                    existingTask.setDescription(newDescription);
+//                    JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "description", new String[]{newDescription});
+                JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -390,6 +443,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeSimpleTaskPrerequisites() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Simple Task Prerequisites");
@@ -404,22 +460,23 @@ public class GUI {
             String name = nameTextField.getText();
             String[] newPrerequisites = newPrerequisitesTextField.getText().split(",\\s*");
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-
-                if (existingTask instanceof PrimitiveTask primitiveTask) {
-                    primitiveTask.getList().clear(); // Clear existing prerequisites
-
-                    for (String prerequisiteName : newPrerequisites) {
-                        if (!prerequisiteName.trim().isEmpty()) {
-                            Task prerequisiteTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), prerequisiteName.trim());
-                            primitiveTask.addPrerequisites(prerequisiteTask);
-                        }
-                    }
-
-                    JOptionPane.showMessageDialog(dialog, "Task prerequisites updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//
+//                if (existingTask instanceof PrimitiveTask primitiveTask) {
+//                    primitiveTask.getList().clear(); // Clear existing prerequisites
+//
+//                    for (String prerequisiteName : newPrerequisites) {
+//                        if (!prerequisiteName.trim().isEmpty()) {
+//                            Task prerequisiteTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), prerequisiteName.trim());
+//                            primitiveTask.addPrerequisites(prerequisiteTask);
+//                        }
+//                    }
+//                    JOptionPane.showMessageDialog(dialog, "Task prerequisites updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", newPrerequisites);
+                JOptionPane.showMessageDialog(dialog, "Task prerequisites updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -438,7 +495,9 @@ public class GUI {
     }
 
 
-
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeSimpleTaskDuration() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Sample Task Duration");
@@ -453,15 +512,17 @@ public class GUI {
             String name = nameTextField.getText();
             String newDurationStr = newDurationTextField.getText();
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-                double newDuration = CheckAvailability.checkDuration(newDurationStr);
-
-                if (existingTask instanceof PrimitiveTask) {
-                    ((PrimitiveTask) existingTask).setDuration(newDuration);
-                    JOptionPane.showMessageDialog(dialog, "Task duration changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//                double newDuration = CheckAvailability.checkDuration(newDurationStr);
+//
+//                if (existingTask instanceof PrimitiveTask) {
+//                    ((PrimitiveTask) existingTask).setDuration(newDuration);
+//                    JOptionPane.showMessageDialog(dialog, "Task duration changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Primitive Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "duration", new String[]{newDurationStr});
+                JOptionPane.showMessageDialog(dialog, "Task duration changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(dialog, "Invalid duration format. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
@@ -481,8 +542,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
-
-
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JPanel createCompositeTaskOperationPanel() {
         JPanel compositeTaskOperationPanel = new JPanel();
         compositeTaskOperationPanel.setLayout(new BoxLayout(compositeTaskOperationPanel, BoxLayout.Y_AXIS));
@@ -504,6 +566,9 @@ public class GUI {
         return compositeTaskOperationPanel;
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void createCompositeTask() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Create Composite Task");
@@ -543,6 +608,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void reportCompositeTaskDuration() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Report Composite Task Duration");
@@ -571,6 +639,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeCompositeTaskName() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Composite Task Name");
@@ -585,15 +656,17 @@ public class GUI {
             String currentName = currentNameTextField.getText();
             String newName = newNameTextField.getText();
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), currentName);
-                CheckAvailability.checkName(newName);
-
-                if (existingTask instanceof CompositeTask) {
-                    existingTask.setName(newName);
-                    JOptionPane.showMessageDialog(dialog, "Composite Task name changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), currentName);
+//                CheckAvailability.checkName(newName);
+//
+//                if (existingTask instanceof CompositeTask) {
+//                    existingTask.setName(newName);
+//                    JOptionPane.showMessageDialog(dialog, "Composite Task name changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), currentName, "prerequisites", new String[]{newName});
+                JOptionPane.showMessageDialog(dialog, "Composite Task name changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -611,6 +684,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeCompositeTaskDescription() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Composite Task Description");
@@ -625,15 +701,17 @@ public class GUI {
             String name = nameTextField.getText();
             String newDescription = newDescriptionTextField.getText();
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-                CheckAvailability.checkDescription(newDescription);
-
-                if (existingTask instanceof CompositeTask) {
-                    existingTask.setDescription(newDescription);
-                    JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//                CheckAvailability.checkDescription(newDescription);
+//
+//                if (existingTask instanceof CompositeTask) {
+//                    existingTask.setDescription(newDescription);
+//                    JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
+//                }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", new String[]{newDescription});
+                JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -651,6 +729,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void changeCompositeTaskSubtasks() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Change Composite Task Subtasks");
@@ -665,22 +746,19 @@ public class GUI {
             String name = nameTextField.getText();
             String[] newSubtasks = newSubtasksTextField.getText().split(",\\s*");
             try {
-                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
-
-                if (existingTask instanceof CompositeTask compositeTask) {
-                    compositeTask.clearSubTasks(); // Clear existing subtasks
-
-                    for (String subtaskName : newSubtasks) {
-                        if (!subtaskName.trim().isEmpty()) {
-                            Task subtask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), subtaskName.trim());
-                            compositeTask.addTask(subtask);
-                        }
-                    }
-
-                    JOptionPane.showMessageDialog(dialog, "Composite Task subtasks updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(dialog, "Selected task is not a Composite Task", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+//                Task existingTask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), name);
+//
+//                if (existingTask instanceof CompositeTask compositeTask) {
+//                    compositeTask.clearSubTasks(); // Clear existing subtasks
+//
+//                    for (String subtaskName : newSubtasks) {
+//                        if (!subtaskName.trim().isEmpty()) {
+//                            Task subtask = CheckAvailability.checkTaskExists(StorageListsOperation.getStorageLists(), subtaskName.trim());
+//                            compositeTask.addTask(subtask);
+//                        }
+//                    }
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "subtasks", newSubtasks);
+                JOptionPane.showMessageDialog(dialog, "Composite Task subtasks changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -698,6 +776,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JPanel createCriterionOperationPanel() {
         JPanel criterionOperationPanel = new JPanel();
         criterionOperationPanel.setLayout(new BoxLayout(criterionOperationPanel, BoxLayout.X_AXIS));
@@ -712,6 +793,9 @@ public class GUI {
         return criterionOperationPanel;
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static void deleteCriterion() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Delete Criterion");
@@ -740,6 +824,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static void printAllCriteria() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Print All Criteria");
@@ -760,6 +847,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static JPanel createDefineCriterionOperationPanel() {
         JPanel defineCriterionOperationPanel = new JPanel();
         defineCriterionOperationPanel.setLayout(new BoxLayout(defineCriterionOperationPanel, BoxLayout.Y_AXIS));
@@ -772,6 +862,9 @@ public class GUI {
         return defineCriterionOperationPanel;
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static void defineBasicCriterion() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Define Basic Criterion");
@@ -813,6 +906,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static void defineNegatedCriterion() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Define Negated Criterion");
@@ -845,6 +941,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static void defineBinaryCriterion() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Define Binary Criterion");
@@ -885,6 +984,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for search operation.
+     */
     private static JPanel createSearchOperationPanel() {
         JPanel searchOperationPanel = new JPanel();
         searchOperationPanel.setLayout(new BoxLayout(searchOperationPanel, BoxLayout.Y_AXIS));
@@ -895,6 +997,9 @@ public class GUI {
         return searchOperationPanel;
     }
 
+    /**
+     * Create the panel for search operation.
+     */
     private static void searchTasksByCriterion() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Search Tasks By Criterion");
@@ -935,8 +1040,11 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for sort operation.
+     */
     private static JPanel createStorageListsOperationPanel() {
-        JPanel storageListsOperationPanel  = new JPanel();
+        JPanel storageListsOperationPanel = new JPanel();
         storageListsOperationPanel.setLayout(new BoxLayout(storageListsOperationPanel, BoxLayout.X_AXIS));
         storageListsOperationPanel.setBorder(new TitledBorder("Storage Lists Operation"));
 
@@ -946,6 +1054,9 @@ public class GUI {
         return storageListsOperationPanel;
     }
 
+    /**
+     * Create the panel for sort operation.
+     */
     private static void undo() {
         try {
             String result = StorageListsOperation.undo();
@@ -955,6 +1066,9 @@ public class GUI {
         }
     }
 
+    /**
+     * Create the panel for sort operation.
+     */
     private static void redo() {
         try {
             String result = StorageListsOperation.redo();
@@ -964,6 +1078,9 @@ public class GUI {
         }
     }
 
+    /**
+     * Create the panel for sort operation.
+     */
     private static JPanel createProgramOperationPanel() {
         JPanel programOperationPanel = new JPanel();
         programOperationPanel.setLayout(new BoxLayout(programOperationPanel, BoxLayout.Y_AXIS));
@@ -974,6 +1091,9 @@ public class GUI {
         return programOperationPanel;
     }
 
+    /**
+     * Quit the program.
+     */
     private static void quit() {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
