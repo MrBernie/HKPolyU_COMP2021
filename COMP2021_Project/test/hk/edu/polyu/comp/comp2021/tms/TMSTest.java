@@ -140,5 +140,4 @@ public class TMSTest {
     public void testUndoRedo(){
         tms.testRun(undoRedoCommand);
     }
-
 }
