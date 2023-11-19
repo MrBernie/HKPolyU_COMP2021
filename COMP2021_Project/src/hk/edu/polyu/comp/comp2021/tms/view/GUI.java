@@ -46,7 +46,8 @@ public class GUI {
 
     /**
      * Create the file operation panel.
-     * @param buttonText The button text.
+     *
+     * @param buttonText     The button text.
      * @param actionListener The action listener.
      * @return fileOperationPanel The file operation panel.
      */
@@ -58,6 +59,7 @@ public class GUI {
 
     /**
      * Create the file operation panel.
+     *
      * @return fileOperationPanel The file operation panel.
      */
     private static JPanel[] createUserManualPanel() {
@@ -79,12 +81,13 @@ public class GUI {
         JPanel userManualPanel6 = new JPanel();
         userManualPanel6.add(createProgramOperationPanel());
 
-        return new JPanel[] {userManualPanel1, userManualPanel2, userManualPanel3,
+        return new JPanel[]{userManualPanel1, userManualPanel2, userManualPanel3,
                 userManualPanel4, userManualPanel5, userManualPanel6};
     }
 
     /**
      * Create the file operation panel.
+     *
      * @return fileOperationPanel The file operation panel.
      */
     private static JPanel createFileOperationPanel() {
@@ -135,6 +138,7 @@ public class GUI {
 
     /**
      * Create the task operation panel.
+     *
      * @return taskOperationPanel The task operation panel.
      */
     private static JPanel createTaskOperationPanel() {
@@ -249,6 +253,7 @@ public class GUI {
 
     /**
      * Create the panel for composite task operation.
+     *
      * @return the panel for composite task operation
      */
     private static JPanel createSimpleTaskOperationPanel() {
@@ -1039,7 +1044,7 @@ public class GUI {
      * Create the panel for sort operation.
      */
     private static JPanel createStorageListsOperationPanel() {
-        JPanel storageListsOperationPanel  = new JPanel();
+        JPanel storageListsOperationPanel = new JPanel();
         storageListsOperationPanel.setLayout(new BoxLayout(storageListsOperationPanel, BoxLayout.X_AXIS));
         storageListsOperationPanel.setBorder(new TitledBorder("Storage Lists Operation"));
 
