@@ -19,7 +19,9 @@ public class GUI {
     private static final int VERTICAL_GAP = 10;
     private static final int ROWS1 = 15;
     private static final int COLUMNS1 = 20;
-    private static final int COLUMNS2 = 50;
+    private static final int SUBMENUE_HEIGHT = 50;
+    private static final int COLUMNS2 = SUBMENUE_HEIGHT;
+    private static final int SUBMENU_WIDTH = 200;
 
     /**
      * Run the GUI.
@@ -169,6 +171,19 @@ public class GUI {
         JLabel nameLabel = new JLabel("Task Name:");
         JTextField nameTextField = new JTextField(COLUMNS1);
 
+        JButton deleteButton = deleteButton(nameTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(deleteButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton deleteButton(JTextField nameTextField, JDialog dialog) {
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> {
             String name = nameTextField.getText();
@@ -179,15 +194,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(deleteButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return deleteButton;
     }
 
     /**
@@ -338,6 +345,19 @@ public class GUI {
         JLabel nameLabel = new JLabel("Task Name:");
         JTextField nameTextField = new JTextField(COLUMNS1);
 
+        JButton submitButton = reportEarliestFinishTimeSubmitButton(nameTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(submitButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton reportEarliestFinishTimeSubmitButton(JTextField nameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
             String taskName = nameTextField.getText();
@@ -348,15 +368,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return submitButton;
     }
 
     /**
@@ -371,6 +383,21 @@ public class GUI {
         JLabel newNameLabel = new JLabel("New Task Name:");
         JTextField newNameTextField = new JTextField(COLUMNS1);
 
+        JButton submitButton = changeSimpleTaskNameSubmitButton(currentNameTextField, newNameTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(currentNameLabel);
+        panel.add(currentNameTextField);
+        panel.add(newNameLabel);
+        panel.add(newNameTextField);
+        panel.add(submitButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton changeSimpleTaskNameSubmitButton(JTextField currentNameTextField, JTextField newNameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
             String currentName = currentNameTextField.getText();
@@ -385,17 +412,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(currentNameLabel);
-        panel.add(currentNameTextField);
-        panel.add(newNameLabel);
-        panel.add(newNameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return submitButton;
     }
 
     /**
@@ -410,17 +427,7 @@ public class GUI {
         JLabel newDescriptionLabel = new JLabel("New Description:");
         JTextField newDescriptionTextField = new JTextField(COLUMNS1);
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(e -> {
-            String name = nameTextField.getText();
-            String newDescription = newDescriptionTextField.getText();
-            try {
-                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "description", new String[]{newDescription});
-                JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        JButton submitButton = changeSimpleTaskDescriptionSubmitButton(nameTextField, newDescriptionTextField, dialog);
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(nameLabel);
@@ -432,6 +439,21 @@ public class GUI {
         dialog.add(panel);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    private static JButton changeSimpleTaskDescriptionSubmitButton(JTextField nameTextField, JTextField newDescriptionTextField, JDialog dialog) {
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            String name = nameTextField.getText();
+            String newDescription = newDescriptionTextField.getText();
+            try {
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "description", new String[]{newDescription});
+                JOptionPane.showMessageDialog(dialog, "Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        return submitButton;
     }
 
     /**
@@ -446,17 +468,7 @@ public class GUI {
         JLabel newPrerequisitesLabel = new JLabel("New Prerequisites (comma-separated):");
         JTextField newPrerequisitesTextField = new JTextField(COLUMNS1);
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(e -> {
-            String name = nameTextField.getText();
-            String[] newPrerequisites = newPrerequisitesTextField.getText().split(",\\s*");
-            try {
-                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", newPrerequisites);
-                JOptionPane.showMessageDialog(dialog, "Task prerequisites updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        JButton submitButton = changeSimpleTaskPrerequisitesSubmitButton(nameTextField, newPrerequisitesTextField, dialog);
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(nameLabel);
@@ -468,6 +480,21 @@ public class GUI {
         dialog.add(panel);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    private static JButton changeSimpleTaskPrerequisitesSubmitButton(JTextField nameTextField, JTextField newPrerequisitesTextField, JDialog dialog) {
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            String name = nameTextField.getText();
+            String[] newPrerequisites = newPrerequisitesTextField.getText().split(",\\s*");
+            try {
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", newPrerequisites);
+                JOptionPane.showMessageDialog(dialog, "Task prerequisites updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        return submitButton;
     }
 
 
@@ -483,6 +510,21 @@ public class GUI {
         JLabel newDurationLabel = new JLabel("New Duration:");
         JTextField newDurationTextField = new JTextField(COLUMNS1);
 
+        JButton submitButton = changeSimpleTaskDurationSubmitButton(nameTextField, newDurationTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(newDurationLabel);
+        panel.add(newDurationTextField);
+        panel.add(submitButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton changeSimpleTaskDurationSubmitButton(JTextField nameTextField, JTextField newDurationTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
             String name = nameTextField.getText();
@@ -496,17 +538,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(newDurationLabel);
-        panel.add(newDurationTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return submitButton;
     }
 
     /**
@@ -585,6 +617,19 @@ public class GUI {
         JLabel nameLabel = new JLabel("Task Name:");
         JTextField nameTextField = new JTextField(COLUMNS1);
 
+        JButton submitButton = reportCompositeTaskDurationSubmitButton(nameTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(submitButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton reportCompositeTaskDurationSubmitButton(JTextField nameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
             String taskName = nameTextField.getText();
@@ -595,15 +640,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return submitButton;
     }
 
     /**
@@ -618,17 +655,7 @@ public class GUI {
         JLabel newNameLabel = new JLabel("New Task Name:");
         JTextField newNameTextField = new JTextField(COLUMNS1);
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(e -> {
-            String currentName = currentNameTextField.getText();
-            String newName = newNameTextField.getText();
-            try {
-                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), currentName, "prerequisites", new String[]{newName});
-                JOptionPane.showMessageDialog(dialog, "Composite Task name changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        JButton submitButton = changeCompositeTaskNameSubmitButton(currentNameTextField, newNameTextField, dialog);
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(currentNameLabel);
@@ -640,6 +667,21 @@ public class GUI {
         dialog.add(panel);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    private static JButton changeCompositeTaskNameSubmitButton(JTextField currentNameTextField, JTextField newNameTextField, JDialog dialog) {
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            String currentName = currentNameTextField.getText();
+            String newName = newNameTextField.getText();
+            try {
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), currentName, "prerequisites", new String[]{newName});
+                JOptionPane.showMessageDialog(dialog, "Composite Task name changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        return submitButton;
     }
 
     /**
@@ -654,17 +696,7 @@ public class GUI {
         JLabel newDescriptionLabel = new JLabel("New Description:");
         JTextField newDescriptionTextField = new JTextField(COLUMNS1);
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(e -> {
-            String name = nameTextField.getText();
-            String newDescription = newDescriptionTextField.getText();
-            try {
-                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", new String[]{newDescription});
-                JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        JButton submitButton = changeCompositeTaskDescriptionSubmitButton(nameTextField, newDescriptionTextField, dialog);
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(nameLabel);
@@ -676,6 +708,21 @@ public class GUI {
         dialog.add(panel);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    private static JButton changeCompositeTaskDescriptionSubmitButton(JTextField nameTextField, JTextField newDescriptionTextField, JDialog dialog) {
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            String name = nameTextField.getText();
+            String newDescription = newDescriptionTextField.getText();
+            try {
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "prerequisites", new String[]{newDescription});
+                JOptionPane.showMessageDialog(dialog, "Composite Task description changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        return submitButton;
     }
 
     /**
@@ -690,17 +737,7 @@ public class GUI {
         JLabel newSubtasksLabel = new JLabel("New Subtasks (comma-separated):");
         JTextField newSubtasksTextField = new JTextField(COLUMNS1);
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(e -> {
-            String name = nameTextField.getText();
-            String[] newSubtasks = newSubtasksTextField.getText().split(",\\s*");
-            try {
-                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "subtasks", newSubtasks);
-                JOptionPane.showMessageDialog(dialog, "Composite Task subtasks changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        JButton submitButton = changeCompositeTaskSubtasksSubmitButton(nameTextField, newSubtasksTextField, dialog);
 
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(nameLabel);
@@ -712,6 +749,21 @@ public class GUI {
         dialog.add(panel);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    private static JButton changeCompositeTaskSubtasksSubmitButton(JTextField nameTextField, JTextField newSubtasksTextField, JDialog dialog) {
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            String name = nameTextField.getText();
+            String[] newSubtasks = newSubtasksTextField.getText().split(",\\s*");
+            try {
+                TaskOperation.setProperty(StorageListsOperation.getStorageLists(), name, "subtasks", newSubtasks);
+                JOptionPane.showMessageDialog(dialog, "Composite Task subtasks changed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        return submitButton;
     }
 
     /**
@@ -741,6 +793,19 @@ public class GUI {
         JLabel nameLabel = new JLabel("Criterion Name:");
         JTextField nameTextField = new JTextField(COLUMNS1);
 
+        JButton deleteButton = deleteCriterionSubmitButton(nameTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(nameLabel);
+        panel.add(nameTextField);
+        panel.add(deleteButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton deleteCriterionSubmitButton(JTextField nameTextField, JDialog dialog) {
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> {
             String name = nameTextField.getText();
@@ -751,15 +816,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(deleteButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return deleteButton;
     }
 
     /**
@@ -854,6 +911,21 @@ public class GUI {
         JTextField newCriterionNameTextField = new JTextField(COLUMNS1);
         JTextField existingCriterionNameTextField = new JTextField(COLUMNS1);
 
+        JButton submitButton = defineNegatedCriterionSubmitButton(newCriterionNameTextField, existingCriterionNameTextField, dialog);
+
+        JPanel panel = new JPanel(new GridLayout(0, 2));
+        panel.add(new JLabel("New Criterion Name:"));
+        panel.add(newCriterionNameTextField);
+        panel.add(new JLabel("Existing Criterion Name:"));
+        panel.add(existingCriterionNameTextField);
+        panel.add(submitButton);
+
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+    private static JButton defineNegatedCriterionSubmitButton(JTextField newCriterionNameTextField, JTextField existingCriterionNameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
             String newCriterionName = newCriterionNameTextField.getText();
@@ -866,17 +938,7 @@ public class GUI {
                 JOptionPane.showMessageDialog(dialog, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-        JPanel panel = new JPanel(new GridLayout(0, 2));
-        panel.add(new JLabel("New Criterion Name:"));
-        panel.add(newCriterionNameTextField);
-        panel.add(new JLabel("Existing Criterion Name:"));
-        panel.add(existingCriterionNameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        return submitButton;
     }
 
     /**
@@ -983,6 +1045,7 @@ public class GUI {
      */
     private static JPanel createStorageListsOperationPanel() {
         JPanel storageListsOperationPanel = new JPanel();
+        storageListsOperationPanel.setPreferredSize(new Dimension(SUBMENU_WIDTH, SUBMENUE_HEIGHT));
         storageListsOperationPanel.setLayout(new BoxLayout(storageListsOperationPanel, BoxLayout.X_AXIS));
         storageListsOperationPanel.setBorder(new TitledBorder("Storage Lists Operation"));
 
@@ -1021,6 +1084,8 @@ public class GUI {
      */
     private static JPanel createProgramOperationPanel() {
         JPanel programOperationPanel = new JPanel();
+
+        programOperationPanel.setPreferredSize(new Dimension(SUBMENU_WIDTH, SUBMENUE_HEIGHT));
         programOperationPanel.setLayout(new BoxLayout(programOperationPanel, BoxLayout.Y_AXIS));
         programOperationPanel.setBorder(new TitledBorder("Program Operation"));
 

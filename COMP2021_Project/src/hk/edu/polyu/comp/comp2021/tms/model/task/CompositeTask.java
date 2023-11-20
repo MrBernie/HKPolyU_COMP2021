@@ -64,11 +64,4 @@ public class CompositeTask extends Task{
         if(strB.charAt(strB.length()-1) == ',') strB.delete(strB.length()-1,strB.length());
         return strB.toString();
     }
-
-    /**
-     * This method clear all subtasks of this composite task.
-     */
-    public void clearSubTasks() {
-        subTaskList.clear();
-    }
 }
