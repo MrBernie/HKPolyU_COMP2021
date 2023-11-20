@@ -13,6 +13,8 @@ import java.io.File;
  * This class represents the GUI of the program.
  */
 public class GUI {
+
+    // GUI constants
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 800;
     private static final int HORIZONTAL_GAP = 10;
@@ -176,6 +178,9 @@ public class GUI {
         panel2(dialog, nameLabel, nameTextField, deleteButton);
     }
 
+    /**
+     * Create the simple task operation panel.
+     */
     private static void panel2(JDialog dialog, JLabel nameLabel, JTextField nameTextField, JButton deleteButton) {
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(nameLabel);
@@ -187,6 +192,11 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the simple task operation panel.
+     *
+     * @return simpleTaskOperationPanel The simple task operation panel.
+     */
     private static JButton deleteButton(JTextField nameTextField, JDialog dialog) {
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> {
@@ -388,6 +398,9 @@ public class GUI {
         panel(dialog, currentNameLabel, currentNameTextField, newNameLabel, newNameTextField, submitButton);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static void panel(JDialog dialog, JLabel currentNameLabel, JTextField currentNameTextField, JLabel newNameLabel, JTextField newNameTextField, JButton submitButton) {
         JPanel panel = getJPanelByGridLayout(0, 1);
         panel.add(currentNameLabel);
@@ -401,6 +414,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JButton changeSimpleTaskNameSubmitButton(JTextField currentNameTextField, JTextField newNameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
@@ -436,6 +452,9 @@ public class GUI {
         panel(dialog, nameLabel, nameTextField, newDescriptionLabel, newDescriptionTextField, submitButton);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JButton changeSimpleTaskDescriptionSubmitButton(JTextField nameTextField, JTextField newDescriptionTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
@@ -468,6 +487,9 @@ public class GUI {
         panel(dialog, nameLabel, nameTextField, newPrerequisitesLabel, newPrerequisitesTextField, submitButton);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JButton changeSimpleTaskPrerequisitesSubmitButton(JTextField nameTextField, JTextField newPrerequisitesTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
@@ -501,6 +523,9 @@ public class GUI {
         panel(dialog, nameLabel, nameTextField, newDurationLabel, newDurationTextField, submitButton);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JButton changeSimpleTaskDurationSubmitButton(JTextField nameTextField, JTextField newDurationTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
@@ -611,6 +636,9 @@ public class GUI {
         panel2(dialog, nameLabel, nameTextField, submitButton);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JButton reportCompositeTaskDurationSubmitButton(JTextField nameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
@@ -642,6 +670,9 @@ public class GUI {
         panel(dialog, currentNameLabel, currentNameTextField, newNameLabel, newNameTextField, submitButton);
     }
 
+    /**
+     * Create the panel for composite task operation.
+     */
     private static JButton changeCompositeTaskNameSubmitButton(JTextField currentNameTextField, JTextField newNameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
@@ -873,6 +904,9 @@ public class GUI {
         dialog.setVisible(true);
     }
 
+    /**
+     * Create the panel for define criterion operation.
+     */
     private static JButton defineNegatedCriterionSubmitButton(JTextField newCriterionNameTextField, JTextField existingCriterionNameTextField, JDialog dialog) {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(e -> {
