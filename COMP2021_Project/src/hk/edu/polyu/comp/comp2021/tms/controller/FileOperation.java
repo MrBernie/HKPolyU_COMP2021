@@ -14,32 +14,43 @@ public class FileOperation {
     /**
      * Write the data to the file.
      * @param storageLists The data to be stored.
-     * @param filePath The file path.
+     * @param filePath     The file path.
      * @return The message of the operation.
      * @throws Exception The exception to the operation.
      */
-    public static String writeFile(StorageLists storageLists, String filePath) throws Exception{
-        try (FileOutputStream fileOut = new FileOutputStream(filePath);
-             ObjectOutputStream ObjOut = new ObjectOutputStream(fileOut)) {
+    public static String writeFile(StorageLists storageLists, String filePath) throws Exception {
+        try {
+            ObjectOutputStream ObjOut;
+            try {
+                FileOutputStream fileOut = new FileOutputStream(filePath);
+                ObjOut = new ObjectOutputStream(fileOut);
+            } catch (Exception e) {
+                return "not find file!";
+            }
             ObjOut.writeObject(storageLists);
         } catch (FileNotFoundException e) {
             throw new Exception("The file path is illegal.");
         } catch (IOException e) {
             throw new Exception("IO exception.");
         }
-        return"The data has been stored to the file.";
+        return "The data has been stored to the file.";
     }
 
     /**
      * Read the data from the file.
-     * @param storageLists The data to be stored.
      * @param filePath The file path.
      * @return The message of the operation.
      * @throws Exception The exception to the operation.
      */
-    public static String readFile(StorageLists storageLists, String filePath) throws Exception {
-        try (FileInputStream fileIn = new FileInputStream(filePath);
-            ObjectInputStream ObjIn = new ObjectInputStream(fileIn)) {
+    public static String readFile(String filePath) throws Exception {
+        try {
+            ObjectInputStream ObjIn;
+            try {
+                FileInputStream fileIn = new FileInputStream(filePath);
+                ObjIn = new ObjectInputStream(fileIn);
+            } catch (Exception e) {
+                return "not find file!";
+            }
             StorageListsOperation.transaction();
             StorageListsOperation.setStorageLists((StorageLists) ObjIn.readObject());
         } catch (FileNotFoundException e) {

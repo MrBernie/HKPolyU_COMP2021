@@ -114,7 +114,7 @@ public class GUI {
             File file = jFileChooser.getSelectedFile();
             try {
                 String filePath = file.getAbsolutePath();
-                FileOperation.readFile(StorageListsOperation.getStorageLists(), filePath);
+                FileOperation.readFile(filePath);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error loading file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -173,6 +173,10 @@ public class GUI {
 
         JButton deleteButton = deleteButton(nameTextField, dialog);
 
+        panel2(dialog, nameLabel, nameTextField, deleteButton);
+    }
+
+    private static void panel2(JDialog dialog, JLabel nameLabel, JTextField nameTextField, JButton deleteButton) {
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(nameLabel);
         panel.add(nameTextField);
@@ -225,14 +229,7 @@ public class GUI {
             }
         });
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(printButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel2(dialog, nameLabel, nameTextField, printButton);
     }
 
     /**
@@ -319,16 +316,26 @@ public class GUI {
             }
         });
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(descriptionLabel);
-        panel.add(descriptionTextField);
-        panel.add(durationLabel);
-        panel.add(durationTextField);
-        panel.add(prerequisitesLabel);
-        panel.add(prerequisitesTextField);
-        panel.add(submitButton);
+        JPanel panel = getJPanelByGridLayout(0, 1);
+
+        try {
+            panel.add(nameLabel);
+            panel.add(nameTextField);
+            panel.add(descriptionLabel);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            panel.add(descriptionTextField);
+            panel.add(durationLabel);
+            panel.add(durationTextField);
+            panel.add(prerequisitesLabel);
+            panel.add(prerequisitesTextField);
+            panel.add(submitButton);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         dialog.add(panel);
         dialog.pack();
@@ -347,14 +354,7 @@ public class GUI {
 
         JButton submitButton = reportEarliestFinishTimeSubmitButton(nameTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel2(dialog, nameLabel, nameTextField, submitButton);
     }
 
     private static JButton reportEarliestFinishTimeSubmitButton(JTextField nameTextField, JDialog dialog) {
@@ -385,7 +385,11 @@ public class GUI {
 
         JButton submitButton = changeSimpleTaskNameSubmitButton(currentNameTextField, newNameTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel(dialog, currentNameLabel, currentNameTextField, newNameLabel, newNameTextField, submitButton);
+    }
+
+    private static void panel(JDialog dialog, JLabel currentNameLabel, JTextField currentNameTextField, JLabel newNameLabel, JTextField newNameTextField, JButton submitButton) {
+        JPanel panel = getJPanelByGridLayout(0, 1);
         panel.add(currentNameLabel);
         panel.add(currentNameTextField);
         panel.add(newNameLabel);
@@ -429,16 +433,7 @@ public class GUI {
 
         JButton submitButton = changeSimpleTaskDescriptionSubmitButton(nameTextField, newDescriptionTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(newDescriptionLabel);
-        panel.add(newDescriptionTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel(dialog, nameLabel, nameTextField, newDescriptionLabel, newDescriptionTextField, submitButton);
     }
 
     private static JButton changeSimpleTaskDescriptionSubmitButton(JTextField nameTextField, JTextField newDescriptionTextField, JDialog dialog) {
@@ -470,16 +465,7 @@ public class GUI {
 
         JButton submitButton = changeSimpleTaskPrerequisitesSubmitButton(nameTextField, newPrerequisitesTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(newPrerequisitesLabel);
-        panel.add(newPrerequisitesTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel(dialog, nameLabel, nameTextField, newPrerequisitesLabel, newPrerequisitesTextField, submitButton);
     }
 
     private static JButton changeSimpleTaskPrerequisitesSubmitButton(JTextField nameTextField, JTextField newPrerequisitesTextField, JDialog dialog) {
@@ -512,16 +498,7 @@ public class GUI {
 
         JButton submitButton = changeSimpleTaskDurationSubmitButton(nameTextField, newDurationTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(newDurationLabel);
-        panel.add(newDurationTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel(dialog, nameLabel, nameTextField, newDurationLabel, newDurationTextField, submitButton);
     }
 
     private static JButton changeSimpleTaskDurationSubmitButton(JTextField nameTextField, JTextField newDurationTextField, JDialog dialog) {
@@ -593,18 +570,30 @@ public class GUI {
             }
         });
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
+        JPanel panel = getJPanelByGridLayout(0, 1);
+
+        panel.add(submitButton);
+        panel.add(subtasksTextField);
         panel.add(nameLabel);
         panel.add(nameTextField);
         panel.add(descriptionLabel);
         panel.add(descriptionTextField);
         panel.add(subtasksLabel);
-        panel.add(subtasksTextField);
-        panel.add(submitButton);
 
         dialog.add(panel);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    /**
+     * Create the JPanel for composite task operation.
+     *
+     * @param rows rows
+     * @param cols cols
+     * @return JPanel
+     */
+    public static JPanel getJPanelByGridLayout(int rows, int cols) {
+        return new JPanel(new GridLayout(rows, cols));
     }
 
     /**
@@ -619,14 +608,7 @@ public class GUI {
 
         JButton submitButton = reportCompositeTaskDurationSubmitButton(nameTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel2(dialog, nameLabel, nameTextField, submitButton);
     }
 
     private static JButton reportCompositeTaskDurationSubmitButton(JTextField nameTextField, JDialog dialog) {
@@ -657,16 +639,7 @@ public class GUI {
 
         JButton submitButton = changeCompositeTaskNameSubmitButton(currentNameTextField, newNameTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(currentNameLabel);
-        panel.add(currentNameTextField);
-        panel.add(newNameLabel);
-        panel.add(newNameTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel(dialog, currentNameLabel, currentNameTextField, newNameLabel, newNameTextField, submitButton);
     }
 
     private static JButton changeCompositeTaskNameSubmitButton(JTextField currentNameTextField, JTextField newNameTextField, JDialog dialog) {
@@ -698,16 +671,7 @@ public class GUI {
 
         JButton submitButton = changeCompositeTaskDescriptionSubmitButton(nameTextField, newDescriptionTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(newDescriptionLabel);
-        panel.add(newDescriptionTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel(dialog, nameLabel, nameTextField, newDescriptionLabel, newDescriptionTextField, submitButton);
     }
 
     private static JButton changeCompositeTaskDescriptionSubmitButton(JTextField nameTextField, JTextField newDescriptionTextField, JDialog dialog) {
@@ -739,16 +703,7 @@ public class GUI {
 
         JButton submitButton = changeCompositeTaskSubtasksSubmitButton(nameTextField, newSubtasksTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(newSubtasksLabel);
-        panel.add(newSubtasksTextField);
-        panel.add(submitButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel(dialog, nameLabel, nameTextField, newSubtasksLabel, newSubtasksTextField, submitButton);
     }
 
     private static JButton changeCompositeTaskSubtasksSubmitButton(JTextField nameTextField, JTextField newSubtasksTextField, JDialog dialog) {
@@ -795,14 +750,7 @@ public class GUI {
 
         JButton deleteButton = deleteCriterionSubmitButton(nameTextField, dialog);
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(deleteButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel2(dialog, nameLabel, nameTextField, deleteButton);
     }
 
     private static JButton deleteCriterionSubmitButton(JTextField nameTextField, JDialog dialog) {
@@ -1030,14 +978,7 @@ public class GUI {
             }
         });
 
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(nameLabel);
-        panel.add(nameTextField);
-        panel.add(searchButton);
-
-        dialog.add(panel);
-        dialog.pack();
-        dialog.setVisible(true);
+        panel2(dialog, nameLabel, nameTextField, searchButton);
     }
 
     /**

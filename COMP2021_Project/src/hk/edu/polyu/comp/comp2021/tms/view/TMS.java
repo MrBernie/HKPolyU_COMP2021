@@ -173,7 +173,7 @@ public class TMS {
             }
             case "load" -> {
                 if (inputStringArray.length != 2) throw INVALID_PARAMETERS;
-                return FileOperation.readFile(StorageListsOperation.getStorageLists(),
+                return FileOperation.readFile(
                         inputStringArray[1]);
             }
             case "undo" -> {

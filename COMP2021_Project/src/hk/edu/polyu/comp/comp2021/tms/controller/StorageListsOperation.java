@@ -52,10 +52,14 @@ public class StorageListsOperation {
      * @return storageListsRedo The storage lists redo.
      * @throws Exception The exception to the operation.
      */
-    public static String undo() throws Exception{
+    public static String undo() throws Exception {
         if (!storageListsUndo.isEmpty()) {
-            storageListsRedo.add(storageLists);
-            storageLists = storageListsUndo.remove(storageListsUndo.size()-1);
+            try {
+                storageListsRedo.add(storageLists);
+                storageLists = storageListsUndo.remove(storageListsUndo.size() - 1);
+            } catch (Exception e) {
+                return "The undo operation has been error.";
+            }
         } else throw new Exception("Nothing can be undo.");
         return "The undo operation has been done.";
     }
@@ -65,10 +69,14 @@ public class StorageListsOperation {
      * @return storageListsRedo The storage lists redo.
      * @throws Exception The exception to the operation.
      */
-    public static String redo() throws Exception{
+    public static String redo() throws Exception {
         if (!storageListsRedo.isEmpty()) {
-            storageListsUndo.add(storageLists);
-            storageLists = storageListsRedo.remove(storageListsRedo.size()-1);
+            try {
+                storageListsUndo.add(storageLists);
+                storageLists = storageListsRedo.remove(storageListsRedo.size() - 1);
+            } catch (Exception e) {
+                return "The redo operation has been error.";
+            }
         } else throw new Exception("Nothing can be redo.");
         return "The redo operation has been done.";
     }
