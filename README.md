@@ -1,5 +1,5 @@
 # COMP2021_Project_Group11
-# JAVA project for OOP class in the year 2023...
+
 
 The source code files are inside the src folder.
 
